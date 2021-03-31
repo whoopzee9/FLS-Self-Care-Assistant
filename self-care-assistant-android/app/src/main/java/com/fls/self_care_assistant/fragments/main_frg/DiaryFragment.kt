@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fls.self_care_assistant.R
 import com.fls.self_care_assistant.adapters.EmotionRecyclerAdapter
+import com.fls.self_care_assistant.adapters.EmotionSpinnerAdapter
 import com.fls.self_care_assistant.data.Emotion
 import com.fls.self_care_assistant.databinding.FragmentDiaryBinding
 import com.fls.self_care_assistant.viewModels.DiaryViewModel
@@ -62,6 +63,8 @@ class DiaryFragment : Fragment() {
         viewModel.emotionsList = emotionsList as ArrayList<String>
 
         val spinner = requireView().findViewById<Spinner>(R.id.sp_emotion)
+        /*val spAdapter = EmotionSpinnerAdapter(requireContext())
+        spinner.adapter = spAdapter*/
 
         spinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(

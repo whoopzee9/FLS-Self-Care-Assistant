@@ -28,9 +28,9 @@
             android:layout_height="43dp"
             android:layout_marginTop="24dp"
             android:entries="@array/emotions"
-            android:background="@drawable/rounded_shape"
+
+            style="@style/spinner_style"
             android:popupBackground="@drawable/rounded_shape"
-            tools:listitem="@layout/spinner_row_layout"
             android:selectedItemPosition="@{DiaryViewModel.selectedEmotionPosition}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
