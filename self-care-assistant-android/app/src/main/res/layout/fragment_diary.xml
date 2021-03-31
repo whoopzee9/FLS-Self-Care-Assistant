@@ -1,0 +1,94 @@
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View"/>
+        <variable name="DiaryViewModel" type="com.fls.self_care_assistant.viewModels.DiaryViewModel"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/diaryFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.main_frg.DiaryFragment">
+
+        <TextView
+            android:id="@+id/tv_my_mood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/my_mood"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/sp_emotion"
+            android:layout_width="311dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="24dp"
+            android:entries="@array/emotions"
+            android:background="@drawable/blue_outline"
+            android:popupBackground="@drawable/rounded_shape"
+            android:selectedItemPosition="@{DiaryViewModel.selectedEmotionPosition}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_my_mood" />
+
+        <SeekBar
+            android:id="@+id/sb_emotion"
+            android:layout_width="311dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:max="9"
+            android:onProgressChanged="@{DiaryViewModel.seekBarTracking}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_emotion" />
+
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/_1"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sb_emotion" />
+
+        <TextView
+            android:id="@+id/tv_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            android:text="@string/_10"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sb_emotion" />
+
+        <Button
+            android:id="@+id/btn_emotion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/add"
+            android:onClick="@{DiaryViewModel.addNewEmotion}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sb_emotion" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_emotions"
+            android:layout_width="338dp"
+            android:layout_height="371dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
