@@ -32,7 +32,6 @@
             android:layout_marginRight="50dp"
             android:entries="@array/emotions"
             android:popupBackground="@drawable/rounded_shape"
-            android:selectedItemPosition="@{DiaryViewModel.selectedEmotionPosition}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_my_mood" />
@@ -78,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="@string/add"
-            android:background="@drawable/rounded_shape"
+            android:background="@drawable/blue_outline"
             android:onClick="@{DiaryViewModel.addNewEmotion}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

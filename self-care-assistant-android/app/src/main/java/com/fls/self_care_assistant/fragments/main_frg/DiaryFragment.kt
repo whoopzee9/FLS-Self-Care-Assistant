@@ -26,9 +26,9 @@ import com.fls.self_care_assistant.viewModels.DiaryViewModel
 
 class DiaryFragment : Fragment() {
 
-    companion object {
+    /*companion object {
         fun newInstance() = DiaryFragment()
-    }
+    }*/
 
     private lateinit var viewModel: DiaryViewModel
 
@@ -56,6 +56,7 @@ class DiaryFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -69,7 +70,7 @@ class DiaryFragment : Fragment() {
         spinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
-                itemSelected: View, selectedItemPosition: Int, selectedId: Long
+                itemSelected: View?, selectedItemPosition: Int, selectedId: Long
             ) {
                 viewModel.selectedEmotionPosition = selectedItemPosition
             }
