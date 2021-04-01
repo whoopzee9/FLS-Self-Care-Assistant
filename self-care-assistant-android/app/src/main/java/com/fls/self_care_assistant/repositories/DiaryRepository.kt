@@ -16,6 +16,11 @@ class DiaryRepository {
     var selectedEmotionPosition: MutableLiveData<Int> = MutableLiveData()
     var selectedEmotionStrength: MutableLiveData<Int> = MutableLiveData()
 
+    init {
+        selectedEmotionPosition.postValue(0)
+        selectedEmotionStrength.postValue(0)
+    }
+
     fun getEmotionDiary() {
         //TODO get from DB
     }

@@ -7,7 +7,11 @@ import com.fls.self_care_assistant.R
 import com.fls.self_care_assistant.data.Emotion
 import java.text.SimpleDateFormat
 
-class EmotionRecyclerAdapter(var values: ArrayList<Emotion>): RecyclerView.Adapter<EmotionRecyclerViewHolder>() {
+class EmotionRecyclerAdapter(var values: ArrayList<Emotion>, var onClickListener: OnClickListener): RecyclerView.Adapter<EmotionRecyclerViewHolder>() {
+
+    interface OnClickListener {
+        fun onItemClick(position: Int)
+    }
 
     override fun getItemCount(): Int {
         return this.values.size
@@ -19,6 +23,10 @@ class EmotionRecyclerAdapter(var values: ArrayList<Emotion>): RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: EmotionRecyclerViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            onClickListener.onItemClick(position)
+        }
+
         holder.setDateText(values[position].date.toString())
         val format = SimpleDateFormat("dd.MM.yyyy\nHH:mm:ss")
         holder.setDateText(format.format(values[position].date))
