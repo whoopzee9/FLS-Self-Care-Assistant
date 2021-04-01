@@ -11,21 +11,21 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class DiaryViewModel : ViewModel() {
-    var selectedEmotionPosition: Int = 0
-    var selectedEmotionStrength: Int = 1
+
     var emotionsList = ArrayList<String>()
 
     var repository = DiaryRepository.instance
 
     fun seekBarTracking(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-        selectedEmotionStrength = progress + 1
+        println(progress)
+        repository.selectedEmotionStrength.postValue(progress)
 
     }
 
     fun addNewEmotion(view: View) {
-        val emotionStr = emotionsList[selectedEmotionPosition]
+        val emotionStr = emotionsList[getSpinnerPosition().value!!]
         val date = Calendar.getInstance().time
-        val emotion = Emotion(date, emotionStr, selectedEmotionStrength)
+        val emotion = Emotion(date, emotionStr, getEmotionStrength().value!! + 1)
         repository.addNewEmotion(emotion)
     }
 
@@ -33,4 +33,15 @@ class DiaryViewModel : ViewModel() {
         return repository.emotionDiary
     }
 
+    fun setSpinnerPosition(value: Int) {
+        repository.selectedEmotionPosition.postValue(value)
+    }
+
+    fun getSpinnerPosition(): LiveData<Int> {
+        return repository.selectedEmotionPosition
+    }
+
+    fun getEmotionStrength(): LiveData<Int> {
+        return repository.selectedEmotionStrength
+    }
 }

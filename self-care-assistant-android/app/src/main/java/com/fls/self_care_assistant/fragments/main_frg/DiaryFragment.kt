@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -39,6 +40,10 @@ class DiaryFragment : Fragment() {
                 return DiaryViewModel() as T
             }
         }).get(DiaryViewModel::class.java)
+
+        println(viewModel.getEmotionStrength().value)
+        println(viewModel.getSpinnerPosition().value)
+        println(viewModel.getEmotionDiary().value?.size)
     }
 
     override fun onCreateView(
@@ -66,13 +71,16 @@ class DiaryFragment : Fragment() {
         val spinner = requireView().findViewById<Spinner>(R.id.sp_emotion)
         /*val spAdapter = EmotionSpinnerAdapter(requireContext())
         spinner.adapter = spAdapter*/
+        /*val spAdapter = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item, R.array.emotions)
+        spAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = spAdapter*/
 
         spinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 itemSelected: View?, selectedItemPosition: Int, selectedId: Long
             ) {
-                viewModel.selectedEmotionPosition = selectedItemPosition
+                viewModel.setSpinnerPosition(selectedItemPosition)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -85,6 +93,9 @@ class DiaryFragment : Fragment() {
         viewModel.getEmotionDiary().observe(viewLifecycleOwner, {
             adapter.values = it
             adapter.notifyDataSetChanged()
+        })
+        viewModel.getSpinnerPosition().observe(viewLifecycleOwner, {
+            spinner.setSelection(it)
         })
     }
 
