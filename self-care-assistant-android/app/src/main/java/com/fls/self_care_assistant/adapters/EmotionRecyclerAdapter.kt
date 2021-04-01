@@ -20,7 +20,7 @@ class EmotionRecyclerAdapter(var values: ArrayList<Emotion>): RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: EmotionRecyclerViewHolder, position: Int) {
         holder.setDateText(values[position].date.toString())
-        val format = SimpleDateFormat("dd.MM.yyyy\nHH:mm")
+        val format = SimpleDateFormat("dd.MM.yyyy\nHH:mm:ss")
         holder.setDateText(format.format(values[position].date))
         holder.setEmotionText(values[position].emotion)
         holder.setStrengthText(values[position].strength.toString())

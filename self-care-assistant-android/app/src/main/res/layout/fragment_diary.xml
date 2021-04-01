@@ -24,12 +24,13 @@
 
         <Spinner
             android:id="@+id/sp_emotion"
-            android:layout_width="311dp"
+            style="@style/spinner_style"
+            android:layout_width="0dp"
             android:layout_height="43dp"
             android:layout_marginTop="24dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:entries="@array/emotions"
-
-            style="@style/spinner_style"
             android:popupBackground="@drawable/rounded_shape"
             android:selectedItemPosition="@{DiaryViewModel.selectedEmotionPosition}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,9 +39,11 @@
 
         <SeekBar
             android:id="@+id/sb_emotion"
-            android:layout_width="311dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:max="9"
             android:onProgressChanged="@{DiaryViewModel.seekBarTracking}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="@string/add"
+            android:background="@drawable/rounded_shape"
             android:onClick="@{DiaryViewModel.addNewEmotion}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,13 +86,18 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_emotions"
-            android:layout_width="338dp"
-            android:layout_height="371dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_emotion"
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
