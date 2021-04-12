@@ -17,5 +17,3 @@ data class Emotion(@JoinColumn (name = "emotions_name_id", nullable = false)
     @Column(name = "id", updatable = false, nullable = false)
     var id: UUID = UUID.randomUUID();
 }
-
-

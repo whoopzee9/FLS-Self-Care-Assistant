@@ -13,8 +13,7 @@ class EmotionSirviceImpl : EmotionService {
     lateinit var emotionRepo: EmotionRepo
 
     override fun addEmotion(emotion: Emotion): UUID {
-        emotionRepo.save(emotion)
-        return emotion.id
+        return emotionRepo.save(emotion).id
     }
 
     override fun getAllEmotions(): Iterable<Emotion> {

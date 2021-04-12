@@ -11,7 +11,6 @@ import selfcareassistant.service.EmotionsNameService
 import java.util.*
 
 @RestController
-@RequestMapping("/emotion")
 @CrossOrigin
 class EmotionController {
     @Autowired
@@ -20,22 +19,22 @@ class EmotionController {
     @Autowired
     lateinit var emotionsNameService: EmotionsNameService
 
-    @GetMapping("/get_all_emotions")
+    @GetMapping("/emotions")
     fun getAllEmotions(): ResponseEntity<Iterable<Emotion>> {
         return ResponseEntity(emotionService.getAllEmotions(), HttpStatus.OK)
     }
 
-    @GetMapping("/get_all_emotions_names")
+    @GetMapping("/emotions-names")
     fun getAllEmotionsNames(): ResponseEntity<Iterable<EmotionsName>> {
         return ResponseEntity(emotionsNameService.getAllEmotionsNames(), HttpStatus.OK)
     }
 
-    @PostMapping("/add_emotion")
+    @PostMapping("/add-emotion")
     fun addUser(@RequestBody emotion: Emotion): ResponseEntity<UUID> {
         return ResponseEntity(emotionService.addEmotion(emotion), HttpStatus.OK)
     }
 
-    @PostMapping("/add_emotions_name")
+    @PostMapping("/add-emotions-name")
     fun addUser(@RequestBody emotionsName: EmotionsName): ResponseEntity<UUID> {
         return ResponseEntity(emotionsNameService.addEmotionsName(emotionsName), HttpStatus.OK)
     }

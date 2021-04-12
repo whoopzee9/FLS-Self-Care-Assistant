@@ -7,5 +7,4 @@ import java.util.*
 
 @Repository
 interface EmotionRepo : CrudRepository<Emotion, UUID> {
-
 }

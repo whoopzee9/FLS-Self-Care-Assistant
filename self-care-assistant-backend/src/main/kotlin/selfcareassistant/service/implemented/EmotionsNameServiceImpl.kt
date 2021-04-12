@@ -18,7 +18,6 @@ class EmotionsNameServiceImpl: EmotionsNameService {
     }
 
     override fun addEmotionsName(emotionsName: EmotionsName): UUID {
-        emotionsNameRepo.save(emotionsName)
-        return emotionsName.id
+        return emotionsNameRepo.save(emotionsName).id
     }
 }
