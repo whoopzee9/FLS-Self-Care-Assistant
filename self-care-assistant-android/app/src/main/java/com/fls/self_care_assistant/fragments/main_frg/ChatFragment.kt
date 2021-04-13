@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.fls.self_care_assistant.R
 
-class MainFragment : Fragment() {
+class ChatFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +18,6 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_chat, container, false)
     }
 }

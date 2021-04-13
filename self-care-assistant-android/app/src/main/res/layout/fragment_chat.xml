@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/list_frg__layout"
-    tools:context="com.fls.self_care_assistant.fragments.main_frg.MainFragment">
+    android:id="@+id/chatFragment"
+    tools:context="com.fls.self_care_assistant.fragments.main_frg.ChatFragment">
 
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FLS"
+        android:text="@string/chat"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

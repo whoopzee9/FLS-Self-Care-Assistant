@@ -7,4 +7,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="spinner_style" >
+        <item name="android:background">@drawable/spinner_bg</item>
+
+        <item name="android:layout_marginRight">10dp</item>
+
+    </style>
+
 </resources>
