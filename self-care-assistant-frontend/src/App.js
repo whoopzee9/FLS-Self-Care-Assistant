@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {minusCountAction, plusCountAction} from "./store/countReducer";
 import {addTextAction, deleteTextAction} from "./store/listReducer";
 import {fetchList} from "./asyncAction/list";
+import Test from "./components/test";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
 
     return (
         <div className="App">
+            <Test/>
             <div className="count">
                 <p>{count}</p>
                 <button onClick={() => Decrement()}>-</button>

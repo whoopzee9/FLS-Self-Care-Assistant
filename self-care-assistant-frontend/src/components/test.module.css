@@ -1,0 +1,14 @@
+.test {
+    background: #b37979;
+}
+.text {
+    color: #000000;
+    background: #b37979;
+    font-weight: 600;
+    padding: 20px 0 0;
+}
+.btn {
+    color: black;
+    border: 1px solid black;
+    font-weight: 600;
+}
