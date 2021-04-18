@@ -1,7 +1,8 @@
 package com.fls.self_care_assistant.fragments.auth
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.fls.self_care_assistant.R
 import com.fls.self_care_assistant.adapters.ViewPagerAdapter
@@ -20,6 +21,7 @@ class AuthActivity : AppCompatActivity() {
         val viewPager: ViewPager2 = findViewById(R.id.main_activity__view_pager)
         val adapter = ViewPagerAdapter(this)
         viewPager.adapter = adapter
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         val tabs: TabLayout = findViewById(R.id.main_activity__tabs)
         val titles = listOf("Sign In", "Sign Up")

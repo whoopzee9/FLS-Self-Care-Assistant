@@ -14,4 +14,16 @@
 
     </style>
 
+
+    <style name="FieldEditText">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:paddingTop">@dimen/spacing_tiny_4</item>
+        <item name="android:enabled">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="FieldEditText.Single" parent="FieldEditText">
+        <item name="android:singleLine">true</item>
+    </style>
 </resources>

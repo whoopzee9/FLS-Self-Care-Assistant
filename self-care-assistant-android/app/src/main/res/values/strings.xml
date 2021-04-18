@@ -9,6 +9,16 @@
     <string name="_1">1</string>
     <string name="_10">10</string>
     <string name="add">Добавить</string>
+    <string name="login_frg__restore">forgot your password?</string>
+    <string name="login_frg__sign_btn">Sign in</string>
+    <string name="login_frg__password_et">password</string>
+    <string name="registration_frg__confirm_password">confirm password</string>
+    <string name="registration_frg__password">password</string>
+    <string name="registration_frg__email_login_et">email</string>
+    <string name="user_name_et">name</string>
+    <string name="login_frg__email_login">login</string>
+    <string name="registration_frg__privacy_check">I accept privacy and</string>
+    <string name="registration_frg__sign_up">Sign up</string>
 
 
     <string-array name="emotions">

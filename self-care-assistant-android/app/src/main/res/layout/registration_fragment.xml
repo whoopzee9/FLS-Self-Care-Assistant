@@ -1,13 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.auth.RegistrationFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="RegistrationViewModel"
+            type="com.fls.self_care_assistant.viewModels.RegistrationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        tools:context=".fragments.auth.RegistrationFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/registration_frg__user_name_wr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_big_30"
+            android:layout_marginBottom="@dimen/spacing_mid_20"
+            android:background="@drawable/custom_input"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/spacing_tiny_4"
+            android:paddingEnd="@dimen/spacing_tiny_4"
+            app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@+id/registration_frg__email_login_wr"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registration_frg__user_name_et"
+                style="@style/FieldEditText.Single"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="@string/user_name_et"
+                android:maxLines="1"
+                android:padding="@dimen/spacing_double_tiny_8"
+                android:text="@={RegistrationViewModel.repository.userName}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/registration_frg__email_login_wr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_big_30"
+            android:layout_marginBottom="@dimen/spacing_mid_20"
+            android:background="@drawable/custom_input"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/spacing_tiny_4"
+            android:paddingEnd="@dimen/spacing_tiny_4"
+            app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@+id/registration_frg__password_wr"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registration_frg__email_login_et"
+                style="@style/FieldEditText.Single"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="@string/registration_frg__email_login_et"
+                android:maxLines="1"
+                android:padding="@dimen/spacing_double_tiny_8"
+                android:text="@={RegistrationViewModel.repository.email}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/registration_frg__password_wr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_big_30"
+            android:layout_marginBottom="@dimen/spacing_mid_20"
+            android:background="@drawable/custom_input"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/spacing_tiny_4"
+            android:paddingEnd="@dimen/spacing_tiny_4"
+            app:endIconMode="clear_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registration_frg__password_et"
+                style="@style/FieldEditText.Single"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="@string/registration_frg__password"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:padding="@dimen/spacing_double_tiny_8"
+                android:text="@={RegistrationViewModel.repository.password}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/registration_frg__confirm_password_wr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_big_30"
+            android:layout_marginTop="@dimen/spacing_mid_20"
+            android:background="@drawable/custom_input"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/spacing_tiny_4"
+            android:paddingEnd="@dimen/spacing_tiny_4"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registration_frg__password_wr">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registration_frg__confirm_password_et"
+                style="@style/FieldEditText.Single"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="@string/registration_frg__confirm_password"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:padding="@dimen/spacing_double_tiny_8"
+                android:text="@={RegistrationViewModel.repository.confirmPassword}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/registration_frg__sign_up"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_double_big_60"
+            android:layout_marginTop="@dimen/spacing_huge_40"
+            android:layout_marginEnd="@dimen/spacing_double_big_60"
+            android:text="@string/registration_frg__sign_up"
+            android:background="@drawable/rounded_sign"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registration_frg__privacy_check" />
+
+        <CheckBox
+            android:id="@+id/registration_frg__privacy_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_mid_20"
+            android:text="@string/registration_frg__privacy_check"
+            app:layout_constraintStart_toStartOf="@+id/registration_frg__confirm_password_wr"
+            app:layout_constraintTop_toBottomOf="@+id/registration_frg__confirm_password_wr" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
