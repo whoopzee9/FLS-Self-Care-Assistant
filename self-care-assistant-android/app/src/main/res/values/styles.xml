@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="spinner_style" >
+    <style name="spinner_style">
         <item name="android:background">@drawable/spinner_bg</item>
 
         <item name="android:layout_marginRight">10dp</item>
@@ -16,7 +16,7 @@
 
 
     <style name="FieldEditText">
-        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:paddingTop">@dimen/spacing_tiny_4</item>
         <item name="android:enabled">true</item>
         <item name="android:focusableInTouchMode">true</item>

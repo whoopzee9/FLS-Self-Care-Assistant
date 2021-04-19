@@ -1,15 +1,18 @@
 package com.fls.self_care_assistant.fragments.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.fls.self_care_assistant.R
 import com.fls.self_care_assistant.databinding.LoginFragmentBinding
+import com.fls.self_care_assistant.main.MainActivity
 import com.fls.self_care_assistant.viewModels.LoginViewModel
 
 class LoginFragment : Fragment() {
@@ -43,6 +46,22 @@ class LoginFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.loginViewModel = viewModel
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.loginFrgSignBtn.setOnClickListener {
+            validate()
+        }
+    }
+
+    private fun validate() {
+        if (viewModel.validateInput()) {
+            startActivity(Intent(requireContext(), MainActivity::class.java))
+            requireActivity().finish()
+        } else {
+            Toast.makeText(requireContext(), "Please, fill all fields", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

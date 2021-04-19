@@ -34,6 +34,7 @@
                 android:paddingStart="@dimen/spacing_tiny_4"
                 android:paddingEnd="@dimen/spacing_tiny_4"
                 app:endIconMode="clear_text"
+                app:hintTextColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/login_frg__password_wr"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -62,6 +63,7 @@
                 android:paddingStart="@dimen/spacing_tiny_4"
                 android:paddingEnd="@dimen/spacing_tiny_4"
                 app:endIconMode="clear_text"
+                app:hintTextColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -140,6 +142,7 @@
                 android:layout_marginTop="@dimen/spacing_double_tiny_8"
                 android:text="@string/login_frg__restore"
                 android:textColor="@android:color/black"
+                android:textSize="@dimen/font_massive__16"
                 app:layout_constraintEnd_toEndOf="@+id/login_frg__password_wr"
                 app:layout_constraintTop_toBottomOf="@+id/login_frg__password_wr" />
 
@@ -152,8 +155,10 @@
                 android:layout_marginBottom="@dimen/spacing_double_big_60"
                 android:background="@drawable/rounded_sign"
                 android:elevation="10dp"
-                android:padding="@dimen/spacing_double_tiny_8"
+                android:paddingVertical="@dimen/font_massive__16"
                 android:text="@string/login_frg__sign_btn"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_massive__16"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
