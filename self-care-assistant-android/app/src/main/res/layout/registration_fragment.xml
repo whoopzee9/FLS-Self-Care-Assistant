@@ -165,9 +165,10 @@
             android:id="@+id/registration_frg__privacy_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_massive__16"
             android:layout_marginTop="@dimen/spacing_mid_20"
+            android:checked="@={RegistrationViewModel.repository.isChecked}"
             android:text="@string/registration_frg__privacy_check"
+            android:textSize="@dimen/font_massive__16"
             app:layout_constraintStart_toStartOf="@+id/registration_frg__confirm_password_wr"
             app:layout_constraintTop_toBottomOf="@+id/registration_frg__confirm_password_wr" />
 

@@ -15,5 +15,9 @@ class RegistrationRepository {
     var userName: MutableLiveData<String> = MutableLiveData()
     var password: MutableLiveData<String> = MutableLiveData()
     var confirmPassword: MutableLiveData<String> = MutableLiveData()
+    val isChecked: MutableLiveData<Boolean> = MutableLiveData()
 
+    init {
+        isChecked.postValue(false)
+    }
 }
