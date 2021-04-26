@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.fls.self_care_assistant.R
 import com.fls.self_care_assistant.databinding.LoginFragmentBinding
+import com.fls.self_care_assistant.extensions.handleBackPressed
 import com.fls.self_care_assistant.main.MainActivity
 import com.fls.self_care_assistant.viewModels.LoginViewModel
 
@@ -56,6 +57,15 @@ class LoginFragment : Fragment() {
         binding.loginFrgRestoreBtn.setOnClickListener {
             binding.loginFrgAuthWr.visibility = View.GONE
             binding.loginFrgRestoreWr.visibility = View.VISIBLE
+        }
+        handleBackPressed {
+            //todo Alert + optimize
+            if (binding.loginFrgAuthWr.visibility == View.GONE) {
+                binding.loginFrgAuthWr.visibility = View.VISIBLE
+                binding.loginFrgRestoreWr.visibility = View.GONE
+            } else {
+                requireActivity().finish()
+            }
         }
     }
 
