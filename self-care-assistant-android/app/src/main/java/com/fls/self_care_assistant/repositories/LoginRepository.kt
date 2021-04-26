@@ -14,4 +14,7 @@ class LoginRepository {
     var email: MutableLiveData<String> = MutableLiveData()
     var password: MutableLiveData<String> = MutableLiveData()
 
+    var emailRestore: MutableLiveData<String> = MutableLiveData()
+
+
 }

@@ -53,6 +53,10 @@ class LoginFragment : Fragment() {
         binding.loginFrgSignBtn.setOnClickListener {
             validate()
         }
+        binding.loginFrgRestoreBtn.setOnClickListener {
+            binding.loginFrgAuthWr.visibility = View.GONE
+            binding.loginFrgRestoreWr.visibility = View.VISIBLE
+        }
     }
 
     private fun validate() {
