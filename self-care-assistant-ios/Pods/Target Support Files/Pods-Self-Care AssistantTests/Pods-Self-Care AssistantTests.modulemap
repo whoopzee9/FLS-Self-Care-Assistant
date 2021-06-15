@@ -1,0 +1,6 @@
+framework module Pods_Self_Care_AssistantTests {
+  umbrella header "Pods-Self-Care AssistantTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

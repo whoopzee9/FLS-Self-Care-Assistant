@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_Self_Care_Assistant_Self_Care_AssistantUITests : NSObject
+@end
+@implementation PodsDummy_Pods_Self_Care_Assistant_Self_Care_AssistantUITests
+@end
