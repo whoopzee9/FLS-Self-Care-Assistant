@@ -231,6 +231,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_huge_40"
                 android:text="@string/login_frg__restore_tv"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_mid_20"
                 app:layout_constraintBottom_toTopOf="@+id/login_frg__email_restore_login_wr"
