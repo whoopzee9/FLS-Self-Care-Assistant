@@ -26,7 +26,7 @@
     <string name="choose_emotion">Выберите эмоцию</string>
     <string name="choose_intensity">Выберите интенсивность</string>
 
-
+    <integer name="com_vk_sdk_AppId">7864498</integer>
 
     <string-array name="emotions">
         <item>Гнев</item>

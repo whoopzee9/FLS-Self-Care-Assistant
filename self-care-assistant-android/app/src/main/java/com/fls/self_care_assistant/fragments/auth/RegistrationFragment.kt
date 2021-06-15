@@ -11,11 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.fls.self_care_assistant.R
-
-import com.fls.self_care_assistant.databinding.FragmentRegistrationBinding
-
 import com.fls.self_care_assistant.databinding.RegistrationFragmentBinding
-
 import com.fls.self_care_assistant.main.MainActivity
 import com.fls.self_care_assistant.viewModels.RegistrationViewModel
 
@@ -45,7 +41,7 @@ class RegistrationFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_registration,
+            R.layout.registration_fragment,
             container,
             false
         )
@@ -67,7 +63,8 @@ class RegistrationFragment : Fragment() {
                 Toast.makeText(requireContext(), "Input correct email", Toast.LENGTH_SHORT).show()
                 return
             } else if (!viewModel.isAcceptPrivacy()) {
-                Toast.makeText(requireContext(), "Please, accept privacy", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please, accept privacy", Toast.LENGTH_SHORT)
+                    .show()
                 return
             } else if (viewModel.passwordsMatch()) {
                 startActivity(Intent(requireContext(), MainActivity::class.java))

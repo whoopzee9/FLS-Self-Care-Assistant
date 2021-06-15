@@ -15,15 +15,22 @@ import com.fls.self_care_assistant.databinding.LoginFragmentBinding
 import com.fls.self_care_assistant.extensions.handleBackPressed
 import com.fls.self_care_assistant.main.MainActivity
 import com.fls.self_care_assistant.viewModels.LoginViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.vk.api.sdk.VK
+import com.vk.api.sdk.auth.VKScope
 
 class LoginFragment : Fragment() {
 
     companion object {
+        const val RC_SIGN_IN = 100
         fun newInstance() = LoginFragment()
     }
 
     private lateinit var viewModel: LoginViewModel
     private lateinit var binding: LoginFragmentBinding
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +45,16 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+
+        val account = GoogleSignIn.getLastSignedInAccount(context)
+        println(account?.email)
+        //googleSignInClient.signOut()
+
+
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.login_fragment,
@@ -58,6 +75,16 @@ class LoginFragment : Fragment() {
             binding.loginFrgAuthWr.visibility = View.GONE
             binding.loginFrgRestoreWr.visibility = View.VISIBLE
         }
+
+        binding.loginFrgAuthVk.setOnClickListener {
+            VK.login(requireActivity(), arrayListOf(VKScope.WALL, VKScope.PHOTOS))
+        }
+        binding.loginFrgAuthGoogle.setOnClickListener {
+            //TODO maybe change because of deprecation
+            val signInIntent: Intent = googleSignInClient.signInIntent
+            requireActivity().startActivityForResult(signInIntent, RC_SIGN_IN)
+        }
+
         handleBackPressed {
             //todo Alert + optimize
             if (binding.loginFrgAuthWr.visibility == View.GONE) {

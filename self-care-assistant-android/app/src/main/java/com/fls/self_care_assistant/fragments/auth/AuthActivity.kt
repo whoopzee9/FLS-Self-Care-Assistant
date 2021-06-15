@@ -23,21 +23,18 @@ import com.vk.api.sdk.auth.VKAccessToken
 import com.vk.api.sdk.auth.VKAuthCallback
 
 
-import android.os.Bundle
-import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
-import com.fls.self_care_assistant.R
-import com.fls.self_care_assistant.adapters.ViewPagerAdapter
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-
-
 class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
         initTabs()
+
+        //TODO temp solution
+        if (VK.isLoggedIn()) {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun initTabs() {
@@ -79,7 +76,7 @@ class AuthActivity : AppCompatActivity() {
             }
 
         }
-        val callback = object: VKAuthCallback {
+        val callback = object : VKAuthCallback {
             override fun onLogin(token: VKAccessToken) {
                 val intent = Intent(applicationContext, MainActivity::class.java)
 
