@@ -11,18 +11,32 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.fls.self_care_assistant.R
+
 import com.fls.self_care_assistant.databinding.FragmentRegistrationBinding
+
+import com.fls.self_care_assistant.databinding.RegistrationFragmentBinding
+
 import com.fls.self_care_assistant.main.MainActivity
 import com.fls.self_care_assistant.viewModels.RegistrationViewModel
 
 class RegistrationFragment : Fragment() {
 
+
+    companion object {
+        fun newInstance() = RegistrationFragment()
+    }
+
     private lateinit var viewModel: RegistrationViewModel
-    private lateinit var binding: FragmentRegistrationBinding
+    private lateinit var binding: RegistrationFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
+        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return RegistrationViewModel() as T
+            }
+        }).get(RegistrationViewModel::class.java)
+
     }
 
     override fun onCreateView(

@@ -1,5 +1,6 @@
 package com.fls.self_care_assistant.fragments.auth
 
+
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -22,6 +23,16 @@ import com.vk.api.sdk.auth.VKAccessToken
 import com.vk.api.sdk.auth.VKAuthCallback
 
 
+import android.os.Bundle
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
+import com.fls.self_care_assistant.R
+import com.fls.self_care_assistant.adapters.ViewPagerAdapter
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+
+
 class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,17 +42,20 @@ class AuthActivity : AppCompatActivity() {
 
     private fun initTabs() {
         supportActionBar?.hide()
+
         val viewPager: ViewPager2 = findViewById(R.id.activity_auth__view_pager)
         val adapter = LoginViewPagerAdapter(this)
         viewPager.adapter = adapter
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         val tabs: TabLayout = findViewById(R.id.activity_auth__tabs)
+
         val titles = listOf("Sign In", "Sign Up")
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = titles[position]
         }.attach()
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //TODO fix request codes
@@ -86,4 +100,5 @@ class AuthActivity : AppCompatActivity() {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
+
 }

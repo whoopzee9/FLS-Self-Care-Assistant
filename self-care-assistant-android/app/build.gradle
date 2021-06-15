@@ -52,8 +52,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-<<<<<<< Updated upstream
-=======
+
     //auth components
     implementation 'com.vk:androidsdk:2.4.0'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
@@ -62,7 +61,12 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     implementation 'com.google.android.material:material:1.4.0-rc01'
 
->>>>>>> Stashed changes
+
+    //Viiew
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
+    implementation 'com.google.android.material:material:1.4.0-alpha02'
+
+
     // Navigation Component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
@@ -86,5 +90,4 @@ dependencies {
     // DataBinding
     kapt "com.android.databinding:compiler:3.2.0-alpha10"
     kapt "androidx.databinding:databinding-common:4.1.2"
-
 }
