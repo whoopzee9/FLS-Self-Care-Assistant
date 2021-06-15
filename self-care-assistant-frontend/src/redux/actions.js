@@ -1,0 +1,1 @@
+export const AUTH_ROUTE = 'AUTH_ROUTE'
