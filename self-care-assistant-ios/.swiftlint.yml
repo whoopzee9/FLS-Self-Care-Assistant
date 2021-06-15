@@ -1,7 +1,10 @@
+excluded:
+  - Pods
 opt_in_rules:
   - indentation_width
 disabled_rules:
   - opening_brace
+  - todo
 type_name:
   allowed_symbols: "_"
 trailing_comma:
