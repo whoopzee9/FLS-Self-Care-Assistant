@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = SwiftLint;
+			productName = SwiftLint;
 		};
 /* End PBXAggregateTarget section */
 
@@ -61,19 +62,19 @@
 		19DFAA604E8843BED4ABA4BF1562405D /* Pods-Self-Care Assistant-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Self-Care Assistant-Info.plist"; sourceTree = "<group>"; };
 		242D983F337312DF80CC198B2EEBE1B5 /* Pods-Self-Care AssistantTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Self-Care AssistantTests-Info.plist"; sourceTree = "<group>"; };
 		2959DA5FBB1860233C2DE64593ACF167 /* Pods-Self-Care AssistantTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Self-Care AssistantTests-umbrella.h"; sourceTree = "<group>"; };
-		33251DC4ED19077F1F6C97AABB0FC658 /* Pods_Self_Care_AssistantTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Self_Care_AssistantTests.framework; path = "Pods-Self-Care AssistantTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		33251DC4ED19077F1F6C97AABB0FC658 /* Pods_Self_Care_AssistantTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Self_Care_AssistantTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A7B47944D8F2BADB7631A7E6335A02E /* Pods-Self-Care Assistant-Self-Care AssistantUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Self-Care Assistant-Self-Care AssistantUITests-Info.plist"; sourceTree = "<group>"; };
 		3EC0124719FE8EF5FDDD72C26F8A2F57 /* SwiftLint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.debug.xcconfig; sourceTree = "<group>"; };
 		43E907CAFD31C8274544CE14E26BC87A /* Pods-Self-Care Assistant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Self-Care Assistant.debug.xcconfig"; sourceTree = "<group>"; };
 		4B0FAFA14A9A1B4530046D87A2AAE33C /* Pods-Self-Care AssistantTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Self-Care AssistantTests.modulemap"; sourceTree = "<group>"; };
-		5148D1FE49D94832F686B9DE2FAB6D24 /* Pods_Self_Care_Assistant_Self_Care_AssistantUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Self_Care_Assistant_Self_Care_AssistantUITests.framework; path = "Pods-Self-Care Assistant-Self-Care AssistantUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5148D1FE49D94832F686B9DE2FAB6D24 /* Pods_Self_Care_Assistant_Self_Care_AssistantUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Self_Care_Assistant_Self_Care_AssistantUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63865A70849EB7516E3F1A2E0290EC13 /* Pods-Self-Care Assistant-Self-Care AssistantUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Self-Care Assistant-Self-Care AssistantUITests-dummy.m"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		73A7F3235E9771DAF69D2F26FD2D22DA /* Pods-Self-Care AssistantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Self-Care AssistantTests.release.xcconfig"; sourceTree = "<group>"; };
 		7EAB1DA481EDDC005A251D3A5E6BE4CD /* SwiftLint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.release.xcconfig; sourceTree = "<group>"; };
 		94D731FBC81974A9122DAE6D6106B7CB /* Pods-Self-Care AssistantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Self-Care AssistantTests.debug.xcconfig"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9FCBB38CC7B6B0013C471FE39C57400B /* Pods_Self_Care_Assistant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Self_Care_Assistant.framework; path = "Pods-Self-Care Assistant.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9FCBB38CC7B6B0013C471FE39C57400B /* Pods_Self_Care_Assistant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Self_Care_Assistant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0BB0FC651577F65A0A4C116CE449CF3 /* Pods-Self-Care AssistantTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Self-Care AssistantTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		AEFD8DF447FFFDB97363C9349C748706 /* Pods-Self-Care Assistant-Self-Care AssistantUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Self-Care Assistant-Self-Care AssistantUITests-umbrella.h"; sourceTree = "<group>"; };
 		B206BCD44F9FCFC7B83538F1E5DA47F1 /* Pods-Self-Care Assistant-Self-Care AssistantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Self-Care Assistant-Self-Care AssistantUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -218,7 +219,6 @@
 			children = (
 				7FDA596DBE0337ACDFE55A210D54EF26 /* Support Files */,
 			);
-			name = SwiftLint;
 			path = SwiftLint;
 			sourceTree = "<group>";
 		};
@@ -496,7 +496,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -617,7 +617,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
