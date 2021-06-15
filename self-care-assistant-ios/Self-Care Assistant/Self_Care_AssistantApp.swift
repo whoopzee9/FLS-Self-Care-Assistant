@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct Self_Care_AssistantApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
     }
+  }
 }

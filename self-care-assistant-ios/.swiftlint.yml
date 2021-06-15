@@ -1,3 +1,5 @@
+opt_in_rules:
+  - indentation_width
 disabled_rules:
   - opening_brace
 type_name:
@@ -6,3 +8,6 @@ trailing_comma:
   mandatory_comma: true
 colon:
   flexible_right_spacing: true
+indentation_width:
+  indentation_width: 2
+  include_comments: true
