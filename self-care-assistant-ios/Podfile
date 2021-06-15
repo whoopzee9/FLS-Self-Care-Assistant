@@ -1,0 +1,16 @@
+platform :ios, '14.1'
+
+target 'Self-Care Assistant' do
+  use_frameworks!
+
+  pod 'SwiftLint'
+
+  target 'Self-Care AssistantTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'Self-Care AssistantUITests' do
+    # Pods for testing
+  end
+end
