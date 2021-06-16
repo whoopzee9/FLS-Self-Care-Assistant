@@ -8,7 +8,7 @@
     <string name="my_mood">Моё настроение</string>
     <string name="_1">1</string>
     <string name="_10">10</string>
-    <string name="add">Добавить</string>
+    <string name="save">Сохранить</string>
 
     <string name="login_frg__restore">forgot your password?</string>
     <string name="login_frg__sign_btn">Sign in</string>
@@ -25,13 +25,16 @@
     <string name="login_frg__restore_btn_submit">restore</string>
     <string name="choose_emotion">Выберите эмоцию</string>
     <string name="choose_intensity">Выберите интенсивность</string>
+    <string name="emotions_diary">Emotions diary</string>
+    <string name="new_record_added">Добавлена новая запись</string>
+    <string name="emotion_type">emotion: %s</string>
+    <string name="intensity">intensity: %s</string>
 
     <integer name="com_vk_sdk_AppId">7864498</integer>
 
     <string-array name="emotions">
-        <item>Гнев</item>
+        <item>Тревога</item>
         <item>Апатия</item>
-        <item>Грусть</item>
         <item>Злость</item>
     </string-array>
 </resources>

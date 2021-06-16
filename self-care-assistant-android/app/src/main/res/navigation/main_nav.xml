@@ -22,4 +22,24 @@
         android:name="com.fls.self_care_assistant.fragments.main_frg.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_chat" />
+
+    <fragment
+        android:id="@+id/addEmotionFragment"
+        android:name="com.fls.self_care_assistant.fragments.main_frg.AddEmotionFragment"
+        android:label="Add Emotion"
+        tools:layout="@layout/fragment_add_emotion" >
+        <action
+            android:id="@+id/action_addEmotionFragment_to_emotionAddedFragment"
+            app:destination="@id/emotionAddedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/emotionAddedFragment"
+        android:name="com.fls.self_care_assistant.fragments.main_frg.EmotionAddedFragment"
+        android:label="Emotion added"
+        tools:layout="@layout/fragment_emotion_added" >
+        <action
+            android:id="@+id/action_emotionAddedFragment_to_addEmotionFragment"
+            app:destination="@id/addEmotionFragment" />
+    </fragment>
 </navigation>

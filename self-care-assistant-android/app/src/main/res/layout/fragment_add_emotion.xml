@@ -31,6 +31,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:entries="@array/emotions"
+            android:background="@drawable/rounded_spinner"
             android:popupBackground="@drawable/rounded_shape"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,14 +52,17 @@
             android:id="@+id/frg_add_emotion__sb_emotion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
+            android:layout_marginHorizontal="35dp"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="50dp"
             android:max="9"
+            android:progressDrawable="@drawable/seekbar_progress_bg"
+            android:thumb="@drawable/seekbar_thumb"
+            android:splitTrack="false"
+            android:thumbOffset="0dp"
             android:onProgressChanged="@{AddEmotionViewModel.seekBarTracking}"
             android:progress="@{AddEmotionViewModel.emotionStrength}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.525"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frg_add_emotion__tv_choose_intensity" />
 
@@ -84,15 +88,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frg_add_emotion__sb_emotion" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_emotion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="88dp"
-            android:layout_marginHorizontal="70dp"
-            android:background="@drawable/blue_outline"
-            android:onClick="@{AddEmotionViewModel.addNewEmotion}"
-            android:text="@string/add"
+            android:layout_marginHorizontal="65dp"
+            style="@style/button_style"
+            android:text="@string/save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frg_add_emotion__sb_emotion" />

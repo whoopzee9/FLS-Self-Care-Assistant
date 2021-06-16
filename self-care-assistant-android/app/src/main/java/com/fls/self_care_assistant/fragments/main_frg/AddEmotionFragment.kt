@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.fls.self_care_assistant.R
 import com.fls.self_care_assistant.databinding.FragmentAddEmotionBinding
 import com.fls.self_care_assistant.databinding.FragmentDiaryBinding
@@ -58,5 +59,12 @@ class AddEmotionFragment : Fragment() {
         viewModel.getSpinnerPosition().observe(viewLifecycleOwner, {
             binding.frgAddEmotionSpEmotion.setSelection(it)
         })
+
+        binding.btnEmotion.setOnClickListener {
+            val emotion = viewModel.addNewEmotion()
+            val bundle = Bundle()
+            bundle.putParcelable("emotion", emotion)
+            findNavController().navigate(R.id.emotionAddedFragment, bundle)
+        }
     }
 }

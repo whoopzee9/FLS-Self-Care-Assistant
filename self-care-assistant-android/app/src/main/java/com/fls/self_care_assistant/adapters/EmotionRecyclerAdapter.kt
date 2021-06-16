@@ -31,7 +31,7 @@ class EmotionRecyclerAdapter(var values: ArrayList<Emotion>, var onClickListener
         val format = SimpleDateFormat("dd.MM.yyyy\nHH:mm:ss")
         holder.setDateText(format.format(values[position].date))
         holder.setEmotionText(values[position].emotion)
-        holder.setStrengthText(values[position].strength.toString())
+        holder.setStrengthText(values[position].intensity.toString())
     }
 
     fun setAdapterValues(value: ArrayList<Emotion>){

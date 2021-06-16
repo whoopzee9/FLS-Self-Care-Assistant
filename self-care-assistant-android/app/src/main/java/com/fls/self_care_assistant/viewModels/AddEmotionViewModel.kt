@@ -20,11 +20,12 @@ class AddEmotionViewModel: ViewModel() {
 
     }
 
-    fun addNewEmotion(view: View) {
+    fun addNewEmotion(): Emotion {
         val emotionStr = emotionsList[getSpinnerPosition().value!!]
         val date = Calendar.getInstance().time
         val emotion = Emotion(date, emotionStr, getEmotionStrength().value!! + 1)
         repository.addNewEmotion(emotion)
+        return emotion
     }
 
     fun getEmotionDiary(): LiveData<ArrayList<Emotion>> {

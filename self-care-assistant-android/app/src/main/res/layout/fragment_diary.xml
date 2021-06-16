@@ -17,16 +17,18 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/frg_diary__toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text=""
+                android:layout_marginEnd="20dp"
+                android:text="@string/emotions_diary"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="32sp" />
+
+
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
