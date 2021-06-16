@@ -1,11 +1,13 @@
 package selfcareassistant.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.hibernate.annotations.GenericGenerator
 import java.util.*
 import javax.persistence.*
+import javax.persistence.JoinColumn
 
 @Entity
-@Table(name = "emotions")
+@Table(name = "emotion")
 data class Emotion(@JoinColumn (name = "emotions_name_id", nullable = false)
                    @ManyToOne (cascade = [CascadeType.REFRESH])
                    var emotionsName: EmotionsName,
@@ -15,5 +17,10 @@ data class Emotion(@JoinColumn (name = "emotions_name_id", nullable = false)
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", updatable = false, nullable = false)
-    var id: UUID = UUID.randomUUID();
+    var id: UUID = UUID.randomUUID()
+
+    @JsonIgnore
+    @ManyToOne(cascade = [CascadeType.REFRESH])
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    var user: User? = null
 }
