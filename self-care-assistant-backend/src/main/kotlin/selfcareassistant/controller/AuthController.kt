@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import selfcareassistant.jwt.JwtProvider
+import selfcareassistant.model.JWTResponse
 import selfcareassistant.model.ResponseMessage
 import selfcareassistant.model.User
 import selfcareassistant.model.UserCredentials
@@ -42,7 +43,7 @@ class AuthController() {
                 UsernamePasswordAuthenticationToken(loginRequest.email, loginRequest.password, userCandidate.authorities))
         SecurityContextHolder.getContext().authentication = authentication
         val jwt: String = jwtProvider.generateJwtToken(loginRequest.email)
-        return ResponseEntity.ok(jwt)
+        return ResponseEntity.ok(JWTResponse(jwt))
     }
 
     @PostMapping("/signup")
