@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.fls.self_care_assistant.R
+import com.fls.self_care_assistant.adapters.DiaryViewPagerAdapter
 import com.fls.self_care_assistant.databinding.FragmentAddEmotionBinding
 import com.fls.self_care_assistant.databinding.FragmentDiaryBinding
 import com.fls.self_care_assistant.viewModels.AddEmotionViewModel
@@ -64,7 +65,9 @@ class AddEmotionFragment : Fragment() {
             val emotion = viewModel.addNewEmotion()
             val bundle = Bundle()
             bundle.putParcelable("emotion", emotion)
-            findNavController().navigate(R.id.emotionAddedFragment, bundle)
+
+            findNavController().navigate(R.id.action_addEmotionFragment_to_emotionAddedFragment, bundle)
+            //findNavController().navigate(R.id.emotionAddedFragment, bundle)
         }
     }
 }
