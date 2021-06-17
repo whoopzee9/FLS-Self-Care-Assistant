@@ -27,8 +27,8 @@
     <string name="choose_intensity">Выберите интенсивность</string>
     <string name="emotions_diary">Emotions diary</string>
     <string name="new_record_added">Добавлена новая запись</string>
-    <string name="emotion_type">emotion: %s</string>
-    <string name="intensity">intensity: %s</string>
+    <string name="emotion_type">эмоция: %s</string>
+    <string name="intensity">интенсивность: %s</string>
 
     <integer name="com_vk_sdk_AppId">7864498</integer>
 

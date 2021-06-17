@@ -7,9 +7,10 @@
 
     <TextView
         android:id="@+id/frg_emotion_added__tv_added_emotion"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="50dp"
         android:text="@string/new_record_added"
         android:textSize="24sp"
         android:textColor="@color/black"
@@ -20,37 +21,40 @@
 
     <TextView
         android:id="@+id/frg_emotion_added__tv_emotion_date"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_marginTop="32dp"
-        android:textSize="24sp"
         android:textColor="@color/black"
-        tools:text="dd.MM.yy hh:mm"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frg_emotion_added__tv_added_emotion" />
+        app:layout_constraintTop_toBottomOf="@+id/frg_emotion_added__tv_added_emotion"
+        tools:text="dd.MM.yy hh:mm" />
 
     <TextView
         android:id="@+id/frg_emotion_added__tv_emotion_type"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_marginTop="16dp"
-        android:textSize="24sp"
-        android:textColor="@color/black"
         android:text="@string/emotion_type"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frg_emotion_added__tv_emotion_date" />
 
     <TextView
         android:id="@+id/frg_emotion_added__tv_emotion_intensity"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_marginTop="16dp"
-        android:textSize="24sp"
-        android:textColor="@color/black"
         android:text="@string/intensity"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frg_emotion_added__tv_emotion_type" />
 

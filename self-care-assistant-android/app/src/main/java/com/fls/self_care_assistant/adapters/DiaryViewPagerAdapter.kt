@@ -6,6 +6,7 @@ import com.fls.self_care_assistant.fragments.main_frg.AddEmotionFragment
 import com.fls.self_care_assistant.fragments.main_frg.DiaryContainerFragment
 import com.fls.self_care_assistant.fragments.main_frg.EmotionAddedFragment
 import com.fls.self_care_assistant.fragments.main_frg.HistoryFragment
+import com.google.android.material.tabs.TabLayout
 
 class DiaryViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
