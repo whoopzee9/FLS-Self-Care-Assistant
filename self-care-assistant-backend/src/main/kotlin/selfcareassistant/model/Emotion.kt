@@ -8,16 +8,17 @@ import javax.persistence.JoinColumn
 
 @Entity
 @Table(name = "emotion")
-data class Emotion(@JoinColumn (name = "emotions_name_id", nullable = false)
-                   @ManyToOne (cascade = [CascadeType.REFRESH])
-                   var emotionsName: EmotionsName,
-                   var name: String, var create_date: Date, var rate: Byte) {
+data class Emotion(var name: String, var create_date: Date, var rate: Byte) {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", updatable = false, nullable = false)
     var id: UUID = UUID.randomUUID()
+
+    @JoinColumn (name = "emotions_name_id", nullable = false)
+    @ManyToOne (cascade = [CascadeType.REFRESH])
+    var emotionsName: EmotionsName? = null
 
     @JsonIgnore
     @ManyToOne(cascade = [CascadeType.REFRESH])

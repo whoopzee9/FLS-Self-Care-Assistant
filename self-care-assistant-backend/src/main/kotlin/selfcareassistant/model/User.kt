@@ -26,4 +26,8 @@ data class User(var name: String, var email: String, var password: String) {
             inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
     )
     var roles: Set<Role>? = setOf(Role("ROLE_USER"))
+
+    @JsonIgnore
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "user")
+    var emotions: List<Emotion> = ArrayList()
 }

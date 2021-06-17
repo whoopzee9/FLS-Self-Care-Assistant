@@ -17,7 +17,7 @@ import javax.servlet.ServletException
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class JwtAuthTokenFilter : OncePerRequestFilter() {
+class JwtAuthTokenFilter: OncePerRequestFilter() {
 
     @Autowired
     lateinit var tokenProvider: JwtProvider

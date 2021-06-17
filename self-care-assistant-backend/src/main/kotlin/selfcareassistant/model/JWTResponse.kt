@@ -1,4 +1,3 @@
 package selfcareassistant.model
 
-class JWTResponse(token: String) {
-}
+class JWTResponse(var token: String?)

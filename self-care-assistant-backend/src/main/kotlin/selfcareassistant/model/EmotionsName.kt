@@ -13,4 +13,8 @@ data class EmotionsName(var name: String) {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", updatable = false, nullable = false)
     var id: UUID = UUID.randomUUID()
+
+    @JsonIgnore
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "emotionsName")
+    var emotions: List<Emotion> = ArrayList()
 }

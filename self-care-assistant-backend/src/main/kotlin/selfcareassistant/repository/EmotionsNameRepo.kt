@@ -6,6 +6,6 @@ import selfcareassistant.model.EmotionsName
 import java.util.*
 
 @Repository
-interface EmotionsNameRepo : CrudRepository<EmotionsName, UUID> {
+interface EmotionsNameRepo: CrudRepository<EmotionsName, UUID> {
 
 }

@@ -9,7 +9,7 @@ import org.springframework.web.context.request.WebRequest
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
 @ControllerAdvice
-class ControllerAdviceRequestError : ResponseEntityExceptionHandler() {
+class ControllerAdviceRequestError: ResponseEntityExceptionHandler() {
     @ExceptionHandler(value = [(UsernameNotFoundException::class)])
     fun handleUserAlreadyExists(ex: UsernameNotFoundException, request: WebRequest): ResponseEntity<String> {
         return ResponseEntity(ex.message!!, HttpStatus.BAD_REQUEST)

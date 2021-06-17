@@ -6,6 +6,6 @@ import selfcareassistant.model.User
 import java.util.*
 
 @Repository
-interface UserRepo : CrudRepository<User, UUID> {
+interface UserRepo: CrudRepository<User, UUID> {
     fun findByEmail(email: String): Optional<User>
 }

@@ -17,7 +17,7 @@ import selfcareassistant.service.AppUserDetailsService
 
 @Configuration
 @EnableOAuth2Sso
-class WebSecurityConfig : WebSecurityConfigurerAdapter() {
+class WebSecurityConfig: WebSecurityConfigurerAdapter() {
 
     @Autowired
     internal var userService: AppUserDetailsService? = null
@@ -51,7 +51,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/signup", "/signin", "/roles", "/add-role").permitAll()
+                .antMatchers("/signup", "/signin").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

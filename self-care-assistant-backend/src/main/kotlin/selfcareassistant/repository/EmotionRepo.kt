@@ -7,6 +7,6 @@ import selfcareassistant.model.User
 import java.util.*
 
 @Repository
-interface EmotionRepo : CrudRepository<Emotion, UUID> {
+interface EmotionRepo: CrudRepository<Emotion, UUID> {
     fun findAllByUser(user: User): Iterable<Emotion>
 }
