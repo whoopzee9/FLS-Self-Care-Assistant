@@ -37,7 +37,6 @@ class DiaryFragment : Fragment() {
     }
 
     private fun initTabs() {
-        //requireActivity().actionBarsupportActionBar?.hide()
         val adapter = DiaryViewPagerAdapter(this)
         binding.frgDiaryViewPager.adapter = adapter
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)

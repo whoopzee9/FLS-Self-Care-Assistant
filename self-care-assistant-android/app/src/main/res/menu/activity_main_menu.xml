@@ -2,14 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/diaryFragment"
-        android:icon="@drawable/ic_menu"
+        android:icon="@drawable/ic_emotions_diary_45"
         android:title="@string/diary"/>
     <item
         android:id="@+id/chatFragment"
-        android:icon="@drawable/ic_chat_bubble"
-        android:title="@string/chat"/>
+        android:icon="@drawable/ic_assistant_45"
+        android:menuCategory="alternative"
+        android:title="@string/chat" />
     <item
         android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_profile"
+        android:icon="@drawable/ic_user_settings_45"
         android:title="@string/profile"/>
 </menu>

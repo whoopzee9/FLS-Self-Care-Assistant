@@ -28,11 +28,7 @@ class HistoryFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return HistoryViewModel() as T
-            }
-        }).get(HistoryViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
 
     }
 
@@ -45,47 +41,19 @@ class HistoryFragment: Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adapter = EmotionRecyclerAdapter(ArrayList(), object: EmotionRecyclerAdapter.OnClickListener {
+            override fun onItemClick(position: Int) {
+                //editEmotion(position)
+            }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-//        var emotionsList = resources.getStringArray(R.array.emotions).toList()
-//        viewModel.emotionsList = emotionsList as ArrayList<String>
-//
-//        val spinner = requireView().findViewById<Spinner>(R.id.frg_add_emotion__sp_emotion)
-//        /*val spAdapter = EmotionSpinnerAdapter(requireContext())
-//        spinner.adapter = spAdapter*/
-//        /*val spAdapter = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item, R.array.emotions)
-//        spAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        spinner.adapter = spAdapter*/
-//
-//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(
-//                parent: AdapterView<*>?,
-//                itemSelected: View?, selectedItemPosition: Int, selectedId: Long
-//            ) {
-//                viewModel.setSpinnerPosition(selectedItemPosition)
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>?) {}
-//        }
-//
-//        val recyclerView = requireView().findViewById<RecyclerView>(R.id.rv_emotions)
-//        val adapter = EmotionRecyclerAdapter(ArrayList(), object: EmotionRecyclerAdapter.OnClickListener {
-//            override fun onItemClick(position: Int) {
-//                editEmotion(position)
-//            }
-//
-//        })
-//        recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(context)
-//        viewModel.getEmotionDiary().observe(viewLifecycleOwner, {
-//            adapter.values = it
-//            adapter.notifyDataSetChanged()
-//        })
-//        viewModel.getSpinnerPosition().observe(viewLifecycleOwner, {
-//            spinner.setSelection(it)
-//        })
+        })
+        binding.rvEmotions.adapter = adapter
+        viewModel.getEmotionDiary().observe(viewLifecycleOwner, {
+            adapter.values = it
+            adapter.notifyDataSetChanged()
+        })
     }
 
 
