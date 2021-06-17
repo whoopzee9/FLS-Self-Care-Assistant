@@ -1,0 +1,21 @@
+name: iOS build
+
+on:
+  push:
+    paths:
+    - 'self-care-assistant-ios/**'
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Build
+        uses: yukiarrr/ios-build-action@v1.4.0
+        with:
+          project-path: self-care-assistant-ios/Self-Care Assistant.xcodeproj
+          p12-base64: ${{ secrets.P12_BASE64 }}
+          mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
+          code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
+          team-id: ${{ secrets.TEAM_ID }}
+          workspace-path: self-care-assistant-ios/Self-Care Assistant.xcworkspace
+
