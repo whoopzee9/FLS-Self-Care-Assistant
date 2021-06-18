@@ -7,8 +7,6 @@ import selfcareassistant.entity.UserEntity
 import java.util.stream.Collectors
 
 class MappingUserUtils {
-    private val mappingRoleUtils: MappingRoleUtils = MappingRoleUtils()
-
     fun mapToUserDto(entity: UserEntity): UserDto {
         val user = UserDto()
         user.id = entity.id

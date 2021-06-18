@@ -25,7 +25,7 @@ class RoleController {
     }
 
     @PostMapping("/role")
-    fun addUser(@Validated @RequestBody roleDto: RoleDto): ResponseEntity<UUID> {
+    fun addUser(@RequestBody roleDto: RoleDto): ResponseEntity<UUID> {
         val role = RoleEntity(roleDto.id, roleDto.name)
         return ResponseEntity.ok(roleService.addRole(role))
     }

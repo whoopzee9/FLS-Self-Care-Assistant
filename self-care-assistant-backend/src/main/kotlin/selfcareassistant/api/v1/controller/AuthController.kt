@@ -37,7 +37,7 @@ class AuthController {
     lateinit var bCryptPasswordEncoder: BCryptPasswordEncoder
 
     @PostMapping("/signin")
-    fun authenticateUser(@Validated @RequestBody loginRequest: UserCredentials): ResponseEntity<Any> {
+    fun authenticateUser(@RequestBody loginRequest: UserCredentials): ResponseEntity<Any> {
 
         val userCandidate: UserDetails = appUserDetailsService.loadUserByUsername(loginRequest.email)
         val authentication = authenticationManager.authenticate(
@@ -48,7 +48,7 @@ class AuthController {
     }
 
     @PostMapping("/signup")
-    fun registerUser(@Validated @RequestBody userDto: UserDto): ResponseEntity<Any> {
+    fun registerUser(@RequestBody userDto: UserDto): ResponseEntity<Any> {
         if (appUserDetailsService.emailExists(userDto.email)) {
             return ResponseEntity(ResponseMessage("User with email " + userDto.email + "already exists!"),
                     HttpStatus.BAD_REQUEST)
