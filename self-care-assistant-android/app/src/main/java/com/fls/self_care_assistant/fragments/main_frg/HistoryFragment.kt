@@ -49,7 +49,7 @@ class HistoryFragment: Fragment() {
             }
 
         })
-        binding.rvEmotions.adapter = adapter
+        binding.frgHistoryRvEmotions.adapter = adapter
         viewModel.getEmotionDiary().observe(viewLifecycleOwner, {
             adapter.values = it
             adapter.notifyDataSetChanged()

@@ -1,22 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/frg_history__sw_display_switch"
+        style="@style/Widget.App.Switch"
+        android:layout_width="103dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="28dp"
+        android:text="List"
+        android:thumb="@drawable/switch_thumb"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:thumbTint="@color/black"
+        app:track="@drawable/switch_track"
+        app:trackTint="@color/switch_color" />
+
+
+    <TextView
+        android:id="@+id/frg_history__tv_chart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="38dp"
+        android:text="Chart"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/frg_history__sw_display_switch"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_emotions"
+        android:id="@+id/frg_history__rv_emotions"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
+        android:background="@drawable/black_outline_10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frg_history__sw_display_switch"
         app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/frg_history__mb_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        app:backgroundTint="@null"
+        android:background="@drawable/button_background_semi_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
