@@ -4,6 +4,7 @@ on:
   push:
     paths:
     - 'self-care-assistant-ios/**'
+    - '.github/workflows/ios-build.yml'
 
 jobs:
   build:
