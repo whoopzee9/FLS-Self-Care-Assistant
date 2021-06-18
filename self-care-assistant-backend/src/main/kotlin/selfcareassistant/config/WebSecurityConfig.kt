@@ -1,7 +1,6 @@
 package selfcareassistant.config
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -16,7 +15,6 @@ import selfcareassistant.jwt.JwtAuthTokenFilter
 import selfcareassistant.service.AppUserDetailsService
 
 @Configuration
-@EnableOAuth2Sso
 class WebSecurityConfig: WebSecurityConfigurerAdapter() {
 
     @Autowired
@@ -51,7 +49,7 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/signup", "/signin").permitAll()
+                .antMatchers("/api/v1/signup", "/api/v1/signin").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

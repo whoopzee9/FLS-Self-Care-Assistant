@@ -1,9 +1,9 @@
 package selfcareassistant.service
 
-import selfcareassistant.model.Role
+import selfcareassistant.entity.RoleEntity
 import java.util.*
 
 interface RoleService {
-    fun addRole(role: Role): UUID
-    fun getAllRoles(): Iterable<Role>
+    fun addRole(roleEntity: RoleEntity): UUID
+    fun getAllRoles(): Iterable<RoleEntity>
 }

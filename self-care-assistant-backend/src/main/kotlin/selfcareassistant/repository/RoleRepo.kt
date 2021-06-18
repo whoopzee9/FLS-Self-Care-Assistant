@@ -1,8 +1,8 @@
 package selfcareassistant.repository
 
 import org.springframework.data.repository.CrudRepository
-import selfcareassistant.model.Role
+import selfcareassistant.entity.RoleEntity
 import java.util.*
 
-interface RoleRepo: CrudRepository<Role, UUID> {
+interface RoleRepo: CrudRepository<RoleEntity, UUID> {
 }

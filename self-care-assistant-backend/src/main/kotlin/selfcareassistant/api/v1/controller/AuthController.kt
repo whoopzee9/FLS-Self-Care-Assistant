@@ -1,4 +1,4 @@
-package selfcareassistant.controller
+package selfcareassistant.api.v1.controller
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -8,20 +8,21 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.*
 import selfcareassistant.jwt.JwtProvider
-import selfcareassistant.model.JWTResponse
-import selfcareassistant.model.ResponseMessage
-import selfcareassistant.model.User
-import selfcareassistant.model.UserCredentials
+import selfcareassistant.api.v1.dto.JWTResponse
+import selfcareassistant.api.v1.dto.ResponseMessage
+import selfcareassistant.entity.UserEntity
+import selfcareassistant.api.v1.dto.UserCredentials
+import selfcareassistant.api.v1.dto.UserDto
+import selfcareassistant.api.v1.dto.util.MappingUserUtils
 import selfcareassistant.service.AppUserDetailsService
 
 @RestController
 @CrossOrigin
-class AuthController() {
+@RequestMapping("/api/v1")
+class AuthController {
 
     @Autowired
     lateinit var authenticationManager: AuthenticationManager
@@ -36,7 +37,7 @@ class AuthController() {
     lateinit var bCryptPasswordEncoder: BCryptPasswordEncoder
 
     @PostMapping("/signin")
-    fun authenticateUser(@RequestBody loginRequest: UserCredentials): ResponseEntity<Any> {
+    fun authenticateUser(@Validated @RequestBody loginRequest: UserCredentials): ResponseEntity<Any> {
 
         val userCandidate: UserDetails = appUserDetailsService.loadUserByUsername(loginRequest.email)
         val authentication = authenticationManager.authenticate(
@@ -47,12 +48,13 @@ class AuthController() {
     }
 
     @PostMapping("/signup")
-    fun registerUser(@RequestBody user: User): ResponseEntity<Any> {
-        if (appUserDetailsService.emailExists(user.email)) {
-            return ResponseEntity(ResponseMessage("User with email " + user.email + "already exists!"),
+    fun registerUser(@Validated @RequestBody userDto: UserDto): ResponseEntity<Any> {
+        if (appUserDetailsService.emailExists(userDto.email)) {
+            return ResponseEntity(ResponseMessage("User with email " + userDto.email + "already exists!"),
                     HttpStatus.BAD_REQUEST)
         }
 
+        val user = MappingUserUtils().mapToUserEntity(userDto)
         user.password = bCryptPasswordEncoder.encode(user.password)
         appUserDetailsService.saveUser(user)
 

@@ -6,7 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Component
-import selfcareassistant.model.User
+import selfcareassistant.entity.UserEntity
 import selfcareassistant.repository.UserRepo
 import selfcareassistant.service.AppUserDetailsService
 import java.util.stream.Collectors
@@ -19,9 +19,8 @@ class AppUserDetailsServiceImpl: AppUserDetailsService {
 
     override fun loadUserByUsername(username: String?): UserDetails {
         val user = userRepo.findByEmail(username!!).get()
-                ?: throw UsernameNotFoundException("User with email '$username' not found")
 
-        val authorities: List<GrantedAuthority> = user.roles!!.stream()
+        val authorities: List<GrantedAuthority> = user.roles.stream()
                 .map { role -> SimpleGrantedAuthority(role.name) }.collect(Collectors.toList<GrantedAuthority>())
 
         return org.springframework.security.core.userdetails.User
@@ -31,18 +30,18 @@ class AppUserDetailsServiceImpl: AppUserDetailsService {
                 .build()
     }
 
-    override fun loadUserByEmail(email: String?): User {
+    override fun loadUserByEmail(email: String?): UserEntity {
         return userRepo.findByEmail(email!!).get()
                 ?: throw UsernameNotFoundException("User with email '$email' not found")
     }
 
-    override fun saveUser(user: User): Boolean {
-        val userFromDB = userRepo.findByEmail(user.email)
+    override fun saveUser(userEntity: UserEntity): Boolean {
+        val userFromDB = userRepo.findByEmail(userEntity.email)
         if (userFromDB.isPresent) {
             return false
         }
 
-        userRepo.save(user)
+        userRepo.save(userEntity)
         return true
     }
 

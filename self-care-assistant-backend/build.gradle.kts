@@ -24,12 +24,13 @@ repositories {
 }
 
 dependencies {
+	implementation("io.springfox:springfox-swagger2:3.0.0")
+	implementation("io.springfox:springfox-swagger-ui:3.0.0")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-rest")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	compileOnly("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE")
 	compileOnly("io.jsonwebtoken:jjwt:0.7.0")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	compileOnly("org.projectlombok:lombok")

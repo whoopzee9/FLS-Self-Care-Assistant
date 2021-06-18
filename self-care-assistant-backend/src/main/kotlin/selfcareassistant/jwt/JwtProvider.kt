@@ -3,11 +3,9 @@ package selfcareassistant.jwt
 import io.jsonwebtoken.*
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import selfcareassistant.model.Constants.JWT_EXPIRATION
-import selfcareassistant.model.Constants.JWT_SECRET
-import selfcareassistant.repository.UserRepo
+import selfcareassistant.entity.Constants.JWT_EXPIRATION
+import selfcareassistant.entity.Constants.JWT_SECRET
 import java.security.SignatureException
 import java.util.*
 
