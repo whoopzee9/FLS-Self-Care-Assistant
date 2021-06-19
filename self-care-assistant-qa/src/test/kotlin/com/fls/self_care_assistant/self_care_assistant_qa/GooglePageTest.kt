@@ -18,7 +18,7 @@ class GooglePageTest {
 
     @Test
     fun user_can_search() {
-        get("[name=q]").setValue("selenide").pressEnter()
-        all("#res .g").shouldHave(sizeGreaterThan(5))
+        get(GooglePageLocators.SEARCH_INPUT).setValue("selenide").pressEnter()
+        all(GooglePageLocators.SEARCH_RESULTS).shouldHave(sizeGreaterThan(5))
     }
 }
