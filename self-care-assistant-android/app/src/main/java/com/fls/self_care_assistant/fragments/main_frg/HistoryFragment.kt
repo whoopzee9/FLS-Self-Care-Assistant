@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fls.self_care_assistant.R
@@ -54,6 +55,10 @@ class HistoryFragment: Fragment() {
             adapter.values = it
             adapter.notifyDataSetChanged()
         })
+
+        binding.frgHistoryMbFilter.setOnClickListener {
+            findNavController().navigate(R.id.action_diaryFragment_to_filterFragment)
+        }
     }
 
 

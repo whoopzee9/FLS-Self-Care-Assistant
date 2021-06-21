@@ -29,6 +29,18 @@
     <string name="new_record_added">Добавлена новая запись</string>
     <string name="emotion_type">эмоция: %s</string>
     <string name="intensity">интенсивность: %s</string>
+    <string name="filter">Filter</string>
+    <string name="emotions">Emotions</string>
+    <string name="anxiety">Тревога</string>
+    <string name="apathy">Апатия</string>
+    <string name="anger">Злость</string>
+    <string name="intensity_from">Intensity from</string>
+    <string name="to">to</string>
+    <string name="all">All</string>
+    <string name="last_week">Last week</string>
+    <string name="last_month">Last month</string>
+    <string name="custom">Custom</string>
+    <string name="from">from</string>
 
     <integer name="com_vk_sdk_AppId">7864498</integer>
 

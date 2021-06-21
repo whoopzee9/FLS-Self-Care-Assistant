@@ -45,6 +45,9 @@
         android:id="@+id/frg_diary__view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:isScrollContainer="true"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frg_diary__bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
