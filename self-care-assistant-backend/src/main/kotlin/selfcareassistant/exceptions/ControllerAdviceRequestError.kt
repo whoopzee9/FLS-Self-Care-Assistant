@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.context.request.WebRequest
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
-import selfcareassistant.api.v1.dto.ResponseMessage
+import selfcareassistant.api.v2.dto.ResponseMessage
 
 @ControllerAdvice
 class ControllerAdviceRequestError: ResponseEntityExceptionHandler() {

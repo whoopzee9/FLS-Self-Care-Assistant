@@ -18,7 +18,8 @@ class AppUserDetailsServiceImpl: AppUserDetailsService {
     lateinit var userRepo: UserRepo
 
     override fun loadUserByUsername(username: String?): UserDetails {
-        val user = userRepo.findByEmail(username!!).get()
+        val user = userRepo.findByEmail(username!!)
+                .orElseThrow { throw UsernameNotFoundException("User with email '$username' not found") }
 
         val authorities: List<GrantedAuthority> = user.roles.stream()
                 .map { role -> SimpleGrantedAuthority(role.name) }.collect(Collectors.toList<GrantedAuthority>())
@@ -31,8 +32,8 @@ class AppUserDetailsServiceImpl: AppUserDetailsService {
     }
 
     override fun loadUserByEmail(email: String?): UserEntity {
-        return userRepo.findByEmail(email!!).get()
-                ?: throw UsernameNotFoundException("User with email '$email' not found")
+        return userRepo.findByEmail(email!!)
+                .orElseThrow { throw UsernameNotFoundException("User with email '$email' not found") }
     }
 
     override fun saveUser(userEntity: UserEntity): Boolean {

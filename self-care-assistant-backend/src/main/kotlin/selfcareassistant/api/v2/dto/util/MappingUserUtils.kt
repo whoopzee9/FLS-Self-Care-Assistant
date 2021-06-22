@@ -1,7 +1,7 @@
-package selfcareassistant.api.v1.dto.util
+package selfcareassistant.api.v2.dto.util
 
-import selfcareassistant.api.v1.dto.RoleDto
-import selfcareassistant.api.v1.dto.UserDto
+import selfcareassistant.api.v2.dto.RoleDto
+import selfcareassistant.api.v2.dto.UserDto
 import selfcareassistant.entity.RoleEntity
 import selfcareassistant.entity.UserEntity
 import java.util.stream.Collectors

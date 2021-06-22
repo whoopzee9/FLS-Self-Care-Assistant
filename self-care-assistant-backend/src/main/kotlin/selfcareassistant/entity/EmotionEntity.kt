@@ -17,9 +17,8 @@ class EmotionEntity {
     @Column(name = "id", updatable = false, nullable = false)
     var id: UUID? = null
 
-    var name: String = ""
-    var create_date: Date = Date()
-    var rate: Byte = 0
+    var createDate: Date = Date()
+    var intensity: Byte = 0
 
     @JoinColumn (name = "emotions_name_id", nullable = false)
     @ManyToOne (cascade = [CascadeType.REFRESH])

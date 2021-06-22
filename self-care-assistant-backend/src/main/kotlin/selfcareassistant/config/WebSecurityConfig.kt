@@ -13,6 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import selfcareassistant.jwt.JwtAuthEntryPoint
 import selfcareassistant.jwt.JwtAuthTokenFilter
 import selfcareassistant.service.AppUserDetailsService
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 
 @Configuration
 class WebSecurityConfig: WebSecurityConfigurerAdapter() {
@@ -49,7 +50,8 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/api/v1/signup", "/api/v1/signin").permitAll()
+                .antMatchers("/api/v2/signup", "/api/v2/signin").permitAll()
+                .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
