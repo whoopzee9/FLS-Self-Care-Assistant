@@ -6,5 +6,4 @@ object Constants {
 
     // JWT token defaults
     const val TOKEN_HEADER = "Authorization"
-    const val TOKEN_PREFIX = "Bearer "
 }

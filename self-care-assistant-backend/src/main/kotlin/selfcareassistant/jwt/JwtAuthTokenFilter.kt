@@ -1,5 +1,6 @@
 package selfcareassistant.jwt
 
+import io.jsonwebtoken.io.IOException
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -8,10 +9,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter
 import selfcareassistant.exceptions.NotValidJwtException
 import selfcareassistant.entity.Constants.TOKEN_HEADER
-import selfcareassistant.entity.Constants.TOKEN_PREFIX
 import selfcareassistant.entity.UserEntity
 import selfcareassistant.service.AppUserDetailsService
-import java.io.IOException
 import javax.servlet.FilterChain
 import javax.servlet.ServletException
 import javax.servlet.http.HttpServletRequest
@@ -48,11 +47,7 @@ class JwtAuthTokenFilter: OncePerRequestFilter() {
     }
 
     private fun getJwt(request: HttpServletRequest): String? {
-        val authHeader = request.getHeader(TOKEN_HEADER)
-
-        return if (authHeader != null && authHeader.startsWith(TOKEN_PREFIX)) {
-            authHeader.replace(TOKEN_PREFIX, "")
-        } else null
+        return request.getHeader(TOKEN_HEADER)
     }
 
     fun getUserFromJwtToken(request: HttpServletRequest): UserEntity {

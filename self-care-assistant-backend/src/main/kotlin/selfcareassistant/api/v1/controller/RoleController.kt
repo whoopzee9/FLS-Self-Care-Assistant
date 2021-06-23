@@ -3,6 +3,7 @@ package selfcareassistant.api.v1.controller
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import selfcareassistant.api.v1.dto.ResponseMessage
 import selfcareassistant.api.v1.dto.RoleDto
 import selfcareassistant.entity.RoleEntity
 import selfcareassistant.service.RoleService
@@ -24,8 +25,8 @@ class RoleController {
     }
 
     @PostMapping("/role")
-    fun addUser(@Valid @RequestBody roleDto: RoleDto): ResponseEntity<UUID> {
+    fun addUser(@Valid @RequestBody roleDto: RoleDto): ResponseEntity<ResponseMessage> {
         val role = RoleEntity(roleDto.id, roleDto.name)
-        return ResponseEntity.ok(roleService.addRole(role))
+        return ResponseEntity.ok(ResponseMessage(roleService.addRole(role).toString()))
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*
 import selfcareassistant.api.v1.dto.EmotionDto
 import selfcareassistant.api.v1.dto.EmotionFilterDto
 import selfcareassistant.api.v1.dto.EmotionNameDto
+import selfcareassistant.api.v1.dto.ResponseMessage
 import selfcareassistant.api.v1.dto.util.MappingEmotionUtils
 import selfcareassistant.entity.EmotionNameEntity
 import selfcareassistant.service.EmotionService
@@ -46,8 +47,9 @@ class EmotionController {
     }
 
     @PostMapping("/emotion")
-    fun addEmotion(request: HttpServletRequest, @RequestBody @Valid emotion: EmotionDto): ResponseEntity<UUID>  {
-        return ResponseEntity.ok(emotionService.addEmotion(request, mappingEmotionUtils.mapToEmotionEntity(emotion)))
+    fun addEmotion(request: HttpServletRequest, @RequestBody @Valid emotion: EmotionDto): ResponseEntity<ResponseMessage>  {
+        return ResponseEntity.
+            ok(ResponseMessage(emotionService.addEmotion(request, mappingEmotionUtils.mapToEmotionEntity(emotion)).toString()))
     }
 
     @GetMapping("/emotion/name")
@@ -58,8 +60,8 @@ class EmotionController {
     }
 
     @PostMapping("/emotion/name")
-    fun addEmotionsName(@Valid @RequestBody emotionNameDto: EmotionNameDto): ResponseEntity<UUID> {
+    fun addEmotionsName(@Valid @RequestBody emotionNameDto: EmotionNameDto): ResponseEntity<ResponseMessage> {
         val emotion = EmotionNameEntity(emotionNameDto.id, emotionNameDto.name)
-        return ResponseEntity.ok(emotionsNameService.addEmotionsName(emotion))
+        return ResponseEntity.ok(ResponseMessage(emotionsNameService.addEmotionsName(emotion).toString()))
     }
 }
