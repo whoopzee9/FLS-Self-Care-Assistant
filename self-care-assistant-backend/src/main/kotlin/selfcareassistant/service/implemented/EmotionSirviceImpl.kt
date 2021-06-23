@@ -54,4 +54,13 @@ class EmotionSirviceImpl: EmotionService {
 
         return emotionRepo.findAllByUser(user)
     }
+
+    override fun deleteEmotion(id: UUID): Boolean {
+        if(!emotionRepo.findById(id).isPresent()) {
+            return false
+        }
+
+        emotionRepo.deleteById(id)
+        return true
+    }
 }

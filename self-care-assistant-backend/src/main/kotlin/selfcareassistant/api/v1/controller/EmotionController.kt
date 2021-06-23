@@ -14,6 +14,7 @@ import selfcareassistant.service.EmotionsNameService
 import java.util.*
 import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
+import org.springframework.http.HttpStatus
 
 @RestController
 @CrossOrigin
@@ -52,16 +53,37 @@ class EmotionController {
             ok(ResponseMessage(emotionService.addEmotion(request, mappingEmotionUtils.mapToEmotionEntity(emotion)).toString()))
     }
 
+    @DeleteMapping("/emotion")
+    fun deleteEmotion(@RequestParam id: UUID): ResponseEntity<ResponseMessage>  {
+        if(!emotionService.deleteEmotion(id)) {
+            //return ResponseEntity.notFound().body(ResponseMessage("Emotion with id '$id' not exist"))
+            return ResponseEntity<ResponseMessage>(ResponseMessage("Emotion with id $id does not exist"), HttpStatus.NOT_FOUND)
+        }
+
+        return ResponseEntity.ok(ResponseMessage("Emotion with id $id successfully deleted"))
+    }
+
     @GetMapping("/emotion/name")
-    fun getEmotionsNames(): ResponseEntity<Iterable<EmotionNameDto>> {
-        val emotionNames = emotionsNameService.getAllEmotionsNames()
+    fun getEmotionNames(): ResponseEntity<Iterable<EmotionNameDto>> {
+        val emotionNames = emotionsNameService.getAllEmotionNames()
                 .map{ EmotionNameDto(it.id, it.name) }
         return ResponseEntity.ok(emotionNames)
     }
 
     @PostMapping("/emotion/name")
-    fun addEmotionsName(@Valid @RequestBody emotionNameDto: EmotionNameDto): ResponseEntity<ResponseMessage> {
+    fun addEmotionName(@Valid @RequestBody emotionNameDto: EmotionNameDto): ResponseEntity<ResponseMessage> {
         val emotion = EmotionNameEntity(emotionNameDto.id, emotionNameDto.name)
-        return ResponseEntity.ok(ResponseMessage(emotionsNameService.addEmotionsName(emotion).toString()))
+        return ResponseEntity.ok(ResponseMessage(emotionsNameService.addEmotionName(emotion).toString()))
+    }
+
+    @DeleteMapping("/emotion/name")
+    fun deleteEmotionName(@RequestParam id: UUID): ResponseEntity<ResponseMessage>  {
+        if(!emotionsNameService.deleteEmotionName(id)) {
+            return ResponseEntity.
+                status(HttpStatus.NOT_FOUND).
+                body(ResponseMessage("Emotion name with id $id does not exist"));
+        }
+
+        return ResponseEntity.ok(ResponseMessage("Emotion name with id $id successfully deleted"))
     }
 }
