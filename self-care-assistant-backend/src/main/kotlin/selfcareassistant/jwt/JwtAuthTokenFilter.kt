@@ -7,9 +7,9 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
 import org.springframework.web.filter.OncePerRequestFilter
 import selfcareassistant.exceptions.NotValidJwtException
-import selfcareassistant.model.Constants.TOKEN_HEADER
-import selfcareassistant.model.Constants.TOKEN_PREFIX
-import selfcareassistant.model.User
+import selfcareassistant.entity.Constants.TOKEN_HEADER
+import selfcareassistant.entity.Constants.TOKEN_PREFIX
+import selfcareassistant.entity.UserEntity
 import selfcareassistant.service.AppUserDetailsService
 import java.io.IOException
 import javax.servlet.FilterChain
@@ -55,7 +55,7 @@ class JwtAuthTokenFilter: OncePerRequestFilter() {
         } else null
     }
 
-    fun getUserFromJwtToken(request: HttpServletRequest): User {
+    fun getUserFromJwtToken(request: HttpServletRequest): UserEntity {
         val jwt = getJwt(request)
         if (jwt != null && tokenProvider.validateJwtToken(jwt)) {
             val email = tokenProvider.getUserNameFromJwtToken(jwt)
