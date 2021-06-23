@@ -1,8 +1,8 @@
-package selfcareassistant.api.v2.dto
+package selfcareassistant.api.v1.dto
 
 import java.util.*
 
-class EmotionNameDto(var name: String) {
+class RoleDto(var name: String) {
     var id: UUID? = null
 
     constructor(id: UUID?, name: String): this(name) {

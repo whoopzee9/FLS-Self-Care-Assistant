@@ -2,7 +2,7 @@ package selfcareassistant.service.implemented
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import selfcareassistant.api.v2.dto.EmotionNameFilterDto
+import selfcareassistant.api.v1.dto.EmotionNameFilterDto
 import selfcareassistant.jwt.JwtAuthTokenFilter
 import selfcareassistant.entity.EmotionEntity
 import selfcareassistant.entity.EmotionNameEntity

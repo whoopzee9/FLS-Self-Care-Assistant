@@ -1,9 +1,9 @@
-package selfcareassistant.api.v2.controller
+package selfcareassistant.api.v1.controller
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import selfcareassistant.api.v2.dto.RoleDto
+import selfcareassistant.api.v1.dto.RoleDto
 import selfcareassistant.entity.RoleEntity
 import selfcareassistant.service.RoleService
 import java.util.*
@@ -11,7 +11,7 @@ import javax.validation.Valid
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v2")
+@RequestMapping("/api/v1")
 class RoleController {
     @Autowired
     lateinit var roleService: RoleService

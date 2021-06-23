@@ -1,7 +1,7 @@
-package selfcareassistant.api.v2.dto.util
+package selfcareassistant.api.v1.dto.util
 
-import selfcareassistant.api.v2.dto.EmotionDto
-import selfcareassistant.api.v2.dto.EmotionNameDto
+import selfcareassistant.api.v1.dto.EmotionDto
+import selfcareassistant.api.v1.dto.EmotionNameDto
 import selfcareassistant.entity.EmotionEntity
 import selfcareassistant.entity.EmotionNameEntity
 

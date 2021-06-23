@@ -1,4 +1,4 @@
-package selfcareassistant.api.v2.controller
+package selfcareassistant.api.v1.controller
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -10,17 +10,17 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.*
 import selfcareassistant.jwt.JwtProvider
-import selfcareassistant.api.v2.dto.JWTResponse
-import selfcareassistant.api.v2.dto.ResponseMessage
-import selfcareassistant.api.v2.dto.UserCredentials
-import selfcareassistant.api.v2.dto.UserDto
-import selfcareassistant.api.v2.dto.util.MappingUserUtils
+import selfcareassistant.api.v1.dto.JWTResponse
+import selfcareassistant.api.v1.dto.ResponseMessage
+import selfcareassistant.api.v1.dto.UserCredentials
+import selfcareassistant.api.v1.dto.UserDto
+import selfcareassistant.api.v1.dto.util.MappingUserUtils
 import selfcareassistant.service.AppUserDetailsService
 import javax.validation.Valid
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v2")
+@RequestMapping("/api/v1")
 class AuthController {
 
     @Autowired

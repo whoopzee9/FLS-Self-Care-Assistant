@@ -1,6 +1,6 @@
 package selfcareassistant.service
 
-import selfcareassistant.api.v2.dto.EmotionNameFilterDto
+import selfcareassistant.api.v1.dto.EmotionNameFilterDto
 import selfcareassistant.entity.EmotionEntity
 import java.util.*
 import javax.servlet.http.HttpServletRequest

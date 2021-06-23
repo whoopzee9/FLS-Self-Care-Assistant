@@ -1,14 +1,12 @@
-package selfcareassistant.api.v2.controller
+package selfcareassistant.api.v1.controller
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import selfcareassistant.api.v2.dto.EmotionDto
-import selfcareassistant.api.v2.dto.EmotionFilterDto
-import selfcareassistant.api.v2.dto.EmotionNameDto
-import selfcareassistant.api.v2.dto.EmotionNameFilterDto
-import selfcareassistant.api.v2.dto.util.MappingEmotionUtils
+import selfcareassistant.api.v1.dto.EmotionDto
+import selfcareassistant.api.v1.dto.EmotionFilterDto
+import selfcareassistant.api.v1.dto.EmotionNameDto
+import selfcareassistant.api.v1.dto.util.MappingEmotionUtils
 import selfcareassistant.entity.EmotionNameEntity
 import selfcareassistant.service.EmotionService
 import selfcareassistant.service.EmotionsNameService
@@ -18,7 +16,7 @@ import javax.validation.Valid
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v2")
+@RequestMapping("/api/v1")
 class EmotionController {
     @Autowired
     lateinit var emotionService: EmotionService

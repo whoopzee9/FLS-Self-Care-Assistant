@@ -1,4 +1,4 @@
-package selfcareassistant.api.v2.dto
+package selfcareassistant.api.v1.dto
 
 import java.util.UUID
 import javax.validation.constraints.Email
