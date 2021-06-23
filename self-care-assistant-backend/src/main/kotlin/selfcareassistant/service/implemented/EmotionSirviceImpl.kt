@@ -33,7 +33,7 @@ class EmotionSirviceImpl: EmotionService {
                                                   emotionNames: List<EmotionNameFilterDto>): Iterable<EmotionEntity> {
         val user = jwtAuthTokenFilter.getUserFromJwtToken(request)
 
-        return if (emotionNames != null && emotionNames.isNotEmpty()) {
+        return if (emotionNames.isNotEmpty()) {
             val emotions: ArrayList<EmotionEntity> = ArrayList()
 
             for (emotionNameFilter in emotionNames) {
