@@ -9,7 +9,6 @@ import selfcareassistant.entity.Constants.JWT_SECRET
 import java.security.SignatureException
 import java.util.*
 
-
 @Component
 class JwtProvider {
 
