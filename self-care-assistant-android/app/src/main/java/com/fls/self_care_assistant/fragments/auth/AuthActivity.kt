@@ -2,6 +2,7 @@ package com.fls.self_care_assistant.fragments.auth
 
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.fls.self_care_assistant.R
 import com.fls.self_care_assistant.adapters.LoginViewPagerAdapter
 import com.fls.self_care_assistant.main.MainActivity
+import com.fls.self_care_assistant.repositories.TokenRepository
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
@@ -27,6 +29,16 @@ class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+        val tokenRepository = TokenRepository.instance
+        tokenRepository.setupSharedPrefs(getSharedPreferences(
+            "prefs",
+            Context.MODE_PRIVATE
+        ))
+        if (tokenRepository.getToken() != null) {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         initTabs()
 
         //TODO temp solution

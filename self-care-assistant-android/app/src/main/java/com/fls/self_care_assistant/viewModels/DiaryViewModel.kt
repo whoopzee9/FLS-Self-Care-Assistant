@@ -4,8 +4,11 @@ import android.view.View
 import android.widget.SeekBar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.fls.self_care_assistant.data.Emotion
+import com.fls.self_care_assistant.network.NetworkResult
 import com.fls.self_care_assistant.repositories.DiaryRepository
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -13,6 +16,7 @@ import kotlin.collections.ArrayList
 class DiaryViewModel : ViewModel() {
 
     var repository = DiaryRepository.instance
+
 
 //    fun editEmotion(emotionId: Int, date: String, strength: Int, oldPosition: Int) {
 //        val format = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")

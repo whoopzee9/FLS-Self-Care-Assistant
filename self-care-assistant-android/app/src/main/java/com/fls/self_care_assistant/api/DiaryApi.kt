@@ -11,7 +11,7 @@ import retrofit2.http.POST
 
 interface DiaryApi {
     @GET("/api/v1/emotion")
-    suspend fun getDiary(@Header("Authorization") token: String) : Response<List<Emotion>>
+    suspend fun getDiary(@Header("Authorization") token: String) : Response<List<EmotionBody>>
 
     @GET("/api/v1/emotion/name")
     suspend fun getEmotionTypes(@Header("Authorization") token: String) : Response<List<EmotionType>>

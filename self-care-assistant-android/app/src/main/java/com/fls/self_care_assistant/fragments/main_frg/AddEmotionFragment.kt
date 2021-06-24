@@ -87,6 +87,8 @@ class AddEmotionFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putParcelable("emotion", it)
 
+                viewModel.getEmotionHistory()
+
                 findNavController().navigate(R.id.action_addEmotionFragment_to_emotionAddedFragment, bundle)
             }
 

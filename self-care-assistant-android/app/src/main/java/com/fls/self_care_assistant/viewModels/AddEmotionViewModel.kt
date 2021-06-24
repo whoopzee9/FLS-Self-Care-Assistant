@@ -79,6 +79,21 @@ class AddEmotionViewModel: ViewModel() {
         }
     }
 
+    fun getEmotionHistory() {
+        viewModelScope.launch {
+            //_addEmotionState.value = AddEmotionState.Processing
+            val result = repository.getEmotionDiary()
+            when (result) {
+                is NetworkResult.Error -> {
+                    //_addEmotionState.value = AddEmotionState.Failure(result.error)
+                }
+                is NetworkResult.Success -> {
+                    //_addEmotionState.value = AddEmotionState.Success
+                }
+            }
+        }
+    }
+
     sealed class AddEmotionState {
         object Initial : AddEmotionState()
         object Processing : AddEmotionState()

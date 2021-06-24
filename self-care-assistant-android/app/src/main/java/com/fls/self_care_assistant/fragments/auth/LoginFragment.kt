@@ -52,13 +52,6 @@ class LoginFragment : Fragment() {
         println(account?.email)
         //googleSignInClient.signOut()
 
-        viewModel.tokenRepository.setupSharedPrefs(
-            requireActivity().getSharedPreferences(
-                "prefs",
-                Context.MODE_PRIVATE
-            )
-        )
-
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.login_fragment,

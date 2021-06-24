@@ -47,6 +47,7 @@ class HistoryFragment : Fragment() {
                 }
 
             })
+        viewModel.getEmotionHistory()
         binding.frgHistoryRvEmotions.adapter = adapter
         lifecycleScope.launch {
             viewModel.emotionDiary.collectLatest {

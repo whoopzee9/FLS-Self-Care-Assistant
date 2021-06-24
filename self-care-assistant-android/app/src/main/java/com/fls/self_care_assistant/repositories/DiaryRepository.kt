@@ -5,17 +5,17 @@ import com.fls.self_care_assistant.api.DiaryApi
 import com.fls.self_care_assistant.data.Emotion
 import com.fls.self_care_assistant.data.EmotionBody
 import com.fls.self_care_assistant.data.EmotionType
-import com.fls.self_care_assistant.extensions.prettyFormat
 import com.fls.self_care_assistant.extensions.requestFormat
 import com.fls.self_care_assistant.network.DiaryError
 import com.fls.self_care_assistant.network.NetworkResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
 
 class DiaryRepository {
     companion object {
-        val instance : DiaryRepository by lazy { holder.Instance }
+        val instance: DiaryRepository by lazy { holder.Instance }
     }
 
     private object holder {
@@ -39,10 +39,16 @@ class DiaryRepository {
         _selectedEmotionStrength.postValue(0)
     }
 
-    suspend fun getEmotionDiary() : NetworkResult<List<Emotion>> {
+    suspend fun getEmotionDiary(): NetworkResult<List<EmotionBody>> {
         val response = retrofitApi.getDiary(tokenRepository.getToken()!!)
         if (response.isSuccessful) {
-            _emotionDiary.value = response.body()!!
+            _emotionDiary.value = response.body()!!.map {
+                Emotion(
+                    SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(it.createDate),
+                    it.emotionName,
+                    it.intensity.toInt()
+                )
+            }
             return NetworkResult.Success(response.body()!!)
         } else if (response.code() == 401) {
             return NetworkResult.Error(DiaryError.InvalidCredentials)
@@ -52,20 +58,19 @@ class DiaryRepository {
     }
 
     suspend fun addNewEmotion(emotion: Emotion): NetworkResult<Any> {
-        val emotionBody = EmotionBody(emotion.date.requestFormat(),emotion.emotion, emotion.intensity.toString())
+        val emotionBody =
+            EmotionBody(emotion.date.requestFormat(), emotion.emotion, emotion.intensity.toString())
         val response = retrofitApi.saveEmotion(emotionBody, tokenRepository.getToken()!!)
         if (response.isSuccessful) {
             return NetworkResult.Success(response)
         } else if (response.code() == 401) {
             return NetworkResult.Error(DiaryError.InvalidCredentials)
         } else {
-            println(response.code())
-            println(response.message())
             return NetworkResult.Error(DiaryError.Unknown)
         }
     }
 
-    suspend fun getEmotionTypes() : NetworkResult<List<EmotionType>> {
+    suspend fun getEmotionTypes(): NetworkResult<List<EmotionType>> {
         val response = retrofitApi.getEmotionTypes(tokenRepository.getToken()!!)
         if (response.isSuccessful) {
             return NetworkResult.Success(response.body()!!)
