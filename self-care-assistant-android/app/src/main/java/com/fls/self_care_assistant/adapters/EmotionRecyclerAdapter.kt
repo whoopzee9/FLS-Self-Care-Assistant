@@ -10,7 +10,7 @@ import com.fls.self_care_assistant.databinding.EmotionHeaderBinding
 import com.fls.self_care_assistant.databinding.EmotionRowLayoutBinding
 import java.text.SimpleDateFormat
 
-class EmotionRecyclerAdapter(var values: ArrayList<Emotion>, var onClickListener: OnClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class EmotionRecyclerAdapter(var values: MutableList<Emotion>, var onClickListener: OnClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     interface OnClickListener {
         fun onItemClick(position: Int)
@@ -54,7 +54,7 @@ class EmotionRecyclerAdapter(var values: ArrayList<Emotion>, var onClickListener
                 with (holder.binding) {
                     val format = SimpleDateFormat("dd.MM.yyyy\nHH:mm:ss")
                     tvDate.text = format.format(values[truePosition].date)
-                    tvEmotion.text = values[truePosition].emotion
+                    tvEmotion.text = values[truePosition].emotion.name
                     tvStrength.text = values[truePosition].intensity.toString()
                 }
             }

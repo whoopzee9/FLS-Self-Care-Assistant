@@ -3,6 +3,13 @@ package com.fls.self_care_assistant.repositories
 import androidx.lifecycle.MutableLiveData
 import com.fls.self_care_assistant.api.DiaryApi
 import com.fls.self_care_assistant.data.Emotion
+import com.fls.self_care_assistant.data.EmotionBody
+import com.fls.self_care_assistant.data.EmotionType
+import com.fls.self_care_assistant.extensions.prettyFormat
+import com.fls.self_care_assistant.extensions.requestFormat
+import com.fls.self_care_assistant.network.DiaryError
+import com.fls.self_care_assistant.network.NetworkResult
+import kotlinx.coroutines.flow.MutableStateFlow
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -15,9 +22,10 @@ class DiaryRepository {
         val Instance = DiaryRepository()
     }
 
-    var emotionDiary: MutableLiveData<ArrayList<Emotion>> = MutableLiveData()
-    var selectedEmotionPosition: MutableLiveData<Int> = MutableLiveData()
-    var selectedEmotionStrength: MutableLiveData<Int> = MutableLiveData()
+    val tokenRepository = TokenRepository.instance
+    var _emotionDiary: MutableStateFlow<List<Emotion>> = MutableStateFlow(mutableListOf())
+    var _selectedEmotionPosition: MutableLiveData<Int> = MutableLiveData()
+    var _selectedEmotionStrength: MutableLiveData<Int> = MutableLiveData()
 
     private val BASE_URL = "https://fls-self-care-assistant.herokuapp.com"
     private var retrofitApi = Retrofit.Builder()
@@ -27,22 +35,45 @@ class DiaryRepository {
         .create(DiaryApi::class.java)
 
     init {
-        selectedEmotionPosition.postValue(0)
-        selectedEmotionStrength.postValue(0)
+        _selectedEmotionPosition.postValue(0)
+        _selectedEmotionStrength.postValue(0)
     }
 
-    fun getEmotionDiary() {
-        //TODO get from DB
-    }
-
-    fun addNewEmotion(emotion: Emotion) {
-        //TODO add to DB
-        var array = emotionDiary.value
-        if (array == null) {
-            array = ArrayList()
+    suspend fun getEmotionDiary() : NetworkResult<List<Emotion>> {
+        val response = retrofitApi.getDiary(tokenRepository.getToken()!!)
+        if (response.isSuccessful) {
+            _emotionDiary.value = response.body()!!
+            return NetworkResult.Success(response.body()!!)
+        } else if (response.code() == 401) {
+            return NetworkResult.Error(DiaryError.InvalidCredentials)
+        } else {
+            return NetworkResult.Error(DiaryError.Unknown)
         }
-        array.add(emotion)
-        emotionDiary.postValue(array)
+    }
+
+    suspend fun addNewEmotion(emotion: Emotion): NetworkResult<Any> {
+        val emotionBody = EmotionBody(emotion.date.requestFormat(),emotion.emotion, emotion.intensity.toString())
+        val response = retrofitApi.saveEmotion(emotionBody, tokenRepository.getToken()!!)
+        if (response.isSuccessful) {
+            return NetworkResult.Success(response)
+        } else if (response.code() == 401) {
+            return NetworkResult.Error(DiaryError.InvalidCredentials)
+        } else {
+            println(response.code())
+            println(response.message())
+            return NetworkResult.Error(DiaryError.Unknown)
+        }
+    }
+
+    suspend fun getEmotionTypes() : NetworkResult<List<EmotionType>> {
+        val response = retrofitApi.getEmotionTypes(tokenRepository.getToken()!!)
+        if (response.isSuccessful) {
+            return NetworkResult.Success(response.body()!!)
+        } else if (response.code() == 401) {
+            return NetworkResult.Error(DiaryError.InvalidCredentials)
+        } else {
+            return NetworkResult.Error(DiaryError.Unknown)
+        }
     }
 
 }

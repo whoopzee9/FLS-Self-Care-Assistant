@@ -25,7 +25,7 @@ class LoginViewModel : ViewModel() {
 
     fun validateInput() = !getEmail().value.isNullOrEmpty() && !getPassword().value.isNullOrEmpty()
 
-    fun signUp() {
+    fun signIn() {
         viewModelScope.launch {
             _loginState.value = LoginState.Processing
             val response = repository.signIn(

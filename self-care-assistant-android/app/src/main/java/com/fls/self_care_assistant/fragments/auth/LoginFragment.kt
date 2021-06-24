@@ -138,7 +138,7 @@ class LoginFragment : Fragment() {
 
     private fun validate() {
         if (viewModel.validateInput()) {
-            viewModel.signUp()
+            viewModel.signIn()
         } else {
             Toast.makeText(requireContext(), "Please, fill all fields", Toast.LENGTH_SHORT).show()
         }

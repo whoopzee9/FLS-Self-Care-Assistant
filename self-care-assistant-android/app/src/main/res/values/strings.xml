@@ -44,6 +44,7 @@
     <string name="registration_successful">Registration Successful. Now you can Log in</string>
     <string name="unknown_error">Unknown error. Try again</string>
     <string name="successful_login">Successful login!</string>
+    <string name="emotion_added">Emotion added successfully!</string>
 
     <integer name="com_vk_sdk_AppId">7864498</integer>
 

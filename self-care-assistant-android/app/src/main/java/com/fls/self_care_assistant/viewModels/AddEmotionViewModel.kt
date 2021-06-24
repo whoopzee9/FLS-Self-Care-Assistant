@@ -1,46 +1,88 @@
 package com.fls.self_care_assistant.viewModels
 
-import android.view.View
 import android.widget.SeekBar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.fls.self_care_assistant.data.Emotion
+import com.fls.self_care_assistant.data.EmotionType
+import com.fls.self_care_assistant.network.ErrorEntity
+import com.fls.self_care_assistant.network.NetworkResult
 import com.fls.self_care_assistant.repositories.DiaryRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.collections.ArrayList
 
 class AddEmotionViewModel: ViewModel() {
-    var emotionsList = ArrayList<String>()
 
     var repository = DiaryRepository.instance
 
+    private val _addEmotionState: MutableStateFlow<AddEmotionState> = MutableStateFlow(AddEmotionState.Initial)
+    val addEmotionState: StateFlow<AddEmotionState> get() = _addEmotionState
+
+    private val _emotionTypes: MutableStateFlow<List<EmotionType>> = MutableStateFlow(mutableListOf())
+    val emotionTypes: StateFlow<List<EmotionType>> get() = _emotionTypes
+
     fun seekBarTracking(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
         println(progress)
-        repository.selectedEmotionStrength.postValue(progress)
+        repository._selectedEmotionStrength.postValue(progress)
 
     }
 
-    fun addNewEmotion(): Emotion {
-        val emotionStr = emotionsList[getSpinnerPosition().value!!]
-        val date = Calendar.getInstance().time
-        val emotion = Emotion(date, emotionStr, getEmotionStrength().value!! + 1)
-        repository.addNewEmotion(emotion)
-        return emotion
-    }
-
-    fun getEmotionDiary(): LiveData<ArrayList<Emotion>> {
-        return repository.emotionDiary
+    fun addNewEmotion(emotionCallback: (emotion: Emotion) -> Unit) {
+        viewModelScope.launch {
+            emotionTypes.collect {
+                val emotionStr = it[getSpinnerPosition().value!!]
+                val date = Calendar.getInstance().time
+                val emotion = Emotion(date, emotionStr, getEmotionStrength().value!! + 1)
+                val result = repository.addNewEmotion(emotion)
+                when (result) {
+                    is NetworkResult.Error -> {
+                        _addEmotionState.value = AddEmotionState.Failure(result.error)
+                    }
+                    is NetworkResult.Success -> {
+                        _addEmotionState.value = AddEmotionState.Success
+                        emotionCallback(emotion)
+                    }
+                }
+            }
+        }
     }
 
     fun setSpinnerPosition(value: Int) {
-        repository.selectedEmotionPosition.postValue(value)
+        repository._selectedEmotionPosition.postValue(value)
     }
 
     fun getSpinnerPosition(): LiveData<Int> {
-        return repository.selectedEmotionPosition
+        return repository._selectedEmotionPosition
     }
 
     fun getEmotionStrength(): LiveData<Int> {
-        return repository.selectedEmotionStrength
+        return repository._selectedEmotionStrength
+    }
+
+    fun getEmotionTypes() {
+        viewModelScope.launch {
+            //_addEmotionState.value = AddEmotionState.Processing
+            val result = repository.getEmotionTypes()
+            when (result) {
+                is NetworkResult.Error -> {
+                    //_addEmotionState.value = AddEmotionState.Failure(result.error)
+                }
+                is NetworkResult.Success -> {
+                    //_addEmotionState.value = AddEmotionState.Success
+                    _emotionTypes.value = result.data
+                }
+            }
+        }
+    }
+
+    sealed class AddEmotionState {
+        object Initial : AddEmotionState()
+        object Processing : AddEmotionState()
+        object Success : AddEmotionState()
+        data class Failure(val addEmotionError: ErrorEntity) : AddEmotionState()
     }
 }

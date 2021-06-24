@@ -4,23 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Spinner
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.fls.self_care_assistant.R
 import com.fls.self_care_assistant.adapters.EmotionRecyclerAdapter
-import com.fls.self_care_assistant.databinding.FragmentDiaryBinding
+import com.fls.self_care_assistant.data.Emotion
 import com.fls.self_care_assistant.databinding.FragmentHistoryBinding
-import com.fls.self_care_assistant.viewModels.DiaryViewModel
 import com.fls.self_care_assistant.viewModels.HistoryViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-class HistoryFragment: Fragment() {
+class HistoryFragment : Fragment() {
 
     private lateinit var viewModel: HistoryViewModel
 
@@ -44,17 +40,20 @@ class HistoryFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = EmotionRecyclerAdapter(ArrayList(), object: EmotionRecyclerAdapter.OnClickListener {
-            override fun onItemClick(position: Int) {
-                //editEmotion(position)
-            }
+        val adapter =
+            EmotionRecyclerAdapter(ArrayList(), object : EmotionRecyclerAdapter.OnClickListener {
+                override fun onItemClick(position: Int) {
+                    //editEmotion(position)
+                }
 
-        })
+            })
         binding.frgHistoryRvEmotions.adapter = adapter
-        viewModel.getEmotionDiary().observe(viewLifecycleOwner, {
-            adapter.values = it
-            adapter.notifyDataSetChanged()
-        })
+        lifecycleScope.launch {
+            viewModel.emotionDiary.collectLatest {
+                adapter.values = it as MutableList<Emotion>
+                adapter.notifyDataSetChanged()
+            }
+        }
 
         binding.frgHistoryMbFilter.setOnClickListener {
             findNavController().navigate(R.id.action_diaryFragment_to_filterFragment)
