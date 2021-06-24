@@ -20,4 +20,13 @@ class RoleServiceImpl: RoleService {
     override fun getAllRoles(): Iterable<RoleEntity> {
         return roleRepo.findAll()
     }
+
+    override fun deleteRole(id: UUID): Boolean {
+        if(!roleRepo.findById(id).isPresent()) {
+            return false
+        }
+
+        roleRepo.deleteById(id)
+        return true
+    }
 }

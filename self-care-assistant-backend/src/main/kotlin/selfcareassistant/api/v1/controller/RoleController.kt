@@ -1,6 +1,7 @@
 package selfcareassistant.api.v1.controller
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import selfcareassistant.api.v1.dto.ResponseMessage
@@ -28,5 +29,16 @@ class RoleController {
     fun addUser(@Valid @RequestBody roleDto: RoleDto): ResponseEntity<ResponseMessage> {
         val role = RoleEntity(roleDto.id, roleDto.name)
         return ResponseEntity.ok(ResponseMessage(roleService.addRole(role).toString()))
+    }
+
+    @DeleteMapping("/role")
+    fun deleteEmotionName(@RequestParam id: UUID): ResponseEntity<ResponseMessage>  {
+        if(!roleService.deleteRole(id)) {
+            return ResponseEntity.
+            status(HttpStatus.NOT_FOUND).
+            body(ResponseMessage("Emotion name with id $id does not exist"));
+        }
+
+        return ResponseEntity.ok(ResponseMessage("Emotion name with id $id successfully deleted"))
     }
 }
