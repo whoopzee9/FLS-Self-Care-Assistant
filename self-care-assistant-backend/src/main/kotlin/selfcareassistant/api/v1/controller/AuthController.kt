@@ -43,7 +43,7 @@ class AuthController {
                 UsernamePasswordAuthenticationToken(loginRequest.email, loginRequest.password, userCandidate.authorities))
         SecurityContextHolder.getContext().authentication = authentication
         val jwt: String = jwtProvider.generateJwtToken(loginRequest.email)
-        return ResponseEntity.ok(ResponseMessage(jwt))
+        return ResponseEntity.ok(JWTResponse(jwt))
     }
 
     @PostMapping("/signup")
