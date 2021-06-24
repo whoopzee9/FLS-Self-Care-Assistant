@@ -1,5 +1,6 @@
 package com.fls.self_care_assistant.fragments.auth
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.fls.self_care_assistant.R
 import com.fls.self_care_assistant.databinding.LoginFragmentBinding
 import com.fls.self_care_assistant.extensions.handleBackPressed
@@ -20,12 +21,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.vk.api.sdk.VK
 import com.vk.api.sdk.auth.VKScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
     companion object {
         const val RC_SIGN_IN = 100
-        fun newInstance() = LoginFragment()
     }
 
     private lateinit var viewModel: LoginViewModel
@@ -34,11 +36,7 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return LoginViewModel() as T
-            }
-        }).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -54,6 +52,12 @@ class LoginFragment : Fragment() {
         println(account?.email)
         //googleSignInClient.signOut()
 
+        viewModel.tokenRepository.setupSharedPrefs(
+            requireActivity().getSharedPreferences(
+                "prefs",
+                Context.MODE_PRIVATE
+            )
+        )
 
         binding = DataBindingUtil.inflate(
             inflater,
@@ -68,6 +72,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            viewModel.loginState.collect {
+                handleUiState(it)
+            }
+        }
+
         binding.loginFrgSignBtn.setOnClickListener {
             validate()
         }
@@ -96,18 +107,40 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun validate() {
-        if (viewModel.validateInput()) {
-            startActivity(Intent(requireContext(), MainActivity::class.java))
-            requireActivity().finish()
-        } else {
-            Toast.makeText(requireContext(), "Please, fill all fields", Toast.LENGTH_SHORT).show()
+    private fun handleUiState(state: LoginViewModel.LoginState) {
+        when (state) {
+            is LoginViewModel.LoginState.Failure -> {
+                binding.loginFrgProgressBar.visibility = View.GONE
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.unknown_error),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            is LoginViewModel.LoginState.Initial -> {
+                binding.loginFrgProgressBar.visibility = View.GONE
+            }
+            is LoginViewModel.LoginState.Processing -> {
+                binding.loginFrgProgressBar.visibility = View.VISIBLE
+            }
+            is LoginViewModel.LoginState.Success -> {
+                binding.loginFrgProgressBar.visibility = View.GONE
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.successful_login),
+                    Toast.LENGTH_SHORT
+                ).show()
+                startActivity(Intent(requireContext(), MainActivity::class.java))
+                requireActivity().finish()
+            }
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-
+    private fun validate() {
+        if (viewModel.validateInput()) {
+            viewModel.signUp()
+        } else {
+            Toast.makeText(requireContext(), "Please, fill all fields", Toast.LENGTH_SHORT).show()
+        }
     }
 }

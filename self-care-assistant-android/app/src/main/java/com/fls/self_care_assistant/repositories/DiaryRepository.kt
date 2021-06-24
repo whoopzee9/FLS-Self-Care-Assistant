@@ -1,7 +1,10 @@
 package com.fls.self_care_assistant.repositories
 
 import androidx.lifecycle.MutableLiveData
+import com.fls.self_care_assistant.api.DiaryApi
 import com.fls.self_care_assistant.data.Emotion
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class DiaryRepository {
     companion object {
@@ -15,6 +18,13 @@ class DiaryRepository {
     var emotionDiary: MutableLiveData<ArrayList<Emotion>> = MutableLiveData()
     var selectedEmotionPosition: MutableLiveData<Int> = MutableLiveData()
     var selectedEmotionStrength: MutableLiveData<Int> = MutableLiveData()
+
+    private val BASE_URL = "https://fls-self-care-assistant.herokuapp.com"
+    private var retrofitApi = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+        .create(DiaryApi::class.java)
 
     init {
         selectedEmotionPosition.postValue(0)
@@ -34,4 +44,5 @@ class DiaryRepository {
         array.add(emotion)
         emotionDiary.postValue(array)
     }
+
 }

@@ -41,6 +41,9 @@
     <string name="last_month">Last month</string>
     <string name="custom">Custom</string>
     <string name="from">from</string>
+    <string name="registration_successful">Registration Successful. Now you can Log in</string>
+    <string name="unknown_error">Unknown error. Try again</string>
+    <string name="successful_login">Successful login!</string>
 
     <integer name="com_vk_sdk_AppId">7864498</integer>
 
