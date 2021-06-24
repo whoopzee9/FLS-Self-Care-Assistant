@@ -1,0 +1,20 @@
+.menu {
+    display: flex;
+    justify-content: start;
+}
+.menu > * {
+    text-decoration: none;
+    margin: 20px 20px 20px 0 ;
+    font-size: 20px;
+    font-weight: 600;
+    color: #3b3b3b;
+    opacity: 0.5;
+}
+.selected{
+    font-weight: 600;
+    color: #3b3b3b;
+    opacity: 0.9;
+}
+.content{
+    margin: 20px 0;
+}

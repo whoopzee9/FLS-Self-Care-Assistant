@@ -1,0 +1,83 @@
+.filter {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    z-index: 10;
+    background: white;
+    padding: 10px 40px 20px 30px;
+    border: 1px solid #c8c5c1   ;
+    border-radius: 30px;
+    text-align: left;
+}
+
+.close_btn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 15px;
+    height: 15px;
+    background: url("close.svg");
+}
+.parameter_title {
+    margin: 7px 0;
+    font-weight: 600;
+    color: #3b3b3b;
+    opacity: 0.9;
+}
+.emotions_inner{
+    display: flex;
+    justify-content: space-between;
+}
+.emotions{
+    margin-right: 40px;
+}
+.intensity_title{
+    font-weight: 600;
+    color: #3b3b3b;
+    opacity: 0.9;
+    font-size: 14px;
+}
+.input {
+    outline: none;
+    width: 20px;
+    margin: 0 5px;
+    border-radius: 15px;
+    border: 1px solid #8c8c8c;
+    text-align: center;
+}
+.radio{
+    margin: 0 5px 0 0;
+}
+.date_input {
+    outline: none;
+    width: 100px;
+    margin: 0 5px;
+    border-radius: 15px;
+    border: 1px solid #8c8c8c;
+    text-align: center;
+}
+.date_input_wrapper{
+    text-align: right;
+    margin: 10px 0 ;
+}
+.btn{
+    background: #2592F7;
+    border-radius: 30px;
+    color: #fff;
+    padding: 10px 20px;
+    max-width: 150px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.btn:hover {
+    opacity: 0.8;
+}
+.btn_wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: -20px;
+    margin-top: 10px;
+}
+.date_inputs{
+    margin-top: -25px;
+}

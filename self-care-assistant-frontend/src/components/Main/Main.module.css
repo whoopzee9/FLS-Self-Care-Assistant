@@ -1,0 +1,70 @@
+.main {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr;
+    align-items: start;
+    background: #ffffff;
+    grid-gap: 10px;
+    margin: auto;
+    border: 1px solid #c8c5c1;
+    border-radius: 30px;
+    min-width: 60vw;
+}
+.nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    border-right: 1px solid #c8c5c1;
+    padding: 20px;
+    min-height: 80vh;
+}
+.content{
+    padding: 20px;
+}
+.nav > * {
+    text-decoration: none;
+    width: 150px;
+    font-weight: 600;
+    margin: 10px 0;
+    font-size: 16px;
+    padding: 10px 10px;
+    height: 40px;
+    color: #3b3b3b;
+    opacity: 0.5;
+}
+.nav > *:first-child{
+    opacity: 0.8 ;
+    color: #343434;
+}
+
+.nav > *:not(:first-child)::before{
+    content: '';
+    background: url("dot.svg") no-repeat;
+    background-size: 20px;
+    background-position: center;
+    padding: 10px;
+    margin-right: 10px;
+}
+.userName::before{
+    content: '';
+    background: url("user.svg") no-repeat;
+    background-size: 26px;
+    background-position: center;
+    padding: 13px;
+    margin-right: 10px;
+}
+.selected{
+    font-weight: 600;
+    color: #3b3b3b;
+    opacity: 1;
+}
+
+.userName {
+    font-size: 20px;
+    margin: 0;
+}
+.selected .userName{
+    color: #000000;
+    opacity: 1;
+}

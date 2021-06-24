@@ -1,0 +1,6 @@
+.main {
+    position: relative;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+}

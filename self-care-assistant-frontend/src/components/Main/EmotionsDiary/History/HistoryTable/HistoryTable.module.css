@@ -1,0 +1,48 @@
+.table {
+    width: 100%;
+    border: 1px solid #c8c5c1;
+    border-radius: 10px;
+    border-spacing: 0;
+    overflow-y:scroll;
+    max-height:300px;
+    display:block;
+}
+.table::-webkit-scrollbar {
+    width: 0px;
+}
+.table_title:first-child, .table_item:first-child {
+    text-align: left;
+}
+.table_title{
+    width: 200px;
+}
+.table_item:last-child{
+    padding-right: 10px;
+    max-width: 80px;
+}
+.table_row {
+    border: 1px solid #c8c5c1;
+    height: 40px;
+}
+
+.table_title {
+    padding: 20px;
+}
+
+.table_item {
+    padding: 20px;
+    border-top: 1px solid #c8c5c1;
+}
+.delete_btn{
+    width: 15px;
+    height: 15px;
+    background: url("close.svg");
+}
+.close_btn:hover{
+    opacity: 0.8;
+}
+.btn_wrapper {
+}
+.table_title_empty{
+    min-width: 80px;
+}
