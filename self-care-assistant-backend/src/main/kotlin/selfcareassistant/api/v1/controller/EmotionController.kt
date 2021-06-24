@@ -32,7 +32,7 @@ class EmotionController {
     fun getEmotions(
             request: HttpServletRequest,
             @RequestBody emotionFilter: EmotionFilterDto)
-            : ResponseEntity<Iterable<EmotionDto>> {
+            : ResponseEntity<List<EmotionDto>> {
 
         val emotions = emotionService.getEmotionsByDateAndEmotionNames(request, emotionFilter.lhsDate,
                 emotionFilter.rhsDate, emotionFilter.emotionNames)
@@ -42,7 +42,7 @@ class EmotionController {
 
     @ResponseBody
     @GetMapping("/emotion")
-    fun getEmotions(request: HttpServletRequest): ResponseEntity<Iterable<EmotionDto>> {
+    fun getEmotions(request: HttpServletRequest): ResponseEntity<List<EmotionDto>> {
         val emotions = emotionService.getAllEmotions(request)
                 .map{ it -> mappingEmotionUtils.mapToEmotionDto(it) }
         return ResponseEntity.ok(emotions)
@@ -65,7 +65,7 @@ class EmotionController {
     }
 
     @GetMapping("/emotion/name")
-    fun getEmotionNames(): ResponseEntity<Iterable<EmotionNameDto>> {
+    fun getEmotionNames(): ResponseEntity<List<EmotionNameDto>> {
         val emotionNames = emotionNameService.getAllEmotionNames()
                 .map{ EmotionNameDto(it.id, it.name) }
         return ResponseEntity.ok(emotionNames)

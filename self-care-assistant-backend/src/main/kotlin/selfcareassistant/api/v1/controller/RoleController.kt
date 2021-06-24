@@ -19,7 +19,7 @@ class RoleController {
     lateinit var roleService: RoleService
 
     @GetMapping("/role")
-    fun getAllRoles(): ResponseEntity<Iterable<RoleDto>> {
+    fun getAllRoles(): ResponseEntity<List<RoleDto>> {
         val roles = roleService.getAllRoles()
                 .map{ RoleDto(it.id, it.name) }
         return ResponseEntity.ok(roles)

@@ -6,6 +6,10 @@ import javax.validation.constraints.Email
 
 @Schema
 class UserRegisterDto {
+    @Schema(
+            description = "Name",
+            example = "Иванов Петр"
+    )
     var name: String = ""
 
     @Schema(
