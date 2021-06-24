@@ -6,6 +6,10 @@ import java.util.*
 
 @Schema
 class EmotionDto {
+    @Schema(
+            description = "id",
+            example = "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    )
     var id: UUID? = null
 
     @Schema(

@@ -49,7 +49,7 @@ class EmotionController {
     }
 
     @PostMapping("/emotion")
-    fun addEmotion(request: HttpServletRequest, @RequestBody @Valid emotion: EmotionDto): ResponseEntity<ResponseMessage>  {
+    fun addEmotion(request: HttpServletRequest,@Valid @RequestBody emotion: EmotionDto): ResponseEntity<ResponseMessage>  {
         return ResponseEntity.
             ok(ResponseMessage(emotionService.addEmotion(request, mappingEmotionUtils.mapToEmotionEntity(emotion)).toString()))
     }
