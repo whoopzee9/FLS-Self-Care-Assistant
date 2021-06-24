@@ -1,0 +1,63 @@
+.main {
+    position: absolute;
+    right: 70px;
+    bottom: -40px;
+    background: white;
+    padding: 20px 45px 20px 30px;
+    border: 1px solid #c8c5c1;
+    border-radius: 30px;
+    text-align: left;
+    width: 250px;
+}
+
+.close_btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 15px;
+    height: 15px;
+    background: url("close.svg");
+}
+
+.item_title {
+    color: #888888;
+    margin-right: 6px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.item {
+    color: #373737;
+    margin-right: 6px;
+    font-weight: 600;
+}
+
+.copyright {
+    color: #606060;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.history_btn:hover, .close_btn:hover {
+    opacity: 0.8;
+}
+
+.btn {
+    background: #2592F7;
+    border-radius: 30px;
+    color: #fff;
+    padding: 10px 20px;
+    max-width: 150px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn_wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: -20px;
+}

@@ -1,0 +1,29 @@
+.select {
+    width: 300px;
+    border-radius: 30px;
+}
+.label {
+    text-align: left;
+    margin-bottom: 5px;
+    color: #797979;
+    font-size: 13px;
+    font-weight: 600;
+}
+.input{
+    margin: 30px 0 60px;
+}
+.btn{
+    background: #2592F7;
+    border-radius: 30px;
+    color: #fff;
+    padding: 10px 50px;
+    max-width: 150px;
+    font-weight: 600;
+}
+.btn:hover{
+    opacity: 0.8;
+}
+.btn_wrapper{
+    position: relative;
+    text-align: left;
+}
