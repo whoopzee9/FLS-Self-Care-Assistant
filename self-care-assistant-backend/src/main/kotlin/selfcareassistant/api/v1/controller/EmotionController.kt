@@ -40,6 +40,7 @@ class EmotionController {
         return ResponseEntity.ok(emotions)
     }
 
+    @ResponseBody
     @GetMapping("/emotion")
     fun getEmotions(request: HttpServletRequest): ResponseEntity<Iterable<EmotionDto>> {
         val emotions = emotionService.getAllEmotions(request)
