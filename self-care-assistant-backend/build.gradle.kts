@@ -35,6 +35,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
+	implementation("org.springdoc:springdoc-openapi-webflux-core:1.5.2")
 	compileOnly("io.jsonwebtoken:jjwt:0.7.0")
 	implementation("io.jsonwebtoken:jjwt-api:0.11.0")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.0")
