@@ -1,5 +1,6 @@
 package selfcareassistant.jwt
 
+import io.jsonwebtoken.io.IOException
 import org.slf4j.LoggerFactory
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.AuthenticationEntryPoint
@@ -17,7 +18,6 @@ class JwtAuthEntryPoint : AuthenticationEntryPoint {
                           response: HttpServletResponse,
                           e: AuthenticationException) {
 
-        logger.error("Unauthorized error. Message - {}", e.message)
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid credentials")
     }
 
