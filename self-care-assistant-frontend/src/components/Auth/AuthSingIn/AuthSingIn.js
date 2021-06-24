@@ -1,15 +1,34 @@
 import React from 'react'
 import s from '../Auth.module.css'
+import {useDispatch, useSelector} from 'react-redux'
+import {singInLoginAction, singInPasswordAction, singInPostData} from '../../../redux/actions'
 
 export const AuthSingIn = () => {
+
+    const dispatch = useDispatch()
+
+    const singIn = useSelector(state => state.singIn)
+
+    const setLogin = (e) => {
+        dispatch(singInLoginAction(e.target.value))
+    }
+
+    const setPassword = (e) => {
+        dispatch(singInPasswordAction(e.target.value))
+    }
+
+    const SingInAuth = () => {
+        dispatch(singInPostData({email: singIn.login, password: singIn.password}))
+    }
+
     return (
         <div className={s.route_inner}>
-            <input type="text" placeholder={'login'} className={s.input}/>
+            <input type="email" placeholder={'login'} className={s.input} onChange={setLogin}/>
             <div className={s.password}>
-                <input type="text" placeholder={'password'} className={s.input}/>
+                <input type="password" placeholder={'password'} className={s.input} onChange={setPassword}/>
                 <button className={s.btn_password}>forgot your password?</button>
             </div>
-            <button className={s.auth_btn}>SING IN</button>
+            <button className={s.auth_btn} onClick={SingInAuth}>SING IN</button>
             <div className={s.string}>
                 <div className={s.line}/>
                 or

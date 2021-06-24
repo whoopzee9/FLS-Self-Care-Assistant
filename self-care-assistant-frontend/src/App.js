@@ -1,11 +1,12 @@
 import './App.css';
 import {Auth} from './components/Auth/Auth'
+import {Redirect, Route} from 'react-router'
 
 function App() {
 
     return (
         <div className="App">
-            <Auth/>
+            <Route exact path='/' component={Auth}/>
         </div>
     );
 }

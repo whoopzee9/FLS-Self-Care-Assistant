@@ -2,8 +2,8 @@ import React from 'react'
 import s from './Auth.module.css'
 import {AuthSingIn} from './AuthSingIn/AuthSingIn'
 import {useDispatch, useSelector} from 'react-redux'
-import {authRouteAction} from '../../redux/types'
-import {AuthSingOut} from './AuthSingOut/AuthSingOut'
+import {authRouteAction} from '../../redux/actions'
+import {AuthSingUp} from './AuthSingUp/AuthSingUp'
 
 export const Auth = () => {
 
@@ -25,12 +25,12 @@ export const Auth = () => {
                     Sing In
                 </button>
                 <button className={routeAuth !== 'singIn' ? s.route_btn + ' ' + s.active_route_btn : s.route_btn}
-                        value='singOut'
+                        value='singUp'
                         onClick={RouteAuthFunction}>
                     Sing Out
                 </button>
             </div>
-            {routeAuth === 'singIn' ? <AuthSingIn/> : <AuthSingOut/>}
+            {routeAuth === 'singIn' ? <AuthSingIn/> : <AuthSingUp/>}
         </div>
     )
 }
