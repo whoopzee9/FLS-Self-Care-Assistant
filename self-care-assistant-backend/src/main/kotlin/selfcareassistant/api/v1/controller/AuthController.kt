@@ -13,8 +13,8 @@ import selfcareassistant.jwt.JwtProvider
 import selfcareassistant.api.v1.dto.JWTResponse
 import selfcareassistant.api.v1.dto.ResponseMessage
 import selfcareassistant.api.v1.dto.UserCredentials
-import selfcareassistant.api.v1.dto.UserDto
-import selfcareassistant.api.v1.dto.util.MappingUserUtils
+import selfcareassistant.api.v1.dto.UserRegisterDto
+import selfcareassistant.api.v1.dto.util.MappingUserRegisterUtils
 import selfcareassistant.service.AppUserDetailsService
 import javax.validation.Valid
 
@@ -47,13 +47,13 @@ class AuthController {
     }
 
     @PostMapping("/signup")
-    fun registerUser(@Valid @RequestBody userDto: UserDto): ResponseEntity<Any> {
-        if (appUserDetailsService.emailExists(userDto.email)) {
-            return ResponseEntity(ResponseMessage("User with email " + userDto.email + "already exists!"),
+    fun registerUser(@Valid @RequestBody userRegisterDto: UserRegisterDto): ResponseEntity<Any> {
+        if (appUserDetailsService.emailExists(userRegisterDto.email)) {
+            return ResponseEntity(ResponseMessage("User with email " + userRegisterDto.email + "already exists!"),
                     HttpStatus.BAD_REQUEST)
         }
 
-        val user = MappingUserUtils().mapToUserEntity(userDto)
+        val user = MappingUserRegisterUtils().mapToUserEntity(userRegisterDto)
         user.password = bCryptPasswordEncoder.encode(user.password)
         appUserDetailsService.saveUser(user)
 
