@@ -6,6 +6,7 @@ import com.fls.self_care_assistant.data.*
 import com.fls.self_care_assistant.extensions.requestFormat
 import com.fls.self_care_assistant.network.DiaryError
 import com.fls.self_care_assistant.network.NetworkResult
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.MutableStateFlow
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -98,6 +99,7 @@ class DiaryRepository {
 
     suspend fun applyFilter(filterBody: FilterBody): NetworkResult<List<EmotionBody>> {
         println(filterBody)
+        println(Gson().toJson(filterBody))
         val response = retrofitApi.applyFilter(filterBody, tokenRepository.getToken()!!)
         if (response.isSuccessful) {
             return NetworkResult.Success(response.body()!!)

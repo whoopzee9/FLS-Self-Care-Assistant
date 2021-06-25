@@ -2,12 +2,15 @@ package com.fls.self_care_assistant.fragments.main_frg
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -24,7 +27,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class FilterFragment : Fragment() {
+class FilterFragment : DialogFragment() {
 
 
     private lateinit var viewModel: FilterViewModel
@@ -37,6 +40,7 @@ class FilterFragment : Fragment() {
     ): View? {
         _binding = FragmentFilterBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(FilterViewModel::class.java)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return binding.root
     }
 
@@ -146,7 +150,7 @@ class FilterFragment : Fragment() {
                 }
             }
 
-            frgFilterRbAll.isChecked = true
+            //frgFilterRbAll.isChecked = true
 
             frgFilterEtApathyIntensityFrom.addTextChangedListener {
                 viewModel.apathy.lhsIntensity = it.toString()
@@ -190,7 +194,8 @@ class FilterFragment : Fragment() {
 
             frgFilterMbCancel.setOnClickListener {
                 viewModel.getEmotionHistory()
-                findNavController().navigate(R.id.action_filterFragment_to_diaryFragment)
+                dismiss()
+                //findNavController().navigate(R.id.action_filterFragment_to_diaryFragment)
             }
 
             //TODO change!!
@@ -257,7 +262,9 @@ class FilterFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
                 setActionsClickability(true)
-                findNavController().navigate(R.id.action_filterFragment_to_diaryFragment)
+                println(viewModel.repository._emotionDiary.value.size)
+                dismiss()
+                //findNavController().navigate(R.id.action_filterFragment_to_diaryFragment)
             }
         }
     }

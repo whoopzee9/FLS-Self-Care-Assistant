@@ -78,8 +78,9 @@ class HistoryFragment : Fragment() {
         }
 
         binding.frgHistoryMbFilter.setOnClickListener {
-            
-            findNavController().navigate(R.id.action_diaryFragment_to_filterFragment)
+            val dialog = FilterFragment()
+            dialog.show(parentFragmentManager, "tag")
+            //findNavController().navigate(R.id.action_diaryFragment_to_filterFragment)
         }
     }
 

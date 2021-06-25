@@ -9,11 +9,11 @@
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/frg_history__sw_display_switch"
         style="@style/Widget.App.Switch"
-        android:layout_width="103dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginTop="28dp"
-        android:text="List"
+        android:text="@string/list"
         android:thumb="@drawable/switch_thumb"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="38dp"
-        android:text="Chart"
+        android:text="@string/chart"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@id/frg_history__sw_display_switch"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,7 +63,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginVertical="10dp"
                 android:layout_weight="1"
-                android:text="Date"
+                android:text="@string/date"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Emotion"
+                android:text="@string/emotion"
                 android:layout_marginVertical="10dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -81,8 +81,8 @@
                 android:id="@+id/emotion_header__tv_intensity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Intensity"
+                android:layout_marginEnd="20dp"
+                android:text="Интенсивность"
                 android:layout_marginVertical="10dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />

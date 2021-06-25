@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginHorizontal="65dp"
-        android:text="Go to history"
+        android:text="@string/go_to_history"
         style="@style/button_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="65dp"
         android:layout_marginTop="48dp"
-        android:text="Add new record"
+        android:text="@string/add_new_record"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frg_emotion_added__mb_history" />

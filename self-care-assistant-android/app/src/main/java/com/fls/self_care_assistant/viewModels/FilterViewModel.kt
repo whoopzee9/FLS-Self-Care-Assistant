@@ -2,6 +2,7 @@ package com.fls.self_care_assistant.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fls.self_care_assistant.data.Emotion
 import com.fls.self_care_assistant.data.EmotionType
 import com.fls.self_care_assistant.data.EmotionTypesFilterBody
 import com.fls.self_care_assistant.data.FilterBody
@@ -10,9 +11,9 @@ import com.fls.self_care_assistant.network.NetworkResult
 import com.fls.self_care_assistant.repositories.DiaryRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 
 class FilterViewModel : ViewModel() {
 
@@ -21,15 +22,17 @@ class FilterViewModel : ViewModel() {
     private val _filterState: MutableStateFlow<FilterState> = MutableStateFlow(FilterState.Initial)
     val filterState: StateFlow<FilterState> get() = _filterState
 
-    private val _filter: MutableStateFlow<FilterBody> = MutableStateFlow(FilterBody("", "", mutableListOf()))
+    private val _filter: MutableStateFlow<FilterBody> =
+        MutableStateFlow(FilterBody("", "", mutableListOf()))
     val filter: StateFlow<FilterBody> get() = _filter
 
 
-    var emotionTypes : List<EmotionType> = mutableListOf()
+    var emotionTypes: List<EmotionType> = mutableListOf()
+
     //TODO temp solution, change!!
-    lateinit var anxiety : EmotionTypesFilterBody
-    lateinit var anger : EmotionTypesFilterBody
-    lateinit var apathy : EmotionTypesFilterBody
+    lateinit var anxiety: EmotionTypesFilterBody
+    lateinit var anger: EmotionTypesFilterBody
+    lateinit var apathy: EmotionTypesFilterBody
 
     init {
         getEmotionTypes()
@@ -45,13 +48,13 @@ class FilterViewModel : ViewModel() {
                     emotionTypes = result.data
                     emotionTypes.forEach {
                         if (it.name == "тревога") {
-                            anger = EmotionTypesFilterBody(it, "", "")
+                            anxiety = EmotionTypesFilterBody(it, "", "")
                         }
                         if (it.name == "апатия") {
                             apathy = EmotionTypesFilterBody(it, "", "")
                         }
                         if (it.name == "злость") {
-                            anxiety = EmotionTypesFilterBody(it, "", "")
+                            anger = EmotionTypesFilterBody(it, "", "")
                         }
                     }
                 }
@@ -86,9 +89,9 @@ class FilterViewModel : ViewModel() {
                     anxiety.lhsIntensity = "1"
                     anxiety.rhsIntensity = "10"
                     it.emotionNames.add(anxiety)
-                    apathy.lhsIntensity = "1"
-                    apathy.rhsIntensity = "10"
-                    it.emotionNames.add(apathy)
+                    anger.lhsIntensity = "1"
+                    anger.rhsIntensity = "10"
+                    it.emotionNames.add(anger)
                 }
                 val result = repository.applyFilter(it)
                 when (result) {
@@ -96,6 +99,14 @@ class FilterViewModel : ViewModel() {
                         _filterState.value = FilterState.Failure(result.error)
                     }
                     is NetworkResult.Success -> {
+                        repository._emotionDiary.value = result.data.map { body ->
+                            Emotion(
+                                body.id!!,
+                                SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(body.createDate),
+                                body.emotionName,
+                                body.intensity.toInt()
+                            )
+                        }
                         _filterState.value = FilterState.Success
                     }
                 }
