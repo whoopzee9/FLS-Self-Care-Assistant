@@ -62,11 +62,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0-rc01'
 
 
-    //Viiew
-    implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
-    implementation 'com.google.android.material:material:1.4.0-rc01'
-
-
     // Navigation Component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
@@ -94,4 +89,5 @@ dependencies {
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
 }

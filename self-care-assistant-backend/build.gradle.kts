@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.4.3"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	id("com.moowork.node") version "1.3.1"
 	kotlin("jvm") version "1.4.30"
 	kotlin("plugin.spring") version "1.4.30"
 	kotlin("plugin.jpa") version "1.4.30"
@@ -18,6 +19,10 @@ configurations {
 	}
 }
 
+node {
+	download = true
+}
+
 repositories {
 	mavenCentral()
 }
@@ -25,15 +30,20 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-rest")
-	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
+	compileOnly("io.jsonwebtoken:jjwt:0.7.0")
+	implementation("io.jsonwebtoken:jjwt-api:0.11.0")
+	implementation("io.jsonwebtoken:jjwt-jackson:0.11.0")
+	implementation("io.jsonwebtoken:jjwt-impl:0.11.0")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
-	runtimeOnly("com.oracle.database.jdbc:ojdbc8")
 	annotationProcessor("org.projectlombok:lombok")
+	runtimeOnly("com.oracle.database.jdbc:ojdbc8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

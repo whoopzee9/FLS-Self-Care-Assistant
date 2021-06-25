@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.fls.self_care_assistant.R
-import com.fls.self_care_assistant.databinding.RegistrationFragmentBinding
+import com.fls.self_care_assistant.databinding.FragmentRegistrationBinding
 import com.fls.self_care_assistant.main.MainActivity
 import com.fls.self_care_assistant.viewModels.RegistrationViewModel
 import com.google.android.material.tabs.TabLayout
@@ -23,7 +23,7 @@ class RegistrationFragment : Fragment() {
 
 
     private lateinit var viewModel: RegistrationViewModel
-    private lateinit var binding: RegistrationFragmentBinding
+    private lateinit var binding: FragmentRegistrationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,7 @@ class RegistrationFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.registration_fragment,
+            R.layout.fragment_registration,
             container,
             false
         )

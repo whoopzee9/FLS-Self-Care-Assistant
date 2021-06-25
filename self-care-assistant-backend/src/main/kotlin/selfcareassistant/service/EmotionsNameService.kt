@@ -1,9 +1,9 @@
 package selfcareassistant.service
 
-import selfcareassistant.model.EmotionsName
+import selfcareassistant.entity.EmotionNameEntity
 import java.util.*
 
 interface EmotionsNameService {
-    fun addEmotionsName(emotionsName: EmotionsName): UUID
-    fun getAllEmotionsNames(): Iterable<EmotionsName>
+    fun addEmotionsName(emotionNameEntity: EmotionNameEntity): UUID
+    fun getAllEmotionsNames(): Iterable<EmotionNameEntity>
 }

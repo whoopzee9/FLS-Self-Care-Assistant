@@ -1,9 +1,16 @@
 package selfcareassistant.service
 
-import selfcareassistant.model.Emotion
+import selfcareassistant.api.v1.dto.EmotionNameFilterDto
+import selfcareassistant.entity.EmotionEntity
 import java.util.*
+import javax.servlet.http.HttpServletRequest
 
 interface EmotionService {
-    fun addEmotion(emotion: Emotion): UUID
-    fun getAllEmotions(): Iterable<Emotion>
+    fun addEmotion(request: HttpServletRequest, emotionEntity: EmotionEntity): UUID
+    fun getEmotionsByDateAndEmotionNames(request: HttpServletRequest,
+                             lhsDate: Date,
+                             rhsDate: Date,
+                             emotionNames: List<EmotionNameFilterDto>): Iterable<EmotionEntity>
+    fun getAllEmotions(request: HttpServletRequest): Iterable<EmotionEntity>
 }
+
