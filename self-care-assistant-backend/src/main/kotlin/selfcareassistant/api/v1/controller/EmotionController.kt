@@ -21,7 +21,6 @@ import org.springframework.validation.annotation.Validated
 import selfcareassistant.jwt.JwtProvider
 import javax.validation.Valid
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.sun.org.slf4j.internal.LoggerFactory
 
 @RestController
 @CrossOrigin
