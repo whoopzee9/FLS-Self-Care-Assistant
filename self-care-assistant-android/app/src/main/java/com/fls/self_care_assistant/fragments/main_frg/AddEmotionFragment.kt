@@ -1,5 +1,6 @@
 package com.fls.self_care_assistant.fragments.main_frg
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,10 @@ import com.fls.self_care_assistant.adapters.DiaryViewPagerAdapter
 import com.fls.self_care_assistant.data.EmotionType
 import com.fls.self_care_assistant.databinding.FragmentAddEmotionBinding
 import com.fls.self_care_assistant.databinding.FragmentDiaryBinding
+import com.fls.self_care_assistant.fragments.auth.AuthActivity
+import com.fls.self_care_assistant.main.MainActivity
+import com.fls.self_care_assistant.network.DiaryError
+import com.fls.self_care_assistant.repositories.TokenRepository
 import com.fls.self_care_assistant.viewModels.AddEmotionViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -49,7 +54,7 @@ class AddEmotionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.resetAddEmotionState()
         lifecycleScope.launch {
             viewModel.addEmotionState.collect {
                 handleUiState(it)
@@ -82,7 +87,7 @@ class AddEmotionFragment : Fragment() {
             binding.frgAddEmotionSpEmotion.setSelection(it)
         })
 
-        binding.btnEmotion.setOnClickListener {
+        binding.frgAddEmotionMbAddEmotion.setOnClickListener {
             viewModel.addNewEmotion() {
                 val bundle = Bundle()
                 bundle.putParcelable("emotion", it)
@@ -95,29 +100,49 @@ class AddEmotionFragment : Fragment() {
         }
     }
 
+    private fun setActionsClickability(isClickable: Boolean) {
+        binding.frgAddEmotionMbAddEmotion.isClickable = isClickable
+    }
+
     private fun handleUiState(state: AddEmotionViewModel.AddEmotionState) {
         when (state) {
             is AddEmotionViewModel.AddEmotionState.Failure -> {
                 binding.frgAddEmotionProgressBar.visibility = View.GONE
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.unknown_error),
-                    Toast.LENGTH_SHORT
-                ).show()
+                if (state.addEmotionError is DiaryError.InvalidCredentials) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.token_expired),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    TokenRepository.instance.isExpired = true
+                    val intent = Intent(requireContext(), AuthActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.unknown_error),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                setActionsClickability(true)
             }
-            AddEmotionViewModel.AddEmotionState.Initial -> {
+            is AddEmotionViewModel.AddEmotionState.Initial -> {
                 binding.frgAddEmotionProgressBar.visibility = View.GONE
+                setActionsClickability(true)
             }
-            AddEmotionViewModel.AddEmotionState.Processing -> {
+            is AddEmotionViewModel.AddEmotionState.Processing -> {
                 binding.frgAddEmotionProgressBar.visibility = View.VISIBLE
+                setActionsClickability(false)
             }
-            AddEmotionViewModel.AddEmotionState.Success -> {
+            is AddEmotionViewModel.AddEmotionState.Success -> {
                 binding.frgAddEmotionProgressBar.visibility = View.GONE
                 Toast.makeText(
                     requireContext(),
                     getString(R.string.emotion_added),
                     Toast.LENGTH_SHORT
                 ).show()
+                setActionsClickability(true)
             }
         }
     }

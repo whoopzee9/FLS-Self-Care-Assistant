@@ -6,4 +6,4 @@ import java.time.LocalDate
 import java.util.*
 
 @Parcelize
-data class Emotion(var date: Date, var emotion: EmotionType, var intensity: Int): Parcelable
+data class Emotion(var id: String, var date: Date, var emotion: EmotionType, var intensity: Int): Parcelable

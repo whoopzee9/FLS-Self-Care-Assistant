@@ -327,6 +327,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
+                    android:paddingStart="10dp"
                     android:background="@drawable/black_outline_rounded"
                     android:inputType="date" />
             </LinearLayout>
@@ -354,6 +355,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
+                    android:paddingStart="10dp"
                     android:background="@drawable/black_outline_rounded"
                     android:inputType="date" />
             </LinearLayout>
@@ -376,7 +378,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="20dp"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/frg_filter__mb_clear_all"
@@ -390,7 +392,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="20dp"
-            android:text="Clear all"
+            android:text="@string/clear_all"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/frg_filter__mb_apply"
@@ -403,7 +405,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
-            android:text="Apply"
+            android:text="@string/apply"
             android:layout_weight="1"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"

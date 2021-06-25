@@ -1,13 +1,8 @@
 package com.fls.self_care_assistant.api
 
-import com.fls.self_care_assistant.data.Emotion
-import com.fls.self_care_assistant.data.EmotionBody
-import com.fls.self_care_assistant.data.EmotionType
+import com.fls.self_care_assistant.data.*
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface DiaryApi {
     @GET("/api/v1/emotion")
@@ -17,5 +12,11 @@ interface DiaryApi {
     suspend fun getEmotionTypes(@Header("Authorization") token: String) : Response<List<EmotionType>>
 
     @POST("/api/v1/emotion")
-    suspend fun saveEmotion(@Body emotion: EmotionBody, @Header("Authorization") token: String) : Response<Any>
+    suspend fun saveEmotion(@Body emotion: EmotionBody, @Header("Authorization") token: String) : Response<ResponseMessage>
+
+    @DELETE("/api/v1/emotion")
+    suspend fun deleteEmotion(@Query("id") id: String, @Header("Authorization") token: String) : Response<ResponseMessage>
+
+    @POST("/api/v1/emotion/filter")
+    suspend fun applyFilter(@Body filterBody: FilterBody, @Header("Authorization") token: String) : Response<List<EmotionBody>>
 }

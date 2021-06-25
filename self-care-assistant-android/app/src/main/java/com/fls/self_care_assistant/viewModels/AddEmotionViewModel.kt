@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fls.self_care_assistant.data.Emotion
 import com.fls.self_care_assistant.data.EmotionType
+import com.fls.self_care_assistant.data.EmotionTypesFilterBody
 import com.fls.self_care_assistant.network.ErrorEntity
 import com.fls.self_care_assistant.network.NetworkResult
 import com.fls.self_care_assistant.repositories.DiaryRepository
@@ -36,7 +37,7 @@ class AddEmotionViewModel: ViewModel() {
             emotionTypes.collect {
                 val emotionStr = it[getSpinnerPosition().value!!]
                 val date = Calendar.getInstance().time
-                val emotion = Emotion(date, emotionStr, getEmotionStrength().value!! + 1)
+                val emotion = Emotion("", date, emotionStr, getEmotionStrength().value!! + 1)
                 val result = repository.addNewEmotion(emotion)
                 when (result) {
                     is NetworkResult.Error -> {
@@ -44,6 +45,7 @@ class AddEmotionViewModel: ViewModel() {
                     }
                     is NetworkResult.Success -> {
                         _addEmotionState.value = AddEmotionState.Success
+                        emotion.id = result.data.message
                         emotionCallback(emotion)
                     }
                 }
@@ -69,7 +71,7 @@ class AddEmotionViewModel: ViewModel() {
             val result = repository.getEmotionTypes()
             when (result) {
                 is NetworkResult.Error -> {
-                    //_addEmotionState.value = AddEmotionState.Failure(result.error)
+                    _addEmotionState.value = AddEmotionState.Failure(result.error)
                 }
                 is NetworkResult.Success -> {
                     //_addEmotionState.value = AddEmotionState.Success
@@ -85,13 +87,17 @@ class AddEmotionViewModel: ViewModel() {
             val result = repository.getEmotionDiary()
             when (result) {
                 is NetworkResult.Error -> {
-                    //_addEmotionState.value = AddEmotionState.Failure(result.error)
+                    _addEmotionState.value = AddEmotionState.Failure(result.error)
                 }
                 is NetworkResult.Success -> {
                     //_addEmotionState.value = AddEmotionState.Success
                 }
             }
         }
+    }
+
+    fun resetAddEmotionState() {
+        _addEmotionState.value = AddEmotionState.Initial
     }
 
     sealed class AddEmotionState {

@@ -45,6 +45,13 @@
     <string name="unknown_error">Unknown error. Try again</string>
     <string name="successful_login">Successful login!</string>
     <string name="emotion_added">Emotion added successfully!</string>
+    <string name="token_expired">Authentication token expired, please log in</string>
+    <string name="emotion_deleted">Emotion deleted successfully</string>
+    <string name="filter_applied">Filter applied successfully!</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear_all">Clear all</string>
+    <string name="apply">Apply</string>
+    <string name="fill_all_fields">Fill all fields!</string>
 
     <integer name="com_vk_sdk_AppId">7864498</integer>
 

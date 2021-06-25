@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 class TokenRepository {
     private lateinit var sharedPreferences: SharedPreferences
 
+    var isExpired = false
+
     fun setupSharedPrefs(sharedPrefs: SharedPreferences) {
         sharedPreferences = sharedPrefs
     }
@@ -15,6 +17,7 @@ class TokenRepository {
 
     fun saveToken(token: String) {
         sharedPreferences.edit().putString(TOKEN_KEY, token).apply()
+        isExpired = false
     }
 
     companion object {

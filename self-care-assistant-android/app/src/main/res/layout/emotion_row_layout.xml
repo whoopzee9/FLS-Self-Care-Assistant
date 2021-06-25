@@ -5,6 +5,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="-2dp"
     android:background="@drawable/black_outline"
     android:orientation="horizontal">
 
@@ -17,6 +18,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginVertical="5dp"
         android:gravity="center_vertical"
+        android:textColor="@color/black"
         android:text="Title"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -34,6 +36,7 @@
         android:layout_marginEnd="10dp"
         android:layout_toEndOf="@+id/tv_date"
         android:gravity="center_vertical"
+        android:textColor="@color/black"
         android:text="Description"
         android:layout_weight="1"
         android:textSize="24sp"
@@ -49,6 +52,7 @@
         android:layout_toStartOf="@+id/ib_close"
         android:gravity="center_vertical|center_horizontal"
         android:text="TextView"
+        android:textColor="@color/black"
         android:textAlignment="gravity"
         android:layout_weight="1"
         android:textSize="24sp"

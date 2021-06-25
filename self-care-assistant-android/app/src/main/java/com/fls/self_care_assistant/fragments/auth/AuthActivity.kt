@@ -34,7 +34,7 @@ class AuthActivity : AppCompatActivity() {
             "prefs",
             Context.MODE_PRIVATE
         ))
-        if (tokenRepository.getToken() != null) {
+        if (tokenRepository.getToken() != null && !tokenRepository.isExpired) {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
             finish()

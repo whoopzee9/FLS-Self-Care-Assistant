@@ -89,7 +89,7 @@
             app:layout_constraintTop_toBottomOf="@+id/frg_add_emotion__sb_emotion" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_emotion"
+            android:id="@+id/frg_add_emotion__mb_add_emotion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="88dp"

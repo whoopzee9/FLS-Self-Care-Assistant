@@ -14,19 +14,20 @@ class EmotionRecyclerAdapter(var values: MutableList<Emotion>, var onClickListen
 
     interface OnClickListener {
         fun onItemClick(position: Int)
+        fun onDeleteClick(position: Int)
     }
 
     override fun getItemCount(): Int {
-        return values.size + 1
+        return values.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         when (viewType) {
-            TYPE_HEADER -> {
-                val binding =
-                    EmotionHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                EmotionHeaderViewHolder(binding)
-            }
+//            TYPE_HEADER -> {
+//                val binding =
+//                    EmotionHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+//                EmotionHeaderViewHolder(binding)
+//            }
             TYPE_ITEM -> {
                 val binding = EmotionRowLayoutBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false
@@ -36,18 +37,18 @@ class EmotionRecyclerAdapter(var values: MutableList<Emotion>, var onClickListen
             else -> throw IllegalArgumentException("Invalid view type")
         }
 
-    override fun getItemViewType(position: Int) = when (position != 0) {
-        true -> TYPE_ITEM
-        else -> TYPE_HEADER
-    }
+    override fun getItemViewType(position: Int) = TYPE_ITEM //when (position != 0) {
+//        true -> TYPE_ITEM
+//        else -> TYPE_HEADER
+//    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is EmotionHeaderViewHolder -> {
-
-            }
+//            is EmotionHeaderViewHolder -> {
+//
+//            }
             is EmotionItemViewHolder -> {
-                val truePosition = position - 1
+                val truePosition = position
                 holder.itemView.setOnClickListener {
                     onClickListener.onItemClick(truePosition)
                 }
@@ -56,7 +57,14 @@ class EmotionRecyclerAdapter(var values: MutableList<Emotion>, var onClickListen
                     tvDate.text = format.format(values[truePosition].date)
                     tvEmotion.text = values[truePosition].emotion.name
                     tvStrength.text = values[truePosition].intensity.toString()
+                    ibClose.setOnClickListener {
+                        println("clicked! $position")
+                        onClickListener.onDeleteClick(truePosition)
+                        values.removeAt(position)
+                        notifyItemRemoved(position)
+                    }
                 }
+
             }
         }
     }
@@ -74,7 +82,7 @@ class EmotionRecyclerAdapter(var values: MutableList<Emotion>, var onClickListen
 
 class EmotionItemViewHolder(val binding: EmotionRowLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
-class EmotionHeaderViewHolder(val binding: EmotionHeaderBinding) : RecyclerView.ViewHolder(binding.root)
+//class EmotionHeaderViewHolder(val binding: EmotionHeaderBinding) : RecyclerView.ViewHolder(binding.root)
 
 
 

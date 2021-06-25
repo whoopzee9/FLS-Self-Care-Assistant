@@ -2,9 +2,7 @@ package com.fls.self_care_assistant.repositories
 
 import androidx.lifecycle.MutableLiveData
 import com.fls.self_care_assistant.api.DiaryApi
-import com.fls.self_care_assistant.data.Emotion
-import com.fls.self_care_assistant.data.EmotionBody
-import com.fls.self_care_assistant.data.EmotionType
+import com.fls.self_care_assistant.data.*
 import com.fls.self_care_assistant.extensions.requestFormat
 import com.fls.self_care_assistant.network.DiaryError
 import com.fls.self_care_assistant.network.NetworkResult
@@ -44,6 +42,7 @@ class DiaryRepository {
         if (response.isSuccessful) {
             _emotionDiary.value = response.body()!!.map {
                 Emotion(
+                    it.id!!,
                     SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(it.createDate),
                     it.emotionName,
                     it.intensity.toInt()
@@ -57,12 +56,17 @@ class DiaryRepository {
         }
     }
 
-    suspend fun addNewEmotion(emotion: Emotion): NetworkResult<Any> {
+    suspend fun addNewEmotion(emotion: Emotion): NetworkResult<ResponseMessage> {
         val emotionBody =
-            EmotionBody(emotion.date.requestFormat(), emotion.emotion, emotion.intensity.toString())
+            EmotionBody(
+                null,
+                emotion.date.requestFormat(),
+                emotion.emotion,
+                emotion.intensity.toString()
+            )
         val response = retrofitApi.saveEmotion(emotionBody, tokenRepository.getToken()!!)
         if (response.isSuccessful) {
-            return NetworkResult.Success(response)
+            return NetworkResult.Success(response.body()!!)
         } else if (response.code() == 401) {
             return NetworkResult.Error(DiaryError.InvalidCredentials)
         } else {
@@ -77,6 +81,30 @@ class DiaryRepository {
         } else if (response.code() == 401) {
             return NetworkResult.Error(DiaryError.InvalidCredentials)
         } else {
+            return NetworkResult.Error(DiaryError.Unknown)
+        }
+    }
+
+    suspend fun deleteEmotion(id: String): NetworkResult<ResponseMessage> {
+        val response = retrofitApi.deleteEmotion(id, tokenRepository.getToken()!!)
+        if (response.isSuccessful) {
+            return NetworkResult.Success(response.body()!!)
+        } else if (response.code() == 401) {
+            return NetworkResult.Error(DiaryError.InvalidCredentials)
+        } else {
+            return NetworkResult.Error(DiaryError.Unknown)
+        }
+    }
+
+    suspend fun applyFilter(filterBody: FilterBody): NetworkResult<List<EmotionBody>> {
+        println(filterBody)
+        val response = retrofitApi.applyFilter(filterBody, tokenRepository.getToken()!!)
+        if (response.isSuccessful) {
+            return NetworkResult.Success(response.body()!!)
+        } else if (response.code() == 401) {
+            return NetworkResult.Error(DiaryError.InvalidCredentials)
+        } else {
+            println(response.code())
             return NetworkResult.Error(DiaryError.Unknown)
         }
     }

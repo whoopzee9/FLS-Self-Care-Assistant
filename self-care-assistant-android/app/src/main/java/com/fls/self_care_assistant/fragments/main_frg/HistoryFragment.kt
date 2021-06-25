@@ -1,9 +1,11 @@
 package com.fls.self_care_assistant.fragments.main_frg
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -12,7 +14,11 @@ import com.fls.self_care_assistant.R
 import com.fls.self_care_assistant.adapters.EmotionRecyclerAdapter
 import com.fls.self_care_assistant.data.Emotion
 import com.fls.self_care_assistant.databinding.FragmentHistoryBinding
+import com.fls.self_care_assistant.fragments.auth.AuthActivity
+import com.fls.self_care_assistant.network.DiaryError
+import com.fls.self_care_assistant.repositories.TokenRepository
 import com.fls.self_care_assistant.viewModels.HistoryViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -40,10 +46,25 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.resetHistoryState()
+        lifecycleScope.launch {
+            viewModel.historyState.collect {
+                handleUiState(it)
+            }
+        }
+
         val adapter =
             EmotionRecyclerAdapter(ArrayList(), object : EmotionRecyclerAdapter.OnClickListener {
                 override fun onItemClick(position: Int) {
                     //editEmotion(position)
+                }
+
+                override fun onDeleteClick(position: Int) {
+                    lifecycleScope.launch {
+                        viewModel.emotionDiary.collect {
+                            viewModel.deleteEmotion(it[position].id)
+                        }
+                    }
                 }
 
             })
@@ -57,7 +78,47 @@ class HistoryFragment : Fragment() {
         }
 
         binding.frgHistoryMbFilter.setOnClickListener {
+            
             findNavController().navigate(R.id.action_diaryFragment_to_filterFragment)
+        }
+    }
+
+    private fun handleUiState(state: HistoryViewModel.HistoryState) {
+        when (state) {
+            is HistoryViewModel.HistoryState.Failure -> {
+                binding.frgHistoryProgressBar.visibility = View.GONE
+                if (state.historyError is DiaryError.InvalidCredentials) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.token_expired),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    TokenRepository.instance.isExpired = true
+                    val intent = Intent(requireContext(), AuthActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.unknown_error),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            is HistoryViewModel.HistoryState.Initial -> {
+                binding.frgHistoryProgressBar.visibility = View.GONE
+            }
+            is HistoryViewModel.HistoryState.Processing -> {
+                binding.frgHistoryProgressBar.visibility = View.VISIBLE
+            }
+            is HistoryViewModel.HistoryState.Success -> {
+                binding.frgHistoryProgressBar.visibility = View.GONE
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.emotion_deleted),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
