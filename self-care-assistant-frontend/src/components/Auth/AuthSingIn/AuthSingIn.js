@@ -31,7 +31,7 @@ export const AuthSingIn = () => {
                 <input type="email" placeholder={'login'} className={s.input} onChange={setLogin}/>
                 <div className={s.password}>
                     <input type="password" placeholder={'password'} className={s.input} onChange={setPassword}/>
-                    <button className={s.btn_password}>forgot your password?</button>
+                    <button className={s.btn_password} type='button'>forgot your password?</button>
                 </div>
                 <input type='submit' className={s.auth_btn} onClick={SingInAuth} value={'SING IN'}/>
             </form>
