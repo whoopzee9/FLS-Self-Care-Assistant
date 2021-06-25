@@ -2,9 +2,9 @@ import {SING_UP, SING_UP_LOGIN, SING_UP_NAME, SING_UP_PASSWORD, SING_UP_PRIVACY}
 
 
 const initialState = {
-    login: null,
+    login: '',
     password: '',
-    name: null,
+    name: '',
     privacy: false,
     roles: []
 }

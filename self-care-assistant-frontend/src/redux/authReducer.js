@@ -1,8 +1,7 @@
 import {AUTH_ROUTE} from './types'
 
 const initialState = {
-    auth_route: 'singIn',
-    is_authenticated: false
+    auth_route: 'singIn'
 }
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {

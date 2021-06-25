@@ -18,7 +18,7 @@ html {
 
 button {
     background: none;
-    outline: none;
+    outline-color: #acacac;
     border: none;
     cursor: pointer;
 }

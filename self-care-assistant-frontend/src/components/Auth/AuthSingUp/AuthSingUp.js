@@ -33,13 +33,14 @@ export const AuthSingUp = () => {
         dispatch(singUpPrivacyAction(e.target.checked))
     }
 
-    const SingUpAuth = () => {
+    const SingUpAuth = (e) => {
+        e.preventDefault()
         if (singUp.password === confirmPassword && singUp.privacy === true) {
             dispatch(singUpPostData({
                 email: singUp.login,
                 password: singUp.password,
                 name: singUp.name,
-                roles: singUp.roles
+                roles: singUp.roles,
             }))
         } else {
             if(singUp.password !== confirmPassword) {
@@ -54,18 +55,18 @@ export const AuthSingUp = () => {
     }
 
     return (
-        <div className={s.route_inner}>
+        <form className={s.route_inner} onSubmit={SingUpAuth}>
             <input type="text" placeholder={'name'} className={s.input} onChange={setName}/>
-            <input type="text" placeholder={'email'} className={s.input} onChange={setLogin}/>
+            <input type="email" placeholder={'email'} className={s.input} onChange={setLogin}/>
             <input type="text" placeholder={'password'} className={s.input} value={singUp.password}
                    onChange={setPassword}/>
-            <input type="text" placeholder={'confirm password'} className={s.input} value={confirmPassword}
+            <input type="password" placeholder={'confirm password'} className={s.input} value={confirmPassword}
                    onChange={PasswordConfirm}/>
             <div className={s.checkbox_wrapper}>
-                <input type="checkbox" onChange={setPrivacy}/>
-                <label>I accept privacy policy and bla bla bla</label>
+                <input id='checkbox' type="checkbox" onChange={setPrivacy}/>
+                <label for='checkbox'>I accept privacy policy and bla bla bla</label>
             </div>
-            <button className={s.auth_btn} onClick={SingUpAuth}>SING UP</button>
-        </div>
+            <input type={'submit'} className={s.auth_btn} onClick={SingUpAuth} value={'SING UP'}/>
+        </form>
     )
 }
