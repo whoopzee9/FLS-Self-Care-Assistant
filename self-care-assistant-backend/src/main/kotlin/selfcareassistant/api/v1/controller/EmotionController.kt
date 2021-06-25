@@ -1,6 +1,10 @@
 package selfcareassistant.api.v1.controller
 
+import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -17,6 +21,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.validation.annotation.Validated
+import javax.swing.text.AbstractDocument
 
 @RestController
 @CrossOrigin
@@ -31,6 +36,11 @@ class EmotionController {
     private val mappingEmotionUtils: MappingEmotionUtils = MappingEmotionUtils()
 
     @PostMapping("/emotion/filter")
+    @Operation(summary = "Filter emotions by date and emotion name")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200")
+    ]
+    )
     fun getEmotions(
             request: HttpServletRequest,
             @RequestBody emotionFilter: EmotionFilterDto)
@@ -42,8 +52,11 @@ class EmotionController {
         return ResponseEntity.ok(emotions)
     }
 
-    @ResponseBody
     @GetMapping("/emotion")
+    @Operation(summary = "Get list of emotions")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200")
+    ])
     fun getEmotions(request: HttpServletRequest): ResponseEntity<List<EmotionDto>> {
         val emotions = emotionService.getAllEmotions(request)
                 .map{ it -> mappingEmotionUtils.mapToEmotionDto(it) }
@@ -51,12 +64,21 @@ class EmotionController {
     }
 
     @PostMapping("/emotion")
+    @Operation(summary = "Add emotion")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200")
+    ])
     fun addEmotion(request: HttpServletRequest,@RequestBody @Valid emotion: EmotionDto): ResponseEntity<ResponseMessage>  {
         return ResponseEntity.
             ok(ResponseMessage(emotionService.addEmotion(request, mappingEmotionUtils.mapToEmotionEntity(emotion)).toString()))
     }
 
     @DeleteMapping("/emotion")
+    @Operation(summary = "Delete emotion by id")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200", description = "Emotion successfully deleted"),
+        ApiResponse(responseCode = "404", description = "Emotion does not exist", content = [Content()])
+    ])
     fun deleteEmotion(@Parameter(description = "id of emotion to be deleted")
                       @RequestParam id: UUID): ResponseEntity<ResponseMessage>  {
         if(!emotionService.deleteEmotion(id)) {
@@ -68,6 +90,10 @@ class EmotionController {
     }
 
     @GetMapping("/emotion/name")
+    @Operation(summary = "Get list of emotion names")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200")
+    ])
     fun getEmotionNames(): ResponseEntity<List<EmotionNameDto>> {
         val emotionNames = emotionNameService.getAllEmotionNames()
                 .map{ EmotionNameDto(it.id, it.name) }
@@ -75,12 +101,21 @@ class EmotionController {
     }
 
     @PostMapping("/emotion/name")
+    @Operation(summary = "Add emotion name")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200")
+    ])
     fun addEmotionName(@Valid @RequestBody emotionNameDto: EmotionNameDto): ResponseEntity<ResponseMessage> {
         val emotion = EmotionNameEntity(emotionNameDto.id, emotionNameDto.name)
         return ResponseEntity.ok(ResponseMessage(emotionNameService.addEmotionName(emotion).toString()))
     }
 
     @DeleteMapping("/emotion/name")
+    @Operation(summary = "Delete emotion name by id")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200", description = "Emotion name successfully deleted"),
+        ApiResponse(responseCode = "404", description = "Emotion name does not exist", content = [Content()])
+    ])
     fun deleteEmotionName(@RequestParam id: UUID): ResponseEntity<ResponseMessage>  {
         if(!emotionNameService.deleteEmotionName(id)) {
             return ResponseEntity.

@@ -42,11 +42,11 @@ class AuthController {
 
     @PostMapping("/signin")
     @Operation(summary = "Autorization")
-//    @ApiResponses(value = {
-//        @ApiResponse(responseCode = "200", description = "User has successfully logged in"),
-//        @ApiResponse(responseCode = "401", description = "Invalid email or password")
-//    })
-        protected fun authenticateUser(@Valid @RequestBody loginRequest: UserCredentials): ResponseEntity<JWTResponse> {
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200", description = "User has successfully logged in"),
+        ApiResponse(responseCode = "401", description = "Invalid email or password", content = [Content()])
+    ])
+    protected fun authenticateUser(@Valid @RequestBody loginRequest: UserCredentials): ResponseEntity<JWTResponse> {
 
         val userCandidate: UserDetails = appUserDetailsService.loadUserByUsername(loginRequest.email)
         val authentication = authenticationManager.authenticate(
@@ -57,6 +57,11 @@ class AuthController {
     }
 
     @PostMapping("/signup")
+    @Operation(summary = "Registration")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200", description = "User successfully registered"),
+        ApiResponse(responseCode = "401", description = "User already exists", content = [Content()])
+    ])
     fun registerUser(@Valid @RequestBody userRegisterDto: UserRegisterDto): ResponseEntity<Any> {
         if (appUserDetailsService.emailExists(userRegisterDto.email)) {
             return ResponseEntity(ResponseMessage("User with email " + userRegisterDto.email + " already exists!"),
