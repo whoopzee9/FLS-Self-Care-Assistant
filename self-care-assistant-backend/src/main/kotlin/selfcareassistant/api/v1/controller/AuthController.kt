@@ -1,5 +1,10 @@
 package selfcareassistant.api.v1.controller
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -36,7 +41,12 @@ class AuthController {
     lateinit var bCryptPasswordEncoder: BCryptPasswordEncoder
 
     @PostMapping("/signin")
-    fun authenticateUser(@Valid @RequestBody loginRequest: UserCredentials): ResponseEntity<Any> {
+    @Operation(summary = "Autorization")
+//    @ApiResponses(value = {
+//        @ApiResponse(responseCode = "200", description = "User has successfully logged in"),
+//        @ApiResponse(responseCode = "401", description = "Invalid email or password")
+//    })
+        protected fun authenticateUser(@Valid @RequestBody loginRequest: UserCredentials): ResponseEntity<JWTResponse> {
 
         val userCandidate: UserDetails = appUserDetailsService.loadUserByUsername(loginRequest.email)
         val authentication = authenticationManager.authenticate(
@@ -49,7 +59,7 @@ class AuthController {
     @PostMapping("/signup")
     fun registerUser(@Valid @RequestBody userRegisterDto: UserRegisterDto): ResponseEntity<Any> {
         if (appUserDetailsService.emailExists(userRegisterDto.email)) {
-            return ResponseEntity(ResponseMessage("User with email " + userRegisterDto.email + "already exists!"),
+            return ResponseEntity(ResponseMessage("User with email " + userRegisterDto.email + " already exists!"),
                     HttpStatus.BAD_REQUEST)
         }
 

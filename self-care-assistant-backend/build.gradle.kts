@@ -41,6 +41,7 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.0")
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.0")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")

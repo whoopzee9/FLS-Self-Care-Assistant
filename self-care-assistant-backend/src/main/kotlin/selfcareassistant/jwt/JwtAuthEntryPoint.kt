@@ -17,7 +17,7 @@ class JwtAuthEntryPoint : AuthenticationEntryPoint {
                           response: HttpServletResponse,
                           e: AuthenticationException) {
 
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid credentials")
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid email or password")
     }
 
     companion object {

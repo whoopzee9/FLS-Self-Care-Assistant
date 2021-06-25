@@ -1,5 +1,6 @@
 package selfcareassistant.api.v1.controller
 
+import io.swagger.v3.oas.annotations.Parameter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -15,6 +16,7 @@ import java.util.*
 import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
 import org.springframework.http.HttpStatus
+import org.springframework.validation.annotation.Validated
 
 @RestController
 @CrossOrigin
@@ -49,13 +51,14 @@ class EmotionController {
     }
 
     @PostMapping("/emotion")
-    fun addEmotion(request: HttpServletRequest,@Valid @RequestBody emotion: EmotionDto): ResponseEntity<ResponseMessage>  {
+    fun addEmotion(request: HttpServletRequest,@RequestBody @Valid emotion: EmotionDto): ResponseEntity<ResponseMessage>  {
         return ResponseEntity.
             ok(ResponseMessage(emotionService.addEmotion(request, mappingEmotionUtils.mapToEmotionEntity(emotion)).toString()))
     }
 
     @DeleteMapping("/emotion")
-    fun deleteEmotion(@RequestParam id: UUID): ResponseEntity<ResponseMessage>  {
+    fun deleteEmotion(@Parameter(description = "id of emotion to be deleted")
+                      @RequestParam id: UUID): ResponseEntity<ResponseMessage>  {
         if(!emotionService.deleteEmotion(id)) {
             //return ResponseEntity.notFound().body(ResponseMessage("Emotion with id '$id' not exist"))
             return ResponseEntity<ResponseMessage>(ResponseMessage("Emotion with id $id does not exist"), HttpStatus.NOT_FOUND)

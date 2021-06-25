@@ -8,14 +8,11 @@ import java.util.stream.Collectors
 
 class MappingUserRegisterUtils {
     fun mapToUserRegisterDto(entity: UserEntity): UserRegisterDto {
-        val user = UserRegisterDto()
-        user.name = entity.name
-        user.email = entity.email
-        user.password = entity.password
-        user.roles = entity.roles.stream()
+
+        val roles = entity.roles.stream()
                 .map{ RoleDto(it.id, it.name) }
                 .collect(Collectors.toList())
-        return user
+        return UserRegisterDto(entity.name, entity.email, entity.password, roles)
     }
 
     fun mapToUserEntity(registerDto: UserRegisterDto): UserEntity {

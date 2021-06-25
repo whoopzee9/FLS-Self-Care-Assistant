@@ -5,23 +5,23 @@ import java.util.UUID
 import javax.validation.constraints.Email
 
 @Schema
-class UserRegisterDto {
+class UserRegisterDto(
     @Schema(
             description = "Name",
             example = "Иванов Петр"
     )
-    var name: String = ""
+    var name: String,
 
     @Schema(
             description = "Email",
             example = "ivanov@mail.ru"
     )
-    var email: String = ""
+    var email: String,
 
     @Schema(
             description = "Password"
     )
-    var password: String = ""
+    var password: String,
 
     var roles: List<RoleDto> = ArrayList()
-}
+)
