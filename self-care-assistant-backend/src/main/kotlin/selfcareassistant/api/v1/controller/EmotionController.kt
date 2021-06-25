@@ -21,9 +21,7 @@ import org.springframework.validation.annotation.Validated
 import selfcareassistant.jwt.JwtProvider
 import javax.validation.Valid
 import com.fasterxml.jackson.databind.ObjectMapper
-
-
-
+import com.sun.org.slf4j.internal.LoggerFactory
 
 @RestController
 @CrossOrigin
@@ -37,16 +35,16 @@ class EmotionController {
 
     private val mappingEmotionUtils: MappingEmotionUtils = MappingEmotionUtils()
 
-    private val logger: Logger = LoggerFactory.getLogger(JwtProvider::class.java)
-
     @PostMapping("/emotion/filter")
     fun getEmotions(
             request: HttpServletRequest,
             @RequestBody emotionFilter: EmotionFilterDto)
             : ResponseEntity<List<EmotionDto>> {
+
         val mapper = ObjectMapper()
 
-        logger.error(mapper.writeValueAsString(emotionFilter))
+        val logger: Logger = LoggerFactory.getLogger(JwtProvider::class.java)
+        logger.info(mapper.writeValueAsString(emotionFilter))
         val emotions = emotionService.getEmotionsByDateAndEmotionNames(request, emotionFilter.lhsDate,
                 emotionFilter.rhsDate, emotionFilter.emotionNames)
                 .map{ it -> mappingEmotionUtils.mapToEmotionDto(it) }

@@ -38,6 +38,7 @@ dependencies {
 	compileOnly("io.jsonwebtoken:jjwt:0.7.0")
 	implementation("io.jsonwebtoken:jjwt-api:0.11.0")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.0")
+	implementation("org.slf4j:slf4j-log4j12:1.7.29")
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.0")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
@@ -48,6 +49,8 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	runtimeOnly("com.oracle.database.jdbc:ojdbc8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("com.fasterxml.jackson.core:jackson-databind:2.8.9")
+	implementation("io.vertx:vertx-core:3.5.3")
 }
 
 tasks.withType<KotlinCompile> {
