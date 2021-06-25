@@ -1,12 +1,13 @@
 package selfcareassistant.api.v1.dto
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.media.Schema
 import java.util.*
 import javax.validation.constraints.*
 
 @Schema
-data class EmotionDto(
+class EmotionDto(
     var id: UUID? = null,
 
     @Schema(
@@ -16,6 +17,7 @@ data class EmotionDto(
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @NotEmpty
     @Past
+    @Parameter(description = "Date of creation")
     var createDate: Date,
 
     @Schema(
@@ -25,6 +27,7 @@ data class EmotionDto(
     @NotNull
     @Min(0)
     @Max(10)
+    @Parameter(description = "Intensity of emotion")
     var intensity: Byte,
 
     @NotNull

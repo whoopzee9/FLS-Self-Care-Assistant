@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.4.3"
+	id("org.springframework.boot") version "2.5.1"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	id("com.moowork.node") version "1.3.1"
 	id("com.felipefzdz.gradle.heroku") version "1.0.6"
@@ -34,14 +34,14 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
-	implementation("org.springdoc:springdoc-openapi-webflux-core:1.5.2")
+	implementation("org.springdoc:springdoc-openapi-ui:1.5.9")
 	compileOnly("io.jsonwebtoken:jjwt:0.7.0")
 	implementation("io.jsonwebtoken:jjwt-api:0.11.0")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.0")
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.0")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("org.springframework.boot:spring-boot-starter-logging")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
