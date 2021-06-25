@@ -1,0 +1,30 @@
+* {
+    font-family: 'Roboto';
+}
+
+html {
+    background:linear-gradient(90deg, rgba(247,214,185,0.7822479333530288) 24%, rgba(236,159,187,0.6758053563222164) 77%) no-repeat;
+    min-height: 100vh;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+.App {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5em;
+}
+
+button {
+    background: none;
+    outline-color: #acacac;
+    border: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 375px){
+    html{
+        background: none;
+    }
+}
