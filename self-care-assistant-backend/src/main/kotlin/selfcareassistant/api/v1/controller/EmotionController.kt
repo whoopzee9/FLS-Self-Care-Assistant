@@ -1,8 +1,6 @@
 package selfcareassistant.api.v1.controller
 
 import io.swagger.v3.oas.annotations.Parameter
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -21,6 +19,10 @@ import org.springframework.validation.annotation.Validated
 import selfcareassistant.jwt.JwtProvider
 import javax.validation.Valid
 import com.fasterxml.jackson.databind.ObjectMapper
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
 
 @RestController
 @CrossOrigin
@@ -35,15 +37,14 @@ class EmotionController {
     private val mappingEmotionUtils: MappingEmotionUtils = MappingEmotionUtils()
 
     @PostMapping("/emotion/filter")
+    @Operation(summary = "Filter emotions by date and emotion name")
+    @ApiResponses(
+            ApiResponse(responseCode = "200")
+    )
     fun getEmotions(
             request: HttpServletRequest,
             @RequestBody emotionFilter: EmotionFilterDto)
             : ResponseEntity<List<EmotionDto>> {
-
-        val mapper = ObjectMapper()
-
-        val logger: Logger = LoggerFactory.getLogger(JwtProvider::class.java)
-        logger.info(mapper.writeValueAsString(emotionFilter))
         val emotions = emotionService.getEmotionsByDateAndEmotionNames(request, emotionFilter.lhsDate,
                 emotionFilter.rhsDate, emotionFilter.emotionNames)
                 .map{ it -> mappingEmotionUtils.mapToEmotionDto(it) }

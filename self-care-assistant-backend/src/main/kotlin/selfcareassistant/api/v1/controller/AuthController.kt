@@ -44,7 +44,7 @@ class AuthController {
     @Operation(summary = "Autorization")
     @ApiResponses(
             ApiResponse(responseCode = "200", description = "User has successfully logged in"),
-            ApiResponse(responseCode = "401", description = "Invalid email or password")
+            ApiResponse(responseCode = "401", description = "Invalid email or password", content = [Content()])
     )
     protected fun authenticateUser(@Valid @RequestBody loginRequest: UserCredentials): ResponseEntity<JWTResponse> {
 
@@ -56,8 +56,12 @@ class AuthController {
         return ResponseEntity.ok(JWTResponse(jwt))
     }
 
-    @Operation(summary = "Registration")
     @PostMapping("/signup")
+    @Operation(summary = "Registration")
+    @ApiResponses(
+            ApiResponse(responseCode = "200", description = "User has successfully registered"),
+            ApiResponse(responseCode = "400", description = "User already exists!", content = [Content()])
+    )
     fun registerUser(@Valid @RequestBody userRegisterDto: UserRegisterDto): ResponseEntity<Any> {
         if (appUserDetailsService.emailExists(userRegisterDto.email)) {
             return ResponseEntity(ResponseMessage("User with email " + userRegisterDto.email + " already exists!"),
