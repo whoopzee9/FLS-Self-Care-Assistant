@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 import java.util.*
 
 @Schema
-class NewEmotionNameDto(
+data class NewEmotionNameDto(
     var id: UUID,
     @Schema(
           description = "Name of emotion",

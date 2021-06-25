@@ -14,15 +14,9 @@ import selfcareassistant.service.EmotionService
 import selfcareassistant.service.EmotionNameService
 import java.util.*
 import javax.servlet.http.HttpServletRequest
+import javax.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.validation.annotation.Validated
-import selfcareassistant.jwt.JwtProvider
-import javax.validation.Valid
-import com.fasterxml.jackson.databind.ObjectMapper
-import io.swagger.v3.oas.annotations.Operation
-import io.swagger.v3.oas.annotations.media.Content
-import io.swagger.v3.oas.annotations.responses.ApiResponse
-import io.swagger.v3.oas.annotations.responses.ApiResponses
 
 @RestController
 @CrossOrigin
@@ -37,20 +31,18 @@ class EmotionController {
     private val mappingEmotionUtils: MappingEmotionUtils = MappingEmotionUtils()
 
     @PostMapping("/emotion/filter")
-    @Operation(summary = "Filter emotions by date and emotion name")
-    @ApiResponses(
-            ApiResponse(responseCode = "200")
-    )
     fun getEmotions(
             request: HttpServletRequest,
             @RequestBody emotionFilter: EmotionFilterDto)
             : ResponseEntity<List<EmotionDto>> {
+
         val emotions = emotionService.getEmotionsByDateAndEmotionNames(request, emotionFilter.lhsDate,
                 emotionFilter.rhsDate, emotionFilter.emotionNames)
                 .map{ it -> mappingEmotionUtils.mapToEmotionDto(it) }
         return ResponseEntity.ok(emotions)
     }
 
+    @ResponseBody
     @GetMapping("/emotion")
     fun getEmotions(request: HttpServletRequest): ResponseEntity<List<EmotionDto>> {
         val emotions = emotionService.getAllEmotions(request)
@@ -68,6 +60,7 @@ class EmotionController {
     fun deleteEmotion(@Parameter(description = "id of emotion to be deleted")
                       @RequestParam id: UUID): ResponseEntity<ResponseMessage>  {
         if(!emotionService.deleteEmotion(id)) {
+            //return ResponseEntity.notFound().body(ResponseMessage("Emotion with id '$id' not exist"))
             return ResponseEntity<ResponseMessage>(ResponseMessage("Emotion with id $id does not exist"), HttpStatus.NOT_FOUND)
         }
 

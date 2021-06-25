@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 import java.util.*
 
 @Schema
-class EmotionFilterDto(
+data class EmotionFilterDto(
     @Schema(
             description = "left parameter of date",
             example = "2022-11-12 12:00:00"

@@ -5,7 +5,7 @@ import java.util.*
 import javax.validation.constraints.NotEmpty
 
 @Schema
-class EmotionNameDto(
+data class EmotionNameDto(
     var id: UUID? = null,
 
     @Schema(
