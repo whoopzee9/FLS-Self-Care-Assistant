@@ -56,6 +56,8 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
                 .formLogin()
                 .usernameParameter("email")
                 .and()
+                .csrf().disable()
+                .cors().and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
