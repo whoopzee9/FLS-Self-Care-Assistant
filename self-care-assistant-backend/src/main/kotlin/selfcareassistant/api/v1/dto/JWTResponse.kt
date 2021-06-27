@@ -1,3 +1,3 @@
 package selfcareassistant.api.v1.dto
 
-class JWTResponse(var token: String?)
+class JWTResponse(var token: String)

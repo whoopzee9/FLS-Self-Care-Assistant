@@ -7,12 +7,18 @@ import selfcareassistant.entity.UserEntity
 import java.util.stream.Collectors
 
 class MappingUserRegisterUtils {
-    fun mapToUserRegisterDto(entity: UserEntity): UserRegisterDto {
 
-        val roles = entity.roles.stream()
-                .map{ RoleDto(it.id, it.name) }
+    private val mappingRoleUtils: MappingRoleUtils = MappingRoleUtils()
+
+    fun mapToUserRegisterDto(entity: UserEntity): UserRegisterDto {
+        val user = UserRegisterDto()
+        user.name = entity.name
+        user.email = entity.email
+        user.password = entity.password
+        user.roles = entity.roles.stream()
+                .map{ mappingRoleUtils.mapToRoleDto(it) }
                 .collect(Collectors.toList())
-        return UserRegisterDto(entity.name, entity.email, entity.password, roles)
+        return user
     }
 
     fun mapToUserEntity(registerDto: UserRegisterDto): UserEntity {

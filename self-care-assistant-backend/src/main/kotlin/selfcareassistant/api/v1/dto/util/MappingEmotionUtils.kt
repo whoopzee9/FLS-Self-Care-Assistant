@@ -7,10 +7,16 @@ import selfcareassistant.entity.EmotionNameEntity
 
 class MappingEmotionUtils {
     fun mapToEmotionDto(entity: EmotionEntity): EmotionDto {
-        val emotion = EmotionDto(entity.id, entity.createDate, entity.intensity,
-                EmotionNameDto(entity.emotionName!!.id, entity.emotionName!!.name))
+        val emotion = EmotionDto()
+        emotion.id = entity.id
+        emotion.createDate = entity.createDate
+        emotion.intensity = entity.intensity
 
-        emotion.emotionName = EmotionNameDto(entity.emotionName!!.id, entity.emotionName!!.name)
+        val emotionNameDto = EmotionNameDto()
+        emotionNameDto.id = entity.emotionName?.id
+        emotionNameDto.name = entity.emotionName!!.name
+
+        emotion.emotionName = emotionNameDto
         return emotion
     }
 
