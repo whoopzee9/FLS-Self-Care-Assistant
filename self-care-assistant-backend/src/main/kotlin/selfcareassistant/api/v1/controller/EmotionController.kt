@@ -21,11 +21,13 @@ import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.validation.annotation.Validated
+import selfcareassistant.api.v1.dto.util.MappingEmotionNameUtils
 import javax.swing.text.AbstractDocument
 
 @RestController
 @CrossOrigin
 @RequestMapping("/api/v1")
+@Validated
 class EmotionController {
     @Autowired
     lateinit var emotionService: EmotionService
@@ -33,17 +35,17 @@ class EmotionController {
     @Autowired
     lateinit var emotionNameService: EmotionNameService
 
+    private val mappingEmotionNameUtils: MappingEmotionNameUtils = MappingEmotionNameUtils()
     private val mappingEmotionUtils: MappingEmotionUtils = MappingEmotionUtils()
 
     @PostMapping("/emotion/filter")
     @Operation(summary = "Filter emotions by date and emotion name")
     @ApiResponses(value = [
         ApiResponse(responseCode = "200")
-    ]
-    )
+    ])
     fun getEmotions(
             request: HttpServletRequest,
-            @RequestBody emotionFilter: EmotionFilterDto)
+            @Valid @RequestBody emotionFilter: EmotionFilterDto)
             : ResponseEntity<List<EmotionDto>> {
 
         val emotions = emotionService.getEmotionsByDateAndEmotionNames(request, emotionFilter.lhsDate,
@@ -96,7 +98,7 @@ class EmotionController {
     ])
     fun getEmotionNames(): ResponseEntity<List<EmotionNameDto>> {
         val emotionNames = emotionNameService.getAllEmotionNames()
-                .map{ EmotionNameDto(it.id, it.name) }
+                .map{ mappingEmotionNameUtils.mapToEmotionNameDto(it) }
         return ResponseEntity.ok(emotionNames)
     }
 

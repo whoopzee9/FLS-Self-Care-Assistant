@@ -1,14 +1,19 @@
 package selfcareassistant.api.v1.dto
 
 import io.swagger.v3.oas.annotations.media.Schema
+import org.springframework.stereotype.Component
 import java.util.*
+import javax.validation.constraints.NotBlank
 
+@Component
 @Schema
-data class NewEmotionNameDto(
-    var id: UUID,
+class NewEmotionNameDto {
+    var id: UUID? = null
+
     @Schema(
-          description = "Name of emotion",
-          example = "гнев"
+            description = "Name of emotion",
+            example = "гнев"
     )
-    var name: String
-)
+    @NotBlank(message = "Name should not be empty")
+    lateinit var name: String
+}
