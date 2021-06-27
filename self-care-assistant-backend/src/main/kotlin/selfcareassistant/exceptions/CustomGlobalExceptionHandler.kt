@@ -1,6 +1,6 @@
 package selfcareassistant.exceptions
 
-import io.jsonwebtoken.io.IOException
+import java.io.IOException
 import org.springframework.beans.InvalidPropertyException
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver
-import java.io.IOException
 import java.util.*
 import javax.servlet.http.HttpServletResponse
 import javax.validation.ConstraintViolationException
