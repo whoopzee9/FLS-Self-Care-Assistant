@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import selfcareassistant.api.v1.dto.ResponseMessage
 import selfcareassistant.api.v1.dto.RoleDto
-import selfcareassistant.api.v1.dto.util.MappingRoleUtils
 import selfcareassistant.entity.RoleEntity
 import selfcareassistant.service.RoleService
 import java.util.*
@@ -23,8 +22,6 @@ class RoleController {
     @Autowired
     lateinit var roleService: RoleService
 
-    private val mappingRoleUtils: MappingRoleUtils = MappingRoleUtils()
-
     @GetMapping("/role")
     @Operation(summary = "Get list of emotion names")
     @ApiResponses(value = [
@@ -32,7 +29,7 @@ class RoleController {
     ])
     fun getAllRoles(): ResponseEntity<List<RoleDto>> {
         val roles = roleService.getAllRoles()
-                .map{ mappingRoleUtils.mapToRoleDto(it) }
+                .map{ RoleDto(it.id, it.name) }
         return ResponseEntity.ok(roles)
     }
 

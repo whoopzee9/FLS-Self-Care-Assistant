@@ -1,8 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-
 plugins {
-	id("org.springframework.boot") version "2.5.2"
+	id("org.springframework.boot") version "2.4.3"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	id("com.moowork.node") version "1.3.1"
 	id("com.felipefzdz.gradle.heroku") version "1.0.6"
@@ -13,9 +12,7 @@ plugins {
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
-java {
-	sourceCompatibility = JavaVersion.VERSION_1_8
-}
+java.sourceCompatibility = JavaVersion.VERSION_14
 
 configurations {
 	compileOnly {
