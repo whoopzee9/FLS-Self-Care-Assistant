@@ -48,7 +48,7 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        http.csrf().disable().authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/api/v1/signup", "/api/v1/signin").permitAll()
                 .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .anyRequest().authenticated()
