@@ -16,7 +16,7 @@ class UserRegisterDto {
             example = "Иванов Петр"
     )
     @NotBlank(message = "Name should not be empty")
-    lateinit var name: String
+    var name: String = ""
 
     @Schema(
             description = "Email",
@@ -24,13 +24,13 @@ class UserRegisterDto {
     )
     @NotBlank(message = "Email should not be empty")
     @Email(message = "Email should be valid")
-    lateinit var email: String
+    var email: String = ""
 
     @Schema(
             description = "Password"
     )
     @NotBlank(message = "Password should not be empty")
-    lateinit var password: String
+    var password: String = ""
 
     var roles: List<RoleDto> = ArrayList()
 }

@@ -26,7 +26,7 @@ class MappingEmotionUtils {
         emotion.createDate = dto.createDate
         emotion.intensity = dto.intensity
 
-        emotion.emotionName = EmotionNameEntity(dto.emotionName.id, dto.emotionName.name)
+        emotion.emotionName = EmotionNameEntity(dto.emotionName?.id, dto.emotionName!!.name)
 
         return emotion
     }

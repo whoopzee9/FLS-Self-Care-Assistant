@@ -10,7 +10,7 @@ import javax.validation.constraints.*
 @Schema
 class EmotionNameFilterDto {
     @NotNull(message = "Emotion name should not be null")
-    lateinit var emotionName: EmotionNameDto
+    var emotionName: EmotionNameDto? = null
 
     @Schema(
             description = "left parameter of intensity",

@@ -37,7 +37,7 @@ class EmotionSirviceImpl: EmotionService {
             val emotions: ArrayList<EmotionEntity> = ArrayList()
 
             for (emotionNameFilter in emotionNames) {
-                val emotionName = EmotionNameEntity(emotionNameFilter.emotionName.id, emotionNameFilter.emotionName.name)
+                val emotionName = EmotionNameEntity(emotionNameFilter.emotionName?.id, emotionNameFilter.emotionName!!.name)
                 emotions.addAll(emotionRepo.findAllByUserAndCreateDateBetweenAndEmotionNameAndIntensityBetween(user,
                         lhsDate, rhsDate, emotionName, emotionNameFilter.lhsIntensity, emotionNameFilter.rhsIntensity))
             }

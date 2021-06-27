@@ -17,7 +17,7 @@ class EmotionFilterDto {
     )
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @NotNull(message = "LhsDate should not be null")
-    lateinit var lhsDate: Date
+    var lhsDate: Date = Date()
 
     @Schema(
             description = "right parameter of date",
@@ -25,7 +25,7 @@ class EmotionFilterDto {
     )
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @NotNull(message = "RhsDate should not be null")
-    lateinit var rhsDate: Date
+    var rhsDate: Date = Date()
 
     @Valid
     var emotionNames: List<EmotionNameFilterDto> = ArrayList()

@@ -15,11 +15,11 @@ class UserCredentials {
     )
     @NotBlank(message = "Email should be valid")
     @Email(message = "Email should not be empty")
-    lateinit var email: String
+    var email: String = ""
 
     @Schema(
             description = "Password"
     )
     @NotBlank(message = "Password should not be empty")
-    lateinit var password: String
+    var password: String = ""
 }

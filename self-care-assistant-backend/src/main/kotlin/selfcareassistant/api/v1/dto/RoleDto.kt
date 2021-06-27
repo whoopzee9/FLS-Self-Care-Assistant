@@ -15,5 +15,5 @@ class RoleDto {
                 example = "user"
         )
         @NotBlank(message = "Name should not be empty")
-        lateinit var name: String
+        var name: String = ""
 }
