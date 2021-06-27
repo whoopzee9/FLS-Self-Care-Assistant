@@ -24,7 +24,7 @@ import selfcareassistant.service.AppUserDetailsService
 import javax.validation.Valid
 
 @RestController
-@CrossOrigin
+@CrossOrigin()
 @RequestMapping("/api/v1")
 class AuthController {
 

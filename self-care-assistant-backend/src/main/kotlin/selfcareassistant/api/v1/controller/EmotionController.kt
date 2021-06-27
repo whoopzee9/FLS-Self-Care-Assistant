@@ -25,7 +25,7 @@ import selfcareassistant.api.v1.dto.util.MappingEmotionNameUtils
 import javax.swing.text.AbstractDocument
 
 @RestController
-@CrossOrigin
+@CrossOrigin()
 @RequestMapping("/api/v1")
 @Validated
 class EmotionController {

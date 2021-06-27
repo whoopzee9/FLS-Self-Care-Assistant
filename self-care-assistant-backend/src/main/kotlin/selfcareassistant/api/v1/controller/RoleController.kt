@@ -17,7 +17,7 @@ import java.util.*
 import javax.validation.Valid
 
 @RestController
-@CrossOrigin
+@CrossOrigin()
 @RequestMapping("/api/v1")
 class RoleController {
     @Autowired
