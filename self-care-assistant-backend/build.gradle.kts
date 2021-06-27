@@ -57,7 +57,3 @@ tasks.withType<KotlinCompile> {
 		jvmTarget = "14"
 	}
 }
-
-tasks.withType<Test> {
-	useJUnitPlatform()
-}
