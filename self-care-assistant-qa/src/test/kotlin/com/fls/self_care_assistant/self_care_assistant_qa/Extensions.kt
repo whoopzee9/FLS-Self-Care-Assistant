@@ -5,14 +5,10 @@ import com.codeborne.selenide.Selenide.`$$`
 import com.codeborne.selenide.Selenide.`$`
 import com.codeborne.selenide.SelenideElement
 
-class Extensions {
-    companion object {
-        fun get(selector: String) : SelenideElement {
-            return `$`(selector)
-        }
+fun get(selector: String) : SelenideElement {
+    return `$`(selector)
+}
 
-        fun all(selector: String) : ElementsCollection {
-            return `$$`(selector)
-        }
-    }
+fun all(selector: String) : ElementsCollection {
+    return `$$`(selector)
 }
