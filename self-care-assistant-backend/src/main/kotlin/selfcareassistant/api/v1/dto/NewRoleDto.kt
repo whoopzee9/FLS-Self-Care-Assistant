@@ -8,8 +8,6 @@ import javax.validation.constraints.NotBlank
 @Component
 @Schema
 class NewRoleDto {
-        var id: UUID? = null
-
         @Schema(
                 description = "Name of role",
                 example = "user"

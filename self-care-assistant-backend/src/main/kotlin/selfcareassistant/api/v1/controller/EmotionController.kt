@@ -130,7 +130,8 @@ class EmotionController {
         ApiResponse(responseCode = "200", description = "Emotion name successfully deleted"),
         ApiResponse(responseCode = "404", description = "Emotion name does not exist", content = [Content()])
     ])
-    fun deleteEmotionName(@RequestParam id: UUID): ResponseEntity<ResponseMessage>  {
+    fun deleteEmotionName(@Parameter(description = "id of emotion to be deleted")
+                          @RequestParam id: UUID): ResponseEntity<ResponseMessage>  {
         if(!emotionNameService.deleteEmotionName(id)) {
             return ResponseEntity.
                 status(HttpStatus.NOT_FOUND).
