@@ -1,6 +1,7 @@
 package selfcareassistant.api.v1.controller
 
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
@@ -68,7 +69,8 @@ class RoleController {
         ApiResponse(responseCode = "200", description = "Role successfully deleted"),
         ApiResponse(responseCode = "404", description = "Role does not exist", content = [Content()])
     ])
-    fun deleteEmotionName(@RequestParam id: UUID): ResponseEntity<ResponseMessage>  {
+    fun deleteEmotionName(@Parameter(description = "id of role to be deleted")
+                          @RequestParam id: UUID): ResponseEntity<ResponseMessage>  {
         if(!roleService.deleteRole(id)) {
             return ResponseEntity.
             status(HttpStatus.NOT_FOUND).
