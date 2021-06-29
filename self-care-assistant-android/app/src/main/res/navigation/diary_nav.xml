@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/diary_nav"
+    app:startDestination="@id/addEmotionFragment">
+
+    <fragment
+        android:id="@+id/addEmotionFragment"
+        android:name="com.fls.self_care_assistant.fragments.main_frg.AddEmotionFragment"
+        android:label="Add Emotion"
+        tools:layout="@layout/fragment_add_emotion" >
+        <action
+            android:id="@+id/action_addEmotionFragment_to_emotionAddedFragment"
+            app:destination="@id/emotionAddedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/emotionAddedFragment"
+        android:name="com.fls.self_care_assistant.fragments.main_frg.EmotionAddedFragment"
+        android:label="Emotion added"
+        tools:layout="@layout/fragment_emotion_added" >
+        <action
+            android:id="@+id/action_emotionAddedFragment_to_addEmotionFragment"
+            app:destination="@id/addEmotionFragment" />
+    </fragment>
+
+</navigation>

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Self-Care-Assistant</string>
-    <integer name="com_vk_sdk_AppId">7864498</integer>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="diary">Дневник</string>
@@ -9,25 +8,62 @@
     <string name="my_mood">Моё настроение</string>
     <string name="_1">1</string>
     <string name="_10">10</string>
-    <string name="add">Добавить</string>
-    <string name="login_frg__restore">forgot your password?</string>
-    <string name="login_frg__sign_btn">Sign in</string>
-    <string name="login_frg__password_et">password</string>
-    <string name="registration_frg__confirm_password">confirm password</string>
-    <string name="registration_frg__password">password</string>
-    <string name="registration_frg__email_login_et">email</string>
-    <string name="user_name_et">name</string>
-    <string name="login_frg__email_login">login</string>
-    <string name="registration_frg__privacy_check">I accept privacy and</string>
-    <string name="registration_frg__sign_up">Sign up</string>
-    <string name="login_frg__restore_tv">Enter your email \nfor restoring password</string>
-    <string name="login_frg__restore_btn_submit">restore</string>
+    <string name="save">Сохранить</string>
 
+    <string name="login_frg__restore">забыли пароль?</string>
+    <string name="login_frg__sign_btn">Войти</string>
+    <string name="login_frg__password_et">пароль</string>
+    <string name="registration_frg__confirm_password">повторите пароль</string>
+    <string name="registration_frg__password">пароль</string>
+    <string name="registration_frg__email_login_et">email</string>
+    <string name="user_name_et">имя</string>
+    <string name="login_frg__email_login">логин</string>
+    <string name="registration_frg__privacy_check">Я всё принимаю</string>
+    <string name="registration_frg__sign_up">Регистрация</string>
+
+    <string name="login_frg__restore_tv">Укажите почту \nдля восстановления пароля</string>
+    <string name="login_frg__restore_btn_submit">восстановить</string>
+    <string name="choose_emotion">Выберите эмоцию</string>
+    <string name="choose_intensity">Выберите интенсивность</string>
+    <string name="emotions_diary">Дневник эмоций</string>
+    <string name="new_record_added">Добавлена новая запись</string>
+    <string name="emotion_type">эмоция: %s</string>
+    <string name="intensity">интенсивность: %s</string>
+    <string name="filter">Фильтр</string>
+    <string name="emotions">Эмоции</string>
+    <string name="anxiety">Тревога</string>
+    <string name="apathy">Апатия</string>
+    <string name="anger">Злость</string>
+    <string name="intensity_from">Интенсивность от</string>
+    <string name="to">до</string>
+    <string name="all">Все</string>
+    <string name="last_week">Последняя неделя</string>
+    <string name="last_month">Последний месяц</string>
+    <string name="custom">Задать дату</string>
+    <string name="from">от</string>
+    <string name="registration_successful">Регистрация прошла успешно. Войдите</string>
+    <string name="unknown_error">Неизвестная ошибка, попробуйте снова</string>
+    <string name="successful_login">Успешный вход!</string>
+    <string name="emotion_added">Эмоция успешно добавлена!</string>
+    <string name="token_expired">Срок аутентификации истёк, пожалуйста, войдите</string>
+    <string name="emotion_deleted">Эмоция успешно удалена!</string>
+    <string name="filter_applied">Фильтр успешно применён!</string>
+    <string name="cancel">Отменить</string>
+    <string name="clear_all">Очистить</string>
+    <string name="apply">Фильтр</string>
+    <string name="fill_all_fields">Заполните все поля!</string>
+    <string name="go_to_history">Перейти в историю</string>
+    <string name="add_new_record">Добавить новую запись</string>
+    <string name="list">Список</string>
+    <string name="chart">График</string>
+    <string name="date">Дата</string>
+    <string name="emotion">Эмоция</string>
+
+    <integer name="com_vk_sdk_AppId">7864498</integer>
 
     <string-array name="emotions">
-        <item>Гнев</item>
+        <item>Тревога</item>
         <item>Апатия</item>
-        <item>Грусть</item>
         <item>Злость</item>
     </string-array>
 </resources>

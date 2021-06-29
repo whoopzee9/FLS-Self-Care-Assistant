@@ -1,7 +1,8 @@
 package com.fls.self_care_assistant.fragments.auth
 
-import android.R.attr
+
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,8 +11,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.fls.self_care_assistant.R
-import com.fls.self_care_assistant.adapters.ViewPagerAdapter
+import com.fls.self_care_assistant.adapters.LoginViewPagerAdapter
 import com.fls.self_care_assistant.main.MainActivity
+import com.fls.self_care_assistant.repositories.TokenRepository
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
@@ -27,22 +29,42 @@ class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+        val tokenRepository = TokenRepository.instance
+        tokenRepository.setupSharedPrefs(getSharedPreferences(
+            "prefs",
+            Context.MODE_PRIVATE
+        ))
+//        if (tokenRepository.getToken() != null && !tokenRepository.isExpired) {
+//            val intent = Intent(applicationContext, MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
         initTabs()
+
+        //TODO temp solution
+        if (VK.isLoggedIn()) {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun initTabs() {
         supportActionBar?.hide()
-        val viewPager: ViewPager2 = findViewById(R.id.main_activity__view_pager)
-        val adapter = ViewPagerAdapter(this)
+
+        val viewPager: ViewPager2 = findViewById(R.id.activity_auth__view_pager)
+        val adapter = LoginViewPagerAdapter(this)
         viewPager.adapter = adapter
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
-        val tabs: TabLayout = findViewById(R.id.main_activity__tabs)
+        val tabs: TabLayout = findViewById(R.id.activity_auth__tabs)
+
         val titles = listOf("Sign In", "Sign Up")
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = titles[position]
         }.attach()
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //TODO fix request codes
@@ -66,7 +88,7 @@ class AuthActivity : AppCompatActivity() {
             }
 
         }
-        val callback = object: VKAuthCallback {
+        val callback = object : VKAuthCallback {
             override fun onLogin(token: VKAccessToken) {
                 val intent = Intent(applicationContext, MainActivity::class.java)
 
@@ -87,4 +109,5 @@ class AuthActivity : AppCompatActivity() {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
+
 }

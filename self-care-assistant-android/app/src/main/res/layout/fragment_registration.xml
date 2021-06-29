@@ -17,8 +17,9 @@
         android:layout_height="match_parent"
         tools:context=".fragments.auth.RegistrationFragment">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/registration_frg__user_name_wr"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registration_frg__user_name_et"
+            style="@style/FieldEditText.Single"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_big_30"
@@ -26,123 +27,80 @@
             android:background="@drawable/custom_input"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:paddingStart="@dimen/spacing_tiny_4"
-            android:paddingEnd="@dimen/spacing_tiny_4"
-            app:endIconMode="clear_text"
+            android:hint="@string/user_name_et"
+            android:maxLines="1"
             app:hintTextColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/registration_frg__email_login_wr"
+            android:padding="@dimen/spacing_double_tiny_8"
+            android:text="@={RegistrationViewModel.repository.userName}"
+            app:layout_constraintBottom_toTopOf="@+id/registration_frg__email_login_et"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/registration_frg__user_name_et"
-                style="@style/FieldEditText.Single"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:hint="@string/user_name_et"
-                android:maxLines="1"
-                android:padding="@dimen/spacing_double_tiny_8"
-                android:text="@={RegistrationViewModel.repository.userName}" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/registration_frg__email_login_wr"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registration_frg__email_login_et"
+            style="@style/FieldEditText.Single"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:hintTextColor="@color/black"
             android:layout_marginHorizontal="@dimen/spacing_big_30"
             android:layout_marginBottom="@dimen/spacing_mid_20"
             android:background="@drawable/custom_input"
+            android:hint="@string/registration_frg__email_login_et"
+            android:maxLines="1"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:paddingStart="@dimen/spacing_tiny_4"
-            android:paddingEnd="@dimen/spacing_tiny_4"
-            app:endIconMode="clear_text"
-            app:hintTextColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/registration_frg__password_wr"
+            android:padding="@dimen/spacing_double_tiny_8"
+            android:text="@={RegistrationViewModel.repository.email}"
+            app:layout_constraintBottom_toTopOf="@+id/registration_frg__password_et"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/registration_frg__email_login_et"
-                style="@style/FieldEditText.Single"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:hint="@string/registration_frg__email_login_et"
-                android:maxLines="1"
-                android:padding="@dimen/spacing_double_tiny_8"
-                android:text="@={RegistrationViewModel.repository.email}" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/registration_frg__password_wr"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registration_frg__password_et"
+            style="@style/FieldEditText.Single"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_big_30"
             android:layout_marginBottom="@dimen/spacing_huge_40"
             android:background="@drawable/custom_input"
-            android:ems="10"
+            android:hint="@string/registration_frg__password"
             android:inputType="textPassword"
-            android:paddingStart="@dimen/spacing_tiny_4"
-            android:paddingEnd="@dimen/spacing_tiny_4"
-            app:endIconMode="clear_text"
+            android:ems="10"
+            android:maxLines="1"
+            android:padding="@dimen/spacing_double_tiny_8"
+            android:text="@={RegistrationViewModel.repository.password}"
             app:hintTextColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/registration_frg__password_et"
-                style="@style/FieldEditText.Single"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:hint="@string/registration_frg__password"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:padding="@dimen/spacing_double_tiny_8"
-                android:text="@={RegistrationViewModel.repository.password}" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/registration_frg__confirm_password_wr"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registration_frg__confirm_password_et"
+            style="@style/FieldEditText.Single"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:ems="10"
             android:layout_marginHorizontal="@dimen/spacing_big_30"
             android:layout_marginTop="@dimen/spacing_mid_20"
             android:background="@drawable/custom_input"
-            android:ems="10"
+            android:hint="@string/registration_frg__confirm_password"
             android:inputType="textPassword"
-            android:paddingStart="@dimen/spacing_tiny_4"
-            android:paddingEnd="@dimen/spacing_tiny_4"
-            app:endIconMode="clear_text"
+            android:maxLines="1"
+            android:padding="@dimen/spacing_double_tiny_8"
+            android:text="@={RegistrationViewModel.repository.confirmPassword}"
             app:hintTextColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registration_frg__password_wr">
+            app:layout_constraintTop_toBottomOf="@+id/registration_frg__password_et"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/registration_frg__confirm_password_et"
-                style="@style/FieldEditText.Single"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:hint="@string/registration_frg__confirm_password"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:padding="@dimen/spacing_double_tiny_8"
-                android:text="@={RegistrationViewModel.repository.confirmPassword}" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/registration_frg__sign_up"
@@ -169,8 +127,19 @@
             android:checked="@={RegistrationViewModel.repository.isChecked}"
             android:text="@string/registration_frg__privacy_check"
             android:textSize="@dimen/font_massive__16"
-            app:layout_constraintStart_toStartOf="@+id/registration_frg__confirm_password_wr"
-            app:layout_constraintTop_toBottomOf="@+id/registration_frg__confirm_password_wr" />
+            app:layout_constraintStart_toStartOf="@+id/registration_frg__confirm_password_et"
+            app:layout_constraintTop_toBottomOf="@+id/registration_frg__confirm_password_et" />
+
+        <ProgressBar
+            android:id="@+id/registration_frg__progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

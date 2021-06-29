@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.fls.self_care_assistant.R
+import com.fls.self_care_assistant.data.EmotionType
 import java.util.*
 
 class EmotionSpinnerAdapter(
@@ -22,7 +23,7 @@ class EmotionSpinnerAdapter(
             view = convertView
         }
         getItem(position)?.let { str ->
-            val tvStr = view.findViewById<TextView>(R.id.tv_string)
+            val tvStr = view.findViewById<TextView>(R.id.tv_emotion)
             tvStr.text = str
         }
         return view
@@ -39,7 +40,7 @@ class EmotionSpinnerAdapter(
         } else {
             view = layoutInflater.inflate(R.layout.spinner_row_layout, parent, false)
             getItem(position)?.let { str ->
-                val tvStr = view.findViewById<TextView>(R.id.tv_string)
+                val tvStr = view.findViewById<TextView>(R.id.tv_emotion)
                 tvStr.text = str
             }
         }

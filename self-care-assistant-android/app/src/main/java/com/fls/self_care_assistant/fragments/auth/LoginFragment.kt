@@ -1,5 +1,6 @@
 package com.fls.self_care_assistant.fragments.auth
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.fls.self_care_assistant.R
-import com.fls.self_care_assistant.databinding.FragmentLoginBinding
+import com.fls.self_care_assistant.databinding.LoginFragmentBinding
 import com.fls.self_care_assistant.extensions.handleBackPressed
 import com.fls.self_care_assistant.main.MainActivity
 import com.fls.self_care_assistant.viewModels.LoginViewModel
@@ -20,26 +21,22 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.vk.api.sdk.VK
 import com.vk.api.sdk.auth.VKScope
-
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
     companion object {
         const val RC_SIGN_IN = 100
-        fun newInstance() = LoginFragment()
     }
 
     private lateinit var viewModel: LoginViewModel
-    private lateinit var binding: FragmentLoginBinding
+    private lateinit var binding: LoginFragmentBinding
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return LoginViewModel() as T
-            }
-        }).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -57,7 +54,7 @@ class LoginFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_login,
+            R.layout.login_fragment,
             container,
             false
         )
@@ -68,6 +65,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            viewModel.loginState.collect {
+                handleUiState(it)
+            }
+        }
+
         binding.loginFrgSignBtn.setOnClickListener {
             validate()
         }
@@ -75,6 +79,7 @@ class LoginFragment : Fragment() {
             binding.loginFrgAuthWr.visibility = View.GONE
             binding.loginFrgRestoreWr.visibility = View.VISIBLE
         }
+
         binding.loginFrgAuthVk.setOnClickListener {
             VK.login(requireActivity(), arrayListOf(VKScope.WALL, VKScope.PHOTOS))
         }
@@ -83,6 +88,7 @@ class LoginFragment : Fragment() {
             val signInIntent: Intent = googleSignInClient.signInIntent
             requireActivity().startActivityForResult(signInIntent, RC_SIGN_IN)
         }
+
         handleBackPressed {
             //todo Alert + optimize
             if (binding.loginFrgAuthWr.visibility == View.GONE) {
@@ -94,19 +100,40 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun handleUiState(state: LoginViewModel.LoginState) {
+        when (state) {
+            is LoginViewModel.LoginState.Failure -> {
+                binding.loginFrgProgressBar.visibility = View.GONE
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.unknown_error),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            is LoginViewModel.LoginState.Initial -> {
+                binding.loginFrgProgressBar.visibility = View.GONE
+            }
+            is LoginViewModel.LoginState.Processing -> {
+                binding.loginFrgProgressBar.visibility = View.VISIBLE
+            }
+            is LoginViewModel.LoginState.Success -> {
+                binding.loginFrgProgressBar.visibility = View.GONE
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.successful_login),
+                    Toast.LENGTH_SHORT
+                ).show()
+                startActivity(Intent(requireContext(), MainActivity::class.java))
+                requireActivity().finish()
+            }
+        }
+    }
+
     private fun validate() {
         if (viewModel.validateInput()) {
-            startActivity(Intent(requireContext(), MainActivity::class.java))
-            requireActivity().finish()
+            viewModel.signIn()
         } else {
             Toast.makeText(requireContext(), "Please, fill all fields", Toast.LENGTH_SHORT).show()
         }
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-
-    }
-
 }

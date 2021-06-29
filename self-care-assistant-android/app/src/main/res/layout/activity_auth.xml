@@ -7,7 +7,7 @@
     tools:context=".fragments.auth.AuthActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/main_activity__bar"
+        android:id="@+id/activity_auth__bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/main_activity__toolbar"
+            android:id="@+id/activity_auth__toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
@@ -31,7 +31,7 @@
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/main_activity__tabs"
+            android:id="@+id/activity_auth__tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabIndicatorColor="@color/black"
@@ -41,9 +41,10 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/main_activity__view_pager"
+        android:id="@+id/activity_auth__view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_activity__bar" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_auth__bar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

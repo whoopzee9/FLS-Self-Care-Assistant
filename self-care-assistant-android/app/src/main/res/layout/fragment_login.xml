@@ -24,65 +24,42 @@
             android:visibility="visible"
             tools:context=".fragments.auth.LoginFragment">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/login_frg__email_login_wr"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_frg__email_login_et"
+                style="@style/FieldEditText.Single"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_big_30"
                 android:layout_marginBottom="@dimen/spacing_mid_20"
                 android:background="@drawable/custom_input"
+                android:hint="@string/login_frg__email_login"
+                android:maxLines="1"
                 android:ems="10"
-                android:inputType="textEmailAddress"
-                android:paddingStart="@dimen/spacing_tiny_4"
-                android:paddingEnd="@dimen/spacing_tiny_4"
-                app:endIconMode="clear_text"
+                android:padding="@dimen/spacing_double_tiny_8"
+                android:text="@={LoginViewModel.repository.email}"
                 app:hintTextColor="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/login_frg__password_wr"
+                app:layout_constraintBottom_toTopOf="@+id/login_frg__password_et"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/login_frg__email_login_et"
-                    style="@style/FieldEditText.Single"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/login_frg__email_login"
-                    android:maxLines="1"
-                    android:padding="@dimen/spacing_double_tiny_8"
-                    android:text="@={LoginViewModel.repository.email}" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/login_frg__password_wr"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_frg__password_et"
+                style="@style/FieldEditText.Single"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_big_30"
                 android:background="@drawable/custom_input"
                 android:ems="10"
+                android:hint="@string/login_frg__password_et"
                 android:inputType="textPassword"
-                android:paddingStart="@dimen/spacing_tiny_4"
-                android:paddingEnd="@dimen/spacing_tiny_4"
-                app:endIconMode="clear_text"
+                android:padding="@dimen/spacing_double_tiny_8"
+                android:text="@={LoginViewModel.repository.password}"
                 app:hintTextColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/login_frg__password_et"
-                    style="@style/FieldEditText.Single"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/login_frg__password_et"
-                    android:inputType="textPassword"
-                    android:padding="@dimen/spacing_double_tiny_8"
-                    android:text="@={LoginViewModel.repository.password}" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
@@ -145,8 +122,8 @@
                 android:text="@string/login_frg__restore"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_massive__16"
-                app:layout_constraintEnd_toEndOf="@+id/login_frg__password_wr"
-                app:layout_constraintTop_toBottomOf="@+id/login_frg__password_wr" />
+                app:layout_constraintEnd_toEndOf="@+id/login_frg__password_et"
+                app:layout_constraintTop_toBottomOf="@+id/login_frg__password_et" />
 
             <Button
                 android:id="@+id/login_frg__sign_btn"
@@ -166,6 +143,16 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login_frg__restore_btn" />
+
+            <ProgressBar
+                android:id="@+id/login_frg__progress_bar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
