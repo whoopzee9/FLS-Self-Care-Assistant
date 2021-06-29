@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import selfcareassistant.api.v1.dto.EmotionDto
+import selfcareassistant.api.v1.dto.NewRoleDto
 import selfcareassistant.api.v1.dto.ResponseMessage
 import selfcareassistant.api.v1.dto.RoleDto
 import selfcareassistant.api.v1.dto.util.MappingRoleUtils
@@ -41,9 +43,23 @@ class RoleController {
     @ApiResponses(value = [
         ApiResponse(responseCode = "201", description = "Role successfully saved")
     ])
-    fun addUser(@Valid @RequestBody roleDto: RoleDto): ResponseEntity<ResponseMessage> {
-        val role = RoleEntity(roleDto.id, roleDto.name)
+    fun addUser(@Valid @RequestBody newRoleDto: NewRoleDto): ResponseEntity<ResponseMessage> {
+        val role = RoleEntity(newRoleDto.name)
         return ResponseEntity.ok(ResponseMessage(roleService.addRole(role).toString()))
+    }
+
+    @PutMapping("/role")
+    @Operation(summary = "Change role")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "201", description = "Role successfully saved"),
+        ApiResponse(responseCode = "204", description = "Role successfully changed")
+    ])
+    fun changeEmotion(@RequestBody @Valid roleDto: RoleDto): ResponseEntity<ResponseMessage>  {
+        if(!roleService.changeRole(RoleEntity(roleDto.id, roleDto.name))) {
+            return ResponseEntity<ResponseMessage>(ResponseMessage("Role successfully saved"), HttpStatus.CREATED)
+        }
+
+        return ResponseEntity<ResponseMessage>(ResponseMessage("Role successfully changed"), HttpStatus.NO_CONTENT)
     }
 
     @DeleteMapping("/role")

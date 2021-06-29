@@ -4,12 +4,10 @@ import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.stereotype.Component
 import java.util.*
 import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotNull
 
 @Component
 @Schema
-class RoleDto {
-        @NotNull(message = "Id should not be null")
+class NewRoleDto {
         var id: UUID? = null
 
         @Schema(
