@@ -5,10 +5,12 @@ import org.springframework.stereotype.Component
 import java.util.*
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 
 @Component
 @Schema
 class EmotionNameDto {
+    @NotNull(message = "Id should not be null")
     var id: UUID? = null
 
     @Schema(

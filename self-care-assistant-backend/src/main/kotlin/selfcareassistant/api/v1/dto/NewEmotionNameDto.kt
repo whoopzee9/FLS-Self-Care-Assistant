@@ -8,8 +8,6 @@ import javax.validation.constraints.NotBlank
 @Component
 @Schema
 class NewEmotionNameDto {
-    var id: UUID? = null
-
     @Schema(
             description = "Name of emotion",
             example = "гнев"

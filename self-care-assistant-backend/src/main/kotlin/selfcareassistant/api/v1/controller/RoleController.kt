@@ -37,13 +37,17 @@ class RoleController {
     }
 
     @PostMapping("/role")
+    @Operation(summary = "Add role")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "201", description = "Role successfully saved")
+    ])
     fun addUser(@Valid @RequestBody roleDto: RoleDto): ResponseEntity<ResponseMessage> {
         val role = RoleEntity(roleDto.id, roleDto.name)
         return ResponseEntity.ok(ResponseMessage(roleService.addRole(role).toString()))
     }
 
     @DeleteMapping("/role")
-    @Operation(summary = "Delete role by id")
+    @Operation(summary = "Delete role with id")
     @ApiResponses(value = [
         ApiResponse(responseCode = "200", description = "Role successfully deleted"),
         ApiResponse(responseCode = "404", description = "Role does not exist", content = [Content()])
