@@ -14,15 +14,14 @@ import org.openqa.selenium.support.ui.WebDriverWait
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SignInPageTest {
+class SignInPageFuncTest {
     @BeforeEach
     fun setup() {
         Selenide.open("http://localhost:3000/login")
     }
 
     @AfterEach
-    fun closeBrowser()
-    {
+    fun closeBrowser() {
         Selenide.closeWebDriver()
     }
 
