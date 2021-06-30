@@ -100,7 +100,7 @@ class EmotionController {
             return ResponseEntity<ResponseMessage>(ResponseMessage("Emotion successfully saved"), HttpStatus.CREATED)
         }
 
-        return ResponseEntity<>(HttpStatus.NO_CONTENT)
+        return ResponseEntity(HttpStatus.NO_CONTENT)
     }
 
     @GetMapping("/emotion/name")
@@ -153,6 +153,6 @@ class EmotionController {
             return ResponseEntity<ResponseMessage>(ResponseMessage("Emotion name successfully saved"), HttpStatus.CREATED)
         }
 
-        return ResponseEntity<>(HttpStatus.NO_CONTENT)
+        return ResponseEntity(HttpStatus.NO_CONTENT)
     }
 }
