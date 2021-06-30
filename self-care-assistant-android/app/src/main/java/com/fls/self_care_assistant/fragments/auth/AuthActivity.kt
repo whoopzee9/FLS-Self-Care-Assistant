@@ -34,11 +34,11 @@ class AuthActivity : AppCompatActivity() {
             "prefs",
             Context.MODE_PRIVATE
         ))
-        if (tokenRepository.getToken() != null && !tokenRepository.isExpired) {
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+//        if (tokenRepository.getToken() != null && !tokenRepository.isExpired) {
+//            val intent = Intent(applicationContext, MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
         initTabs()
 
         //TODO temp solution
@@ -59,7 +59,7 @@ class AuthActivity : AppCompatActivity() {
 
         val tabs: TabLayout = findViewById(R.id.activity_auth__tabs)
 
-        val titles = listOf("Sign In", "Sign Up")
+        val titles = listOf("Войти", "Регистрация")
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = titles[position]
         }.attach()

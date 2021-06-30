@@ -40,7 +40,7 @@ class DiaryFragment : Fragment() {
         val adapter = DiaryViewPagerAdapter(this)
         binding.frgDiaryViewPager.adapter = adapter
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-        val titles = listOf("Add record", "History")
+        val titles = listOf("Добавить запись", "История")
         TabLayoutMediator(binding.frgDiaryTabs, binding.frgDiaryViewPager) { tab, position ->
             tab.text = titles[position]
         }.attach()
