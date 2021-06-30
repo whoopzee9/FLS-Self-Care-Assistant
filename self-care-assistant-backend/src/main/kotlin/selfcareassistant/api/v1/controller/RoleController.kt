@@ -53,7 +53,7 @@ class RoleController {
     @Operation(summary = "Change role")
     @ApiResponses(value = [
         ApiResponse(responseCode = "201", description = "Role successfully saved"),
-        ApiResponse(responseCode = "204", description = "Role successfully changed")
+        ApiResponse(responseCode = "204", description = "Role successfully changed", content = [Content()])
     ])
     fun changeEmotion(@RequestBody @Valid roleDto: RoleDto): ResponseEntity<ResponseMessage>  {
         if(!roleService.changeRole(RoleEntity(roleDto.id, roleDto.name))) {

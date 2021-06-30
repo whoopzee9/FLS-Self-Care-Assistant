@@ -93,7 +93,7 @@ class EmotionController {
     @Operation(summary = "Change emotion")
     @ApiResponses(value = [
         ApiResponse(responseCode = "201", description = "Emotion successfully saved"),
-        ApiResponse(responseCode = "204", description = "Emotion successfully changed")
+        ApiResponse(responseCode = "204", description = "Emotion successfully changed", content = [Content()])
     ])
     fun changeEmotion(@RequestBody @Valid emotionDto: EmotionDto): ResponseEntity<ResponseMessage>  {
         if(!emotionService.changeEmotion(mappingEmotionUtils.mapToEmotionEntity(emotionDto))) {
@@ -145,7 +145,7 @@ class EmotionController {
     @Operation(summary = "Change emotion name")
     @ApiResponses(value = [
         ApiResponse(responseCode = "201", description = "Emotion successfully saved"),
-        ApiResponse(responseCode = "204", description = "Emotion successfully changed")
+        ApiResponse(responseCode = "204", description = "Emotion successfully changed", content = [Content()])
     ])
     fun changeEmotionName(@RequestBody @Valid emotionNameDto: EmotionNameDto): ResponseEntity<ResponseMessage>  {
         val emotionName = EmotionNameEntity(emotionNameDto.id, emotionNameDto.name)
