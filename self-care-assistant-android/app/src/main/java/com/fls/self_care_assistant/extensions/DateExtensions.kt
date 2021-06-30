@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun Date.prettyFormat(): String {
-    return SimpleDateFormat("dd.MM.yy hh:mm").format(this)
+    return SimpleDateFormat("dd.MM.yy HH:mm").format(this)
 }
 
 fun Date.requestFormat(): String {

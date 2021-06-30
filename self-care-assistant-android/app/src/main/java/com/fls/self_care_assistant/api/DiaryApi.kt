@@ -12,7 +12,7 @@ interface DiaryApi {
     suspend fun getEmotionTypes(@Header("Authorization") token: String) : Response<List<EmotionType>>
 
     @POST("/api/v1/emotion")
-    suspend fun saveEmotion(@Body emotion: EmotionBody, @Header("Authorization") token: String) : Response<ResponseMessage>
+    suspend fun saveEmotion(@Body emotion: EmotionBodyWithoutId, @Header("Authorization") token: String) : Response<ResponseMessage>
 
     @DELETE("/api/v1/emotion")
     suspend fun deleteEmotion(@Query("id") id: String, @Header("Authorization") token: String) : Response<ResponseMessage>

@@ -59,8 +59,7 @@ class DiaryRepository {
 
     suspend fun addNewEmotion(emotion: Emotion): NetworkResult<ResponseMessage> {
         val emotionBody =
-            EmotionBody(
-                null,
+            EmotionBodyWithoutId(
                 emotion.date.requestFormat(),
                 emotion.emotion,
                 emotion.intensity.toString()
