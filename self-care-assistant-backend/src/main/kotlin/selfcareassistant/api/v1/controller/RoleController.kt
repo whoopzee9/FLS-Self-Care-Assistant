@@ -60,7 +60,7 @@ class RoleController {
             return ResponseEntity<ResponseMessage>(ResponseMessage("Role successfully saved"), HttpStatus.CREATED)
         }
 
-        return ResponseEntity<ResponseMessage>(ResponseMessage("Role successfully changed"), HttpStatus.NO_CONTENT)
+        return ResponseEntity<>(HttpStatus.NO_CONTENT)
     }
 
     @DeleteMapping("/role")
