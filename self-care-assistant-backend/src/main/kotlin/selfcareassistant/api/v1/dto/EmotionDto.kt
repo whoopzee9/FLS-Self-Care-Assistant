@@ -19,7 +19,6 @@ class EmotionDto {
     )
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @NotNull(message = "Date should not be null")
-    @Past(message = "Date should not be more than the current one")
     lateinit var createDate: Date
 
     @Schema(
