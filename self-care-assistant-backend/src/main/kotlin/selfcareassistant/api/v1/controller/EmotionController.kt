@@ -2,7 +2,9 @@ package selfcareassistant.api.v1.controller
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,6 +22,7 @@ import org.springframework.validation.annotation.Validated
 import selfcareassistant.api.v1.dto.*
 import selfcareassistant.api.v1.dto.util.MappingEmotionNameUtils
 import selfcareassistant.api.v1.dto.util.MappingNewEmotionUtils
+import selfcareassistant.exceptions.ApiError
 
 @RestController
 @CrossOrigin()
@@ -117,7 +120,10 @@ class EmotionController {
     @PostMapping("/emotion/name")
     @Operation(summary = "Add emotion name")
     @ApiResponses(value = [
-        ApiResponse(responseCode = "201", description = "Emotion successfully saved")
+        ApiResponse(responseCode = "201", description = "Emotion successfully saved"),
+        ApiResponse(responseCode = "404", description = "Some field is not valid",
+                content = [
+                    (Content(schema = Schema(implementation = ApiError::class)))]),
     ])
     fun addEmotionName(@Valid @RequestBody newEmotionNameDto: NewEmotionNameDto): ResponseEntity<ResponseMessage> {
         val emotionName = EmotionNameEntity(newEmotionNameDto.name)

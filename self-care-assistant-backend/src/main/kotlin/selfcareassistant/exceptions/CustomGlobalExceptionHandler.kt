@@ -52,8 +52,7 @@ class CustomGlobalExceptionHandler : ResponseEntityExceptionHandler() {
     fun handleMethodArgumentTypeMismatch(
             ex: MethodArgumentTypeMismatchException, request: WebRequest?): ResponseEntity<Any?>? {
         val error = ex.name + " should be of type " + ex.requiredType!!.name
-        val apiError = ApiError(HttpStatus.BAD_REQUEST, ex.localizedMessage)
         return ResponseEntity(
-                apiError, HttpHeaders(), apiError.status)
+                error, HttpHeaders(), HttpStatus.BAD_REQUEST)
     }
 }

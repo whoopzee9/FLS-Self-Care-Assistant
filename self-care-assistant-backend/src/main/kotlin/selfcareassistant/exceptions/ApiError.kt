@@ -1,8 +1,8 @@
 package selfcareassistant.exceptions
 
 import org.springframework.http.HttpStatus
+import java.util.*
 
 data class ApiError(
-    val status: HttpStatus,
-    val message: String
+        val message: List<String>
 )
