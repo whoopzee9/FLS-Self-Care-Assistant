@@ -55,212 +55,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frg_filter__tv_filter" />
 
-            <CheckBox
-                android:id="@+id/frg_filter__cb_anxiety"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/anxiety"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frg_filter__tv_emotions" />
-
-            <LinearLayout
-                android:id="@+id/frg_filter__anxiety_layout"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/frg_filter__rv_emotions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frg_filter__cb_anxiety">
+                android:layout_marginHorizontal="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-                <TextView
-                    android:id="@+id/frg_filter__tv_anxiety_intensity_from"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/intensity_from"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/frg_filter__et_anxiety_intensity_from"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/black_outline_rounded"
-                    android:inputType="number"
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/frg_filter__tv_anxiety_intensity_to"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="@string/to"
-                    android:textColor="@color/black"
-
-                    android:textSize="20sp" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/frg_filter__et_anxiety_intensity_to"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/black_outline_rounded"
-                    android:inputType="number"
-                    android:textAlignment="center" />
-
-            </LinearLayout>
-
-            <CheckBox
-                android:id="@+id/frg_filter__cb_apathy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/apathy"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frg_filter__anxiety_layout" />
-
-            <LinearLayout
-                android:id="@+id/frg_filter__apathy_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frg_filter__cb_apathy">
-
-                <TextView
-                    android:id="@+id/frg_filter__tv_apathy_intensity_from"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/intensity_from"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/frg_filter__et_apathy_intensity_from"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/black_outline_rounded"
-                    android:inputType="number"
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/frg_filter__tv_apathy_intensity_to"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="@string/to"
-                    android:textColor="@color/black"
-
-                    android:textSize="20sp" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/frg_filter__et_apathy_intensity_to"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/black_outline_rounded"
-                    android:inputType="number"
-                    android:textAlignment="center" />
-
-            </LinearLayout>
-
-            <CheckBox
-                android:id="@+id/frg_filter__cb_anger"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/anger"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frg_filter__apathy_layout" />
-
-            <LinearLayout
-                android:id="@+id/frg_filter__anger_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frg_filter__cb_anger">
-
-                <TextView
-                    android:id="@+id/frg_filter__tv_anger_intensity_from"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/intensity_from"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/frg_filter__et_anger_intensity_from"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/black_outline_rounded"
-                    android:inputType="number"
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/frg_filter__tv_anger_intensity_to"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="@string/to"
-                    android:textColor="@color/black"
-
-                    android:textSize="20sp" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/frg_filter__et_anger_intensity_to"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/black_outline_rounded"
-                    android:inputType="number"
-                    android:textAlignment="center" />
-
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/frg_filter__tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="40dp"
                 android:text="@string/date"
                 android:textColor="@color/black"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/frg_filter__anger_layout" />
+                android:textSize="20sp" />
 
             <RadioGroup
                 android:id="@+id/frg_filter__rg_date_radio_group"

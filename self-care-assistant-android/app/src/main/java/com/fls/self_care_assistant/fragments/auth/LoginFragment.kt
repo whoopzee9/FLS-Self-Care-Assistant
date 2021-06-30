@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.fls.self_care_assistant.R
-import com.fls.self_care_assistant.databinding.LoginFragmentBinding
+import com.fls.self_care_assistant.databinding.FragmentLoginBinding
 import com.fls.self_care_assistant.extensions.handleBackPressed
 import com.fls.self_care_assistant.main.MainActivity
 import com.fls.self_care_assistant.viewModels.LoginViewModel
@@ -31,7 +31,7 @@ class LoginFragment : Fragment() {
     }
 
     private lateinit var viewModel: LoginViewModel
-    private lateinit var binding: LoginFragmentBinding
+    private lateinit var binding: FragmentLoginBinding
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +54,7 @@ class LoginFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.login_fragment,
+            R.layout.fragment_login,
             container,
             false
         )

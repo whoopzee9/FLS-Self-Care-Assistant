@@ -26,13 +26,13 @@ class FilterViewModel : ViewModel() {
         MutableStateFlow(FilterBody("", "", mutableListOf()))
     val filter: StateFlow<FilterBody> get() = _filter
 
+    private val _selectedEmotions: MutableStateFlow<List<EmotionTypesFilterBody>> =
+        MutableStateFlow(listOf())
+    val selectedEmotions: StateFlow<List<EmotionTypesFilterBody>> get() = _selectedEmotions
 
-    var emotionTypes: List<EmotionType> = mutableListOf()
-
-    //TODO temp solution, change!!
-    lateinit var anxiety: EmotionTypesFilterBody
-    lateinit var anger: EmotionTypesFilterBody
-    lateinit var apathy: EmotionTypesFilterBody
+    private val _emotionTypes: MutableStateFlow<List<EmotionType>> =
+        MutableStateFlow(listOf())
+    val emotionTypes: StateFlow<List<EmotionType>> get() = _emotionTypes
 
     init {
         getEmotionTypes()
@@ -45,18 +45,8 @@ class FilterViewModel : ViewModel() {
                 is NetworkResult.Error -> {
                 }
                 is NetworkResult.Success -> {
-                    emotionTypes = result.data
-                    emotionTypes.forEach {
-                        if (it.name == "тревога") {
-                            anxiety = EmotionTypesFilterBody(it, "", "")
-                        }
-                        if (it.name == "апатия") {
-                            apathy = EmotionTypesFilterBody(it, "", "")
-                        }
-                        if (it.name == "злость") {
-                            anger = EmotionTypesFilterBody(it, "", "")
-                        }
-                    }
+                    _emotionTypes.value = result.data
+
                 }
             }
         }
@@ -81,34 +71,27 @@ class FilterViewModel : ViewModel() {
     fun applyFilter() {
         viewModelScope.launch {
             _filterState.value = FilterState.Processing
-            filter.collectLatest {
-                if (it.emotionNames.isEmpty()) {
-                    apathy.lhsIntensity = "1"
-                    apathy.rhsIntensity = "10"
-                    it.emotionNames.add(apathy)
-                    anxiety.lhsIntensity = "1"
-                    anxiety.rhsIntensity = "10"
-                    it.emotionNames.add(anxiety)
-                    anger.lhsIntensity = "1"
-                    anger.rhsIntensity = "10"
-                    it.emotionNames.add(anger)
+            if (selectedEmotions.value.isEmpty()) {
+                _selectedEmotions.value = emotionTypes.value.map {
+                    EmotionTypesFilterBody(it, "1", "10")
                 }
-                val result = repository.applyFilter(it)
-                when (result) {
-                    is NetworkResult.Error -> {
-                        _filterState.value = FilterState.Failure(result.error)
+            }
+            _filter.value.emotionNames = selectedEmotions.value
+            val result = repository.applyFilter(filter.value)
+            when (result) {
+                is NetworkResult.Error -> {
+                    _filterState.value = FilterState.Failure(result.error)
+                }
+                is NetworkResult.Success -> {
+                    repository._emotionDiary.value = result.data.map { body ->
+                        Emotion(
+                            body.id!!,
+                            SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(body.createDate),
+                            body.emotionName,
+                            body.intensity.toInt()
+                        )
                     }
-                    is NetworkResult.Success -> {
-                        repository._emotionDiary.value = result.data.map { body ->
-                            Emotion(
-                                body.id!!,
-                                SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(body.createDate),
-                                body.emotionName,
-                                body.intensity.toInt()
-                            )
-                        }
-                        _filterState.value = FilterState.Success
-                    }
+                    _filterState.value = FilterState.Success
                 }
             }
         }
@@ -126,12 +109,13 @@ class FilterViewModel : ViewModel() {
         _filter.value.rhsDate = date
     }
 
-    fun addEmotion(emotionTypesFilterBody: EmotionTypesFilterBody) {
-        _filter.value.emotionNames.add(emotionTypesFilterBody)
-    }
 
     fun resetFilterState() {
         _filterState.value = FilterState.Initial
+    }
+
+    fun setSelectedEmotions(list: List<EmotionTypesFilterBody>) {
+        _selectedEmotions.value = list
     }
 
     sealed class FilterState {

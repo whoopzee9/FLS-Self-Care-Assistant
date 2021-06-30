@@ -9,13 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.fls.self_care_assistant.R
+import com.fls.self_care_assistant.adapters.EmotionFilterRecyclerAdapter
+import com.fls.self_care_assistant.data.EmotionFilter
+import com.fls.self_care_assistant.data.EmotionTypesFilterBody
 import com.fls.self_care_assistant.databinding.FragmentFilterBinding
 import com.fls.self_care_assistant.fragments.auth.AuthActivity
 import com.fls.self_care_assistant.network.FilterError
@@ -33,6 +33,8 @@ class FilterFragment : DialogFragment() {
     private lateinit var viewModel: FilterViewModel
     private var _binding: FragmentFilterBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var adapter: EmotionFilterRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,31 +54,10 @@ class FilterFragment : DialogFragment() {
             }
         }
 
+        adapter = EmotionFilterRecyclerAdapter()
+        binding.frgFilterRvEmotions.adapter = adapter
+
         with(binding) {
-            frgFilterAngerLayout.visibility = View.GONE
-            frgFilterAnxietyLayout.visibility = View.GONE
-            frgFilterApathyLayout.visibility = View.GONE
-            frgFilterCbAnger.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (isChecked) {
-                    frgFilterAngerLayout.visibility = View.VISIBLE
-                } else {
-                    frgFilterAngerLayout.visibility = View.GONE
-                }
-            }
-            frgFilterCbApathy.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (isChecked) {
-                    frgFilterApathyLayout.visibility = View.VISIBLE
-                } else {
-                    frgFilterApathyLayout.visibility = View.GONE
-                }
-            }
-            frgFilterCbAnxiety.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (isChecked) {
-                    frgFilterAnxietyLayout.visibility = View.VISIBLE
-                } else {
-                    frgFilterAnxietyLayout.visibility = View.GONE
-                }
-            }
             frgFilterCustomDateFromLayout.visibility = View.GONE
             frgFilterCustomDateToLayout.visibility = View.GONE
             frgFilterRbCustom.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -150,43 +131,18 @@ class FilterFragment : DialogFragment() {
                 }
             }
 
-            //frgFilterRbAll.isChecked = true
-
-            frgFilterEtApathyIntensityFrom.addTextChangedListener {
-                viewModel.apathy.lhsIntensity = it.toString()
+            lifecycleScope.launch {
+                viewModel.emotionTypes.collect { list ->
+                    adapter.bind(list.map {
+                        EmotionFilter(false, it, "", "")
+                    })
+                }
             }
 
-            frgFilterEtApathyIntensityTo.addTextChangedListener {
-                viewModel.apathy.rhsIntensity = it.toString()
-            }
-
-            frgFilterEtAngerIntensityFrom.addTextChangedListener {
-                viewModel.anger.lhsIntensity = it.toString()
-            }
-
-            frgFilterEtAngerIntensityTo.addTextChangedListener {
-                viewModel.anger.rhsIntensity = it.toString()
-            }
-
-            frgFilterEtAnxietyIntensityFrom.addTextChangedListener {
-                viewModel.anxiety.lhsIntensity = it.toString()
-            }
-
-            frgFilterEtAnxietyIntensityTo.addTextChangedListener {
-                viewModel.anxiety.rhsIntensity = it.toString()
-            }
 
             frgFilterMbClearAll.setOnClickListener {
-                frgFilterCbAnxiety.isChecked = false
-                frgFilterCbApathy.isChecked = false
-                frgFilterCbAnger.isChecked = false
-                frgFilterRbAll.isChecked = true
-                frgFilterEtAngerIntensityFrom.setText("")
-                frgFilterEtAngerIntensityTo.setText("")
-                frgFilterEtAnxietyIntensityFrom.setText("")
-                frgFilterEtAnxietyIntensityTo.setText("")
-                frgFilterEtApathyIntensityFrom.setText("")
-                frgFilterEtApathyIntensityTo.setText("")
+                adapter.clear()
+                frgFilterRgDateRadioGroup.clearCheck()
                 frgFilterEtCustomDateFrom.setText("")
                 frgFilterEtCustomDateTo.setText("")
                 viewModel.resetFilter()
@@ -198,24 +154,24 @@ class FilterFragment : DialogFragment() {
                 //findNavController().navigate(R.id.action_filterFragment_to_diaryFragment)
             }
 
-            //TODO change!!
+            frgFilterRbAll.isChecked = true
+
             frgFilterMbApply.setOnClickListener {
-                if ((frgFilterCbAnger.isChecked && (viewModel.anger.lhsIntensity.isEmpty() || viewModel.anger.rhsIntensity.isEmpty())) ||
-                    (frgFilterCbApathy.isChecked && (viewModel.apathy.lhsIntensity.isEmpty() || viewModel.apathy.rhsIntensity.isEmpty())) ||
-                    (frgFilterCbAnxiety.isChecked && (viewModel.anxiety.lhsIntensity.isEmpty() || viewModel.anxiety.rhsIntensity.isEmpty()))) {
-                    Toast.makeText(requireContext(), getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show()
-                } else {
-                    if (frgFilterCbAnger.isChecked) {
-                        viewModel.addEmotion(viewModel.anger)
+                val list = adapter.emotionsList
+                list.forEach {
+                    if (it.isSelected && (it.from.isEmpty() || it.to.isEmpty())) {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.fill_all_fields),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return@setOnClickListener
                     }
-                    if (frgFilterCbApathy.isChecked) {
-                        viewModel.addEmotion(viewModel.apathy)
-                    }
-                    if (frgFilterCbAnxiety.isChecked) {
-                        viewModel.addEmotion(viewModel.anxiety)
-                    }
-                    viewModel.applyFilter()
                 }
+                viewModel.setSelectedEmotions(list.filter { it.isSelected }.map {
+                    EmotionTypesFilterBody(it.emotionName, it.from, it.to)
+                })
+                viewModel.applyFilter()
             }
         }
     }
