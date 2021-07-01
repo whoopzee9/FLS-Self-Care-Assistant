@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.WebDriverWait
 
-class SignUpPageTest {
+class SignUpPageFuncTest {
     @BeforeEach
     fun setup() {
         Selenide.open("http://localhost:3000/login")
@@ -20,8 +20,7 @@ class SignUpPageTest {
     }
 
     @AfterEach
-    fun closeBrowser()
-    {
+    fun closeBrowser() {
         Selenide.closeWebDriver()
     }
 

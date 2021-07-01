@@ -2,25 +2,42 @@ package com.fls.self_care_assistant.self_care_assistant_qa.pages
 
 import com.codeborne.selenide.Condition
 import com.codeborne.selenide.Selenide
+import com.fls.self_care_assistant.self_care_assistant_qa.LoginPageLocators
 import com.fls.self_care_assistant.self_care_assistant_qa.SignUpLocators
 import com.fls.self_care_assistant.self_care_assistant_qa.get
 import org.junit.jupiter.api.Assertions
 
 class SignUpPage {
     companion object {
-        private fun fillNameInput(name: String) {
+        private fun checkNamePlaceholder() {
+            get(SignUpLocators.NAME_INPUT).shouldHave(Condition.attribute("placeholder", "name"))
+        }
+
+        private fun checkEmailPlaceholder() {
+            get(SignUpLocators.EMAIL_INPUT).shouldHave(Condition.attribute("placeholder", "email"))
+        }
+
+        private fun checkPassPlaceholder() {
+            get(SignUpLocators.PASS_INPUT).shouldHave(Condition.attribute("placeholder", "password"))
+        }
+
+        private fun checkConfirmPassPlaceholder() {
+            get(SignUpLocators.CONFIRM_PASS_INPUT).shouldHave(Condition.attribute("placeholder", "confirm password"))
+        }
+
+        fun fillNameInput(name: String) {
             get(SignUpLocators.NAME_INPUT).value = name
         }
 
-        private fun fillEmailInput(email: String) {
+        fun fillEmailInput(email: String) {
             get(SignUpLocators.EMAIL_INPUT).value = email
         }
 
-        private fun fillPassInput(pass: String) {
+        fun fillPassInput(pass: String) {
             get(SignUpLocators.PASS_INPUT).value = pass
         }
 
-        private fun fillConfirmPassInput(confirmPass: String) {
+        fun fillConfirmPassInput(confirmPass: String) {
             get(SignUpLocators.CONFIRM_PASS_INPUT).value = confirmPass
         }
 
@@ -39,10 +56,24 @@ class SignUpPage {
             get(SignUpLocators.CONFIRM_SIGN_UP_BUTTON).click()
         }
 
-        fun checkEmptyPassInputs()
-        {
+        fun checkEmptyPassInputs() {
             get(SignUpLocators.PASS_INPUT).shouldBe(Condition.empty)
             get(SignUpLocators.CONFIRM_PASS_INPUT).shouldBe(Condition.empty)
+        }
+
+        fun checkAllPlaceholders() {
+            checkNamePlaceholder()
+            checkEmailPlaceholder()
+            checkPassPlaceholder()
+            checkConfirmPassPlaceholder()
+        }
+
+        fun checkOpacityOfSubmitButton() {
+            Assertions.assertEquals("0.9", get(SignUpLocators.CONFIRM_SIGN_UP_BUTTON).getCssValue("opacity"))
+        }
+
+        fun checkBorderOfSignInSwitchButton() {
+            Assertions.assertEquals("2px", get(LoginPageLocators.SIGN_IN_PAGE).getCssValue("border-bottom-width"))
         }
 
         fun checkCorrectRegisterAlert() {
