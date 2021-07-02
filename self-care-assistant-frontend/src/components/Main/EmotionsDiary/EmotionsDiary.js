@@ -9,13 +9,13 @@ export const EmotionsDiary = () => {
     return (
         <div className={s.main}>
             <div className={s.menu}>
-                <NavLink to={'/emotiondiary/addrecord'} activeClassName={s.selected}>Add Record</NavLink>
-                <NavLink to={'/emotiondiary/history'} activeClassName={s.selected}>History</NavLink>
+                <NavLink to={'/main/emotiondiary/addrecord'} activeClassName={s.selected}>Add Record</NavLink>
+                <NavLink to={'/main/emotiondiary/history'} activeClassName={s.selected}>History</NavLink>
             </div>
             <div className={s.content}>
-                <Route exact path={'/emotiondiary'}><Redirect to={'/emotiondiary/addrecord'}/></Route>
-                <Route path={'/emotiondiary/addrecord'} component={AddRecord}/>
-                <Route path={'/emotiondiary/history'} component={History}/>
+                <Route exact path={'/main/emotiondiary'}><Redirect to={'/main/emotiondiary/addrecord'}/></Route>
+                <Route path={'/main/emotiondiary/addrecord'} component={AddRecord}/>
+                <Route path={'/main/emotiondiary/history'} component={History}/>
             </div>
         </div>
     )

@@ -1,9 +1,8 @@
 import {
-    EMOTION_DIARY_ADD_RECORD_DATE,
+    EMOTION_DIARY_ADD_RECORD_DATE, EMOTION_DIARY_ADD_RECORD_GET_EMOTION,
     EMOTION_DIARY_ADD_RECORD_SAVE_ACTIVE,
     EMOTION_DIARY_ADD_RECORD_SELECT,
-    EMOTION_DIARY_ADD_RECORD_SLIDER,
-    EMOTION_DIARY_HISTORY_ACTIVE_DELETE,
+    EMOTION_DIARY_ADD_RECORD_SLIDER, EMOTION_DIARY_GET_HISTORY,
     EMOTION_DIARY_HISTORY_ACTIVE_DELETE_WINDOW,
     EMOTION_DIARY_HISTORY_DELETE,
     EMOTION_DIARY_HISTORY_FILTER_ADD_EMOTIONS,
@@ -15,12 +14,12 @@ import {
 } from './types'
 
 const initialState = {
-    emotions: ['sad', 'happy', 'lol', 'kek'],
+    emotions: [],
     addRecords: {
         addRecordSelect: undefined,
         addRecordSlider: undefined,
         addRecordSaveActive: false,
-        addRecordDate: new Date().toLocaleString(),
+        addRecordDate: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
     },
     history: {
         historyRecords: [],
@@ -51,19 +50,6 @@ export const diaryReducer = (state = initialState, action) => {
             return {...state, addRecords: {...state.addRecords, addRecordSaveActive: action.payload}}
         case EMOTION_DIARY_ADD_RECORD_DATE :
             return {...state, addRecords: {...state.addRecords, addRecordDate: action.payload}}
-        case EMOTION_DIARY_HISTORY_SAVE :
-            return {
-                ...state, history: {
-                    ...state.history, historyRecords: [...state.history.historyRecords, action.payload]
-                }
-            }
-        case EMOTION_DIARY_HISTORY_DELETE :
-            return {
-                ...state, history: {
-                    ...state.history,
-                    historyRecords: state.history.historyRecords.filter(item => item.addRecordDate !== action.payload.addRecordDate)
-                }
-            }
         case EMOTION_DIARY_HISTORY_ACTIVE_DELETE_WINDOW :
             return {
                 ...state, history: {
@@ -129,6 +115,14 @@ export const diaryReducer = (state = initialState, action) => {
                     }
                 }
             }
+        case EMOTION_DIARY_ADD_RECORD_GET_EMOTION:
+            return {...state, emotions: action.payload}
+        case EMOTION_DIARY_GET_HISTORY:
+             return {
+            ...state, history: {
+                ...state.history, historyRecords: action.payload
+            }
+        }
         default :
             return state
     }

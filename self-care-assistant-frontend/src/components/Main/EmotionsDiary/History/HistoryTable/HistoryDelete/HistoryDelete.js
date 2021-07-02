@@ -1,9 +1,9 @@
 import React, {useEffect, useRef} from 'react'
 import s from './HistoryDelete.module.css'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {
-    emotionDiaryHistoryActiveDeleteWindowAction,
-    emotionDiaryHistoryDeleteAction
+    deleteEmotionsData,
+    emotionDiaryHistoryActiveDeleteWindowAction
 } from '../../../../../../redux/actions'
 
 
@@ -11,7 +11,7 @@ export const HistoryDelete = (props) => {
 
     const node1 = useRef()
     const dispatch = useDispatch()
-
+    const token = useSelector(state => state.singIn.token)
     useEffect(() => {
         document.addEventListener('mousedown', handleClick)
         return () => {
@@ -23,7 +23,7 @@ export const HistoryDelete = (props) => {
     const handleClick = e => {
         let obj = {
             addRecordSaveActive: true,
-            addRecordDate: props.item.addRecordDate
+            addRecordDate: props.item.createDate
         }
         if (node1.current.contains(e.target) === false) {
             dispatch(emotionDiaryHistoryActiveDeleteWindowAction(obj))
@@ -33,8 +33,8 @@ export const HistoryDelete = (props) => {
         dispatch(emotionDiaryHistoryActiveDeleteWindowAction(item))
     }
 
-    const DeleteItem = (value) => {
-        dispatch(emotionDiaryHistoryDeleteAction(value))
+    const DeleteItem = () => {
+        dispatch(deleteEmotionsData(token, props.item.id))
     }
 
     return (
@@ -47,20 +47,20 @@ export const HistoryDelete = (props) => {
                 </p>
                 <p className={s.item}>
                     <span className={s.item_title}>date:</span>
-                    {props.item.addRecordDate}
+                    {props.item.createDate}
                 </p>
                 <p className={s.item}>
                     <span className={s.item_title}>emotion:</span>
-                    {props.item.addRecordSelect}
+                    {props.item.emotionName.name}
                 </p>
                 <p className={s.item}>
                     <span className={s.item_title}>intensity:</span>
-                    {props.item.addRecordSlider}
+                    {props.item.intensity}
                 </p>
             </div>
             <div className={s.btn_wrapper}>
                 <button className={s.btn} onClick={() => SetNotActive(props.item)}>Cancel</button>
-                <button className={s.btn} onClick={() => DeleteItem(props.item)}>Remove</button>
+                <button className={s.btn} onClick={DeleteItem}>Remove</button>
             </div>
         </div>
     )

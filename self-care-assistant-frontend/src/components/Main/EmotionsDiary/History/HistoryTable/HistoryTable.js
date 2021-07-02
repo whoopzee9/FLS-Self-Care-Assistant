@@ -1,12 +1,7 @@
 import React from 'react'
 import s from './HistoryTable.module.css'
 import {useDispatch, useSelector} from 'react-redux'
-import {
-    emotionDiaryAddRecordSaveActiveAction,
-    emotionDiaryHistoryActiveDeleteWindowAction,
-    emotionDiaryHistoryDeleteAction
-} from '../../../../../redux/actions'
-import {AddRecordSave} from '../../AddRecord/AddRecordSave/AddRecordSave'
+import {emotionDiaryHistoryActiveDeleteWindowAction} from '../../../../../redux/actions'
 import {HistoryDelete} from './HistoryDelete/HistoryDelete'
 
 export const HistoryTable = () => {
@@ -19,9 +14,11 @@ export const HistoryTable = () => {
         dispatch(emotionDiaryHistoryActiveDeleteWindowAction(item))
     }
 
+    console.log(list)
     return (
         <div className={s.main}>
             <table className={s.table}>
+                <tbody>
                 <tr className={s.table_row}>
                     <th className={s.table_title}>Date</th>
                     <th className={s.table_title}>Emotion</th>
@@ -30,13 +27,13 @@ export const HistoryTable = () => {
                 </tr>
                 {list.map(item => {
                     return (
-                        <tr className={s.table_row}>
-                            <td className={s.table_item}>{item.addRecordDate}</td>
-                            <td className={s.table_item}>{item.addRecordSelect}</td>
-                            <td className={s.table_item}>{item.addRecordSlider}</td>
+                        <tr className={s.table_row} key={item.id}>
+                            <td className={s.table_item}>{item.createDate}</td>
+                            <td className={s.table_item}>{item.emotionName.name}</td>
+                            <td className={s.table_item}>{item.intensity}</td>
                             <td className={s.table_item}>
                                 <div className={s.btn_wrapper}>
-                                    <button className={s.delete_btn} onClick={()=>SetActive(item)}></button>
+                                    <button className={s.delete_btn} onClick={() => SetActive(item)}></button>
                                     {item.addRecordSaveActive ?
                                         <HistoryDelete item={item} active={item.addRecordSaveActive}/> : <div></div>}
                                 </div>
@@ -44,6 +41,7 @@ export const HistoryTable = () => {
                         </tr>
                     )
                 })}
+                </tbody>
             </table>
         </div>
     )

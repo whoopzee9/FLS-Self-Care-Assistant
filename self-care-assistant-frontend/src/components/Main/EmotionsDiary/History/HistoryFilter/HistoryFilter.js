@@ -19,7 +19,7 @@ export const HistoryFilter = () => {
             <HistoryFilterItem/>
             <div className={s.filter_wrapper}>
                 <button className={s.filter_btn} onClick={() => SetActive(true)}></button>
-                {activeWindow ? <HistoryFilterWindow active={activeWindow} setActive={SetActive}/> : <div></div> }
+                {activeWindow ? <HistoryFilterWindow key={new Date()} active={activeWindow} setActive={SetActive}/> : <div></div> }
             </div>
         </div>
     )

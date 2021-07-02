@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef} from 'react'
 import s from './AddRecordSave.module.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {emotionDiaryAddRecordSaveActiveAction} from '../../../../../redux/actions'
@@ -35,18 +35,18 @@ export const AddRecordSave = () => {
                 <p className={s.copyright}>New record has been saved!</p>
                 <p className={s.item}>
                     <span className={s.item_title}>date:</span>
-                    {data_redux.addRecordDate}
+                    {data_redux.addRecordDate.toLocaleString()}
                 </p>
                 <p className={s.item}>
                     <span className={s.item_title}>emotion:</span>
-                    {data_redux.addRecordSelect}
+                    {data_redux.addRecordSelect.name}
                 </p>
                 <p className={s.item}>
                     <span className={s.item_title}>intensity:</span>
                     {data_redux.addRecordSlider}
                 </p>
             </div>
-            <NavLink to={'/emotiondiary/history'} className={s.history_btn} onClick={SetNotActive}>Go to history</NavLink>
+            <NavLink to={'/main/emotiondiary/history'} className={s.history_btn} onClick={SetNotActive}>Go to history</NavLink>
         </div>
     )
 }

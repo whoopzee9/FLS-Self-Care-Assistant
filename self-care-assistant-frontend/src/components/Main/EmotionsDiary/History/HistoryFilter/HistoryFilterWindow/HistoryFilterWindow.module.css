@@ -1,16 +1,30 @@
 .filter {
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 10;
+    background: rgba(112, 112, 112, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.filter_wrapper {
+    position: relative;
+    height: 300px;
+    width: 350px;
     background: white;
     padding: 10px 40px 20px 30px;
-    border: 1px solid #c8c5c1   ;
+    border: 1px solid #c8c5c1;
     border-radius: 30px;
     text-align: left;
 }
 
-.close_btn{
+.close_btn {
     position: absolute;
     right: 20px;
     top: 20px;
@@ -18,25 +32,30 @@
     height: 15px;
     background: url("close.svg");
 }
+
 .parameter_title {
     margin: 7px 0;
     font-weight: 600;
     color: #3b3b3b;
     opacity: 0.9;
 }
-.emotions_inner{
+
+.emotions_inner {
     display: flex;
     justify-content: space-between;
 }
-.emotions{
+
+.emotions {
     margin-right: 40px;
 }
-.intensity_title{
+
+.intensity_title {
     font-weight: 600;
     color: #3b3b3b;
     opacity: 0.9;
     font-size: 14px;
 }
+
 .input {
     outline: none;
     width: 20px;
@@ -45,9 +64,11 @@
     border: 1px solid #8c8c8c;
     text-align: center;
 }
-.radio{
+
+.radio {
     margin: 0 5px 0 0;
 }
+
 .date_input {
     outline: none;
     width: 100px;
@@ -55,12 +76,21 @@
     border-radius: 15px;
     border: 1px solid #8c8c8c;
     text-align: center;
+    webkit-appearance: none;
 }
-.date_input_wrapper{
+
+.date_input::-webkit-inner-spin-button,
+.date_input::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.date_input_wrapper {
     text-align: right;
-    margin: 10px 0 ;
+    margin: 10px 0;
 }
-.btn{
+
+.btn {
     background: #2592F7;
     border-radius: 30px;
     color: #fff;
@@ -69,15 +99,30 @@
     font-weight: 600;
     margin-left: 10px;
 }
+
 .btn:hover {
     opacity: 0.8;
 }
-.btn_wrapper{
+
+.btn_wrapper {
     display: flex;
     justify-content: flex-end;
     margin-right: -20px;
     margin-top: 10px;
 }
-.date_inputs{
+
+.date_inputs {
     margin-top: -25px;
+}
+
+.btn_submit{
+    padding: 3px;
+    background: #e9e9e9;
+    border-radius: 10px;
+    display: block;
+    width: 115px;
+    margin: 10px 0;
+}
+.btn_submit:hover{
+    background: #d9d9d9;
 }

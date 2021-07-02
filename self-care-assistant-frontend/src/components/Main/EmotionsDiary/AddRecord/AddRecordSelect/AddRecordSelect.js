@@ -4,45 +4,42 @@ import {useDispatch} from 'react-redux'
 import {emotionDiaryAddRecordSelectAction} from '../../../../../redux/actions'
 
 
-export const AddRecordSelect = () => {
+export const AddRecordSelect = (props) => {
     const dispatch = useDispatch()
 
-    const getSelectValue = (arr) => {
-        dispatch(emotionDiaryAddRecordSelectAction(arr.value))
+    const getSelectValue = (item) => {
+        dispatch(emotionDiaryAddRecordSelectAction({id: item.value, name: item.label}))
     }
 
     const customStyles = {
-        control: styles => ({...styles,
+        control: styles => ({
+            ...styles,
             borderRadius: 30,
             width: 200,
             paddingLeft: 10,
-            paddingRight:5,
-            fontSize:15,
-            minHeight:30
+            paddingRight: 5,
+            fontSize: 15,
+            minHeight: 30
         }),
         option: (styles, {data, isDisabled, isFocused, isSelected}) => {
             return {
                 ...styles,
                 width: 200,
-                textAlign:'left'
+                textAlign: 'left'
             }
         },
-        menu: styles => ({...styles,
+        menu: styles => ({
+            ...styles,
             width: 200,
         }),
-        dropdownIndicator: styles => ({...styles,
-            padding:4
+        dropdownIndicator: styles => ({
+            ...styles,
+            padding: 4
         }),
     }
 
 
-    const selectOption = [
-        {value: 'sad', label: 'sad'},
-        {value: 'happy', label: 'happy'},
-        {value: 'lol', label: 'lol'},
-        {value: 'keke', label: 'keke'},
-    ]
     return (
-            <Select options={selectOption} styles={customStyles} onChange={getSelectValue}/>
+        <Select options={props.selectOption} styles={customStyles} onChange={getSelectValue}/>
     )
 }

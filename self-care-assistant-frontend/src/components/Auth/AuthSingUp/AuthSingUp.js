@@ -64,7 +64,7 @@ export const AuthSingUp = () => {
                    onChange={PasswordConfirm}/>
             <div className={s.checkbox_wrapper}>
                 <input id='checkbox' type="checkbox" onChange={setPrivacy}/>
-                <label for='checkbox'>I accept privacy policy and bla bla bla</label>
+                <label htmlFor='checkbox'>I accept privacy policy and bla bla bla</label>
             </div>
             <input type={'submit'} className={s.auth_btn} onClick={SingUpAuth} value={'SING UP'}/>
         </form>
