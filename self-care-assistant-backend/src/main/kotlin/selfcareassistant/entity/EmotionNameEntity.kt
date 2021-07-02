@@ -9,9 +9,7 @@ import javax.persistence.*
 @Table(name = "emotionsName")
 class EmotionNameEntity(var name: String)  {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     var id: UUID? = null
 
     @JsonIgnore

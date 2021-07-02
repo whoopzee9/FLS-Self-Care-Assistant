@@ -9,10 +9,7 @@ import javax.validation.constraints.*
 
 @Component
 @Schema
-class EmotionDto {
-    @NotNull(message = "Id should not be null")
-    var id: UUID? = null
-
+class NewEmotionDto {
     @Schema(
             example = "2020-02-17 00:00:00",
             name = "createDate"

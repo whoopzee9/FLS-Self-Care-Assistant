@@ -12,9 +12,7 @@ import javax.persistence.JoinColumn
 class EmotionEntity {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     var id: UUID? = null
 
     var createDate: Date = Date()

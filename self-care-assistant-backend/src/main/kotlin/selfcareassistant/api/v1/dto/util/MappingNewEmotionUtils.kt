@@ -1,15 +1,13 @@
 package selfcareassistant.api.v1.dto.util
 
-import selfcareassistant.api.v1.dto.EmotionDto
 import selfcareassistant.api.v1.dto.NewEmotionDto
 import selfcareassistant.api.v1.dto.EmotionNameDto
 import selfcareassistant.entity.EmotionEntity
 import selfcareassistant.entity.EmotionNameEntity
 
-class MappingEmotionUtils {
-    fun mapToEmotionDto(entity: EmotionEntity): EmotionDto {
-        val emotion = EmotionDto()
-        emotion.id = entity.id
+class MappingNewEmotionUtils {
+    fun mapToEmotionDto(entity: EmotionEntity): NewEmotionDto {
+        val emotion = NewEmotionDto()
         emotion.createDate = entity.createDate
         emotion.intensity = entity.intensity
 
@@ -21,9 +19,8 @@ class MappingEmotionUtils {
         return emotion
     }
 
-    fun mapToEmotionEntity(dtoNew: EmotionDto): EmotionEntity {
+    fun mapToEmotionEntity(dtoNew: NewEmotionDto): EmotionEntity {
         val emotion = EmotionEntity()
-        emotion.id = dtoNew.id
         emotion.createDate = dtoNew.createDate
         emotion.intensity = dtoNew.intensity
 

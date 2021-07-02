@@ -12,9 +12,7 @@ import javax.persistence.FetchType
 @Table(name = "usr")
 class UserEntity {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     var id: UUID? = null
 
     var name: String = ""
@@ -30,6 +28,6 @@ class UserEntity {
     var roles: List<RoleEntity> = ArrayList()
 
     @JsonIgnore
-    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "user")
+    @OneToMany(cascade = [CascadeType.REFRESH], mappedBy = "user")
     var emotions: List<EmotionEntity> = ArrayList()
 }

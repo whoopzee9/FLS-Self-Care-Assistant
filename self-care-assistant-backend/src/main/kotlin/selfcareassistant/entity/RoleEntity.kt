@@ -8,12 +8,10 @@ import javax.persistence.*
 @Table(name = "role")
 class RoleEntity(var name: String)  {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     var id: UUID? = null
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(cascade = [CascadeType.ALL], mappedBy = "roles")
     var users: List<UserEntity> = ArrayList()
 
     constructor(id: UUID?, name: String): this(name) {

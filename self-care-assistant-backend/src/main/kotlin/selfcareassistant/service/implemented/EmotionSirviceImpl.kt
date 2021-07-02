@@ -3,9 +3,9 @@ package selfcareassistant.service.implemented
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import selfcareassistant.api.v1.dto.EmotionNameFilterDto
-import selfcareassistant.jwt.JwtAuthTokenFilter
 import selfcareassistant.entity.EmotionEntity
 import selfcareassistant.entity.EmotionNameEntity
+import selfcareassistant.jwt.JwtAuthTokenFilter
 import selfcareassistant.repository.EmotionRepo
 import selfcareassistant.service.EmotionService
 import java.util.*
@@ -37,14 +37,13 @@ class EmotionSirviceImpl: EmotionService {
             val emotions: ArrayList<EmotionEntity> = ArrayList()
 
             for (emotionNameFilter in emotionNames) {
-                val emotionName = EmotionNameEntity(emotionNameFilter.emotionName?.id, emotionNameFilter.emotionName!!.name)
+                val emotionName = EmotionNameEntity(emotionNameFilter.emotionName.id, emotionNameFilter.emotionName.name)
                 emotions.addAll(emotionRepo.findAllByUserAndCreateDateBetweenAndEmotionNameAndIntensityBetween(user,
                         lhsDate, rhsDate, emotionName, emotionNameFilter.lhsIntensity, emotionNameFilter.rhsIntensity))
             }
 
             emotions
         } else {
-            print("else")
             emotionRepo.findAllByUserAndCreateDateBetween(user, lhsDate, rhsDate)
         }
     }
@@ -53,5 +52,24 @@ class EmotionSirviceImpl: EmotionService {
         val user = jwtAuthTokenFilter.getUserFromJwtToken(request)
 
         return emotionRepo.findAllByUser(user)
+    }
+
+    override fun deleteEmotion(id: UUID): Boolean {
+        if(!emotionRepo.findById(id).isPresent) {
+            return false
+        }
+
+        emotionRepo.deleteById(id)
+        return true
+    }
+
+    override fun changeEmotion(emotionEntity: EmotionEntity): Boolean {
+        var flag = false
+        if(emotionRepo.findById(emotionEntity.id!!).isPresent) {
+            flag = true
+        }
+
+        emotionRepo.save(emotionEntity)
+        return flag
     }
 }

@@ -12,5 +12,7 @@ interface EmotionService {
                              rhsDate: Date,
                              emotionNames: List<EmotionNameFilterDto>): Iterable<EmotionEntity>
     fun getAllEmotions(request: HttpServletRequest): Iterable<EmotionEntity>
+    fun deleteEmotion(id: UUID): Boolean
+    fun changeEmotion(emotionEntity: EmotionEntity): Boolean
 }
 

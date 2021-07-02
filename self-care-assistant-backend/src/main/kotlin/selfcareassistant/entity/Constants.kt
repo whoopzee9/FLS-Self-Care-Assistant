@@ -1,10 +1,10 @@
 package selfcareassistant.entity
 
 object Constants {
-    const val JWT_SECRET = "n2r5u8x/A%D*G-KaPdSgVkYp3s6v9yB&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRf"
-    const val JWT_EXPIRATION = 24 * 60 * 1000
+    const val JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9ew0KICAic3ViIjogIjEyMzQ1Njc4OTAiLA0KICAibmFtZSI6ICJBbmlzaCBOYXRoI" +
+            "iwNCiAgImlhdCI6IDE1MTYyMzkwMjINCn0BrDQYqyG8W9CvizQNeJN2aLUea7YVNvbHu5NPeWZESzkkgGTPxukUGHexHE6FT2Wk9" +
+            "SfP0Hgh8Jy7xBYQ"
+    const val JWT_EXPIRATION = 24 * 60 * 60 * 1000
 
-    // JWT token defaults
     const val TOKEN_HEADER = "Authorization"
-    const val TOKEN_PREFIX = "Bearer "
 }
