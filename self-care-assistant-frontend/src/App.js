@@ -23,9 +23,9 @@ function App() {
 
     return (
         <div className="App">
-                <Route path="/login" component={Auth}/>
-                <PrivateRoute path='/emotiondiary' component={Main}/>
-                <Route path="/"><Redirect to={'/login'}/></Route>
+            <Route path="/login" component={Auth}/>
+            <PrivateRoute path='/emotiondiary' component={Main}/>
+            <Route path="/"><Redirect to={'/login'}/></Route>
         </div>
     )
 }
