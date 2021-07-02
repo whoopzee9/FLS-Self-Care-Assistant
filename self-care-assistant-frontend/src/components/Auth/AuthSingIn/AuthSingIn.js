@@ -22,7 +22,7 @@ export const AuthSingIn = () => {
         dispatch(singInPostData({
             email: singIn.login,
             password: singIn.password,
-        }, singIn.token))
+        }))
     }
 
     return (

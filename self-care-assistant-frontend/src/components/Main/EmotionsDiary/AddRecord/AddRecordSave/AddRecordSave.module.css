@@ -1,0 +1,50 @@
+.main{
+    position: absolute;
+    left: 170px;
+    top: 0px;
+    background: white;
+    padding: 10px 70px 20px 30px;
+    border: 1px solid #c8c5c1   ;
+    border-radius: 30px;
+}
+.close_btn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 15px;
+    height: 15px;
+    background: url("close.svg");
+}
+
+.item_title{
+    color: #888888;
+    margin-right: 6px;
+    font-weight: 600;
+    font-size: 14px;
+}
+.item{
+    color: #373737;
+    margin-right: 6px;
+    font-weight: 600;
+}
+.copyright{
+    color: #606060;
+    font-weight: 600;
+    font-size: 15px;
+}
+.history_btn{
+    text-decoration: none;
+    background: #2592F7;
+    border-radius: 30px;
+    color: #fff;
+    padding: 8px 20px;
+    max-width: 75px;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: auto;
+    display: flex;
+    margin-right: -50px;
+}
+.history_btn:hover, .close_btn:hover{
+    opacity: 0.8;
+}

@@ -1,8 +1,8 @@
 import './App.css'
 import {Auth} from './components/Auth/Auth'
-import {Redirect, Route, Router, Switch} from 'react-router'
+import {Redirect, Route} from 'react-router'
 import {useSelector} from 'react-redux'
-import {Content} from './components/Content/Content'
+import {Main} from './components/Main/Main'
 
 function App() {
 
@@ -22,9 +22,9 @@ function App() {
 
     return (
         <div className="App">
-                <Route path="/login" component={Auth}/>
-                <PrivateRoute path='/content' component={Content}/>
-                <Route path="/"><Redirect to={'/login'}/></Route>
+            <Route path="/login" component={Auth}/>
+            <PrivateRoute path='/main' component={Main}/>
+            <Route path="/"><Redirect to={'/login'}/></Route>
         </div>
     )
 }

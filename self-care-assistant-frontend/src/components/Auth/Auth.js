@@ -17,7 +17,7 @@ export const Auth = () => {
     const { state } = useLocation()
 
     if (isAuthenticated === true) {
-        return <Redirect to={state?.from || '/content'} />
+        return <Redirect to={state?.from || '/main/emotiondiary/addrecord'} />
     }
 
     const RouteAuthFunction = (e) => {
